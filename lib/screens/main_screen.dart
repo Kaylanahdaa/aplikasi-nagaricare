@@ -1,3 +1,4 @@
+import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/screens/help_screen.dart';
 import 'package:aplikasi_nagaricare/screens/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class MainScreen extends StatelessWidget {
             showSelectedLabels: true,
             onTap: landingPageController.changeTabIndex,
             currentIndex: landingPageController.tabIndex.value,
-            backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+            backgroundColor: AppColors.primaryColor,
             unselectedItemColor: Colors.white.withOpacity(0.5),
             selectedItemColor: Colors.white,
             unselectedLabelStyle: unselectedLabelStyle,

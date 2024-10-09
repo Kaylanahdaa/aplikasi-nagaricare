@@ -50,7 +50,7 @@ dev_dependencies:
   flutter_lints: ^4.0.0
 
 flutter_native_splash:
-  color: "#78B7D0"
+  color: "#A0DEFF"
   image: assets/images/logo_banknagari.png
 
   android_12:

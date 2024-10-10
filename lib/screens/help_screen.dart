@@ -1,9 +1,35 @@
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({super.key});
+  // Helper function to launch a URL
+  Future<void> _launchUrl(String url) async {
+    final Uri _url = Uri.parse(url); // Use Uri.parse for better URL handling
+    if (!await launchUrl(_url)) {
+      throw 'Could not launch $url';
+    }
+  }
+
+  // Helper function to open an app if installed or fallback to Play Store/App Store
+  Future<void> _launchApp(String urlScheme, String fallbackUrl) async {
+    try {
+      final Uri _urlScheme = Uri.parse(urlScheme);
+      final Uri _fallbackUrl = Uri.parse(fallbackUrl);
+
+      // Try launching the app, if it fails, open the fallback URL (Play Store, web, etc.)
+      if (!await launchUrl(_urlScheme, mode: LaunchMode.externalApplication)) {
+        await launchUrl(_fallbackUrl, mode: LaunchMode.externalApplication);
+      }
+    } catch (e) {
+      // Fallback to the app store or web if the app is not installed
+      final Uri _fallbackUrl = Uri.parse(fallbackUrl);
+      await launchUrl(_fallbackUrl, mode: LaunchMode.externalApplication);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +39,11 @@ class HelpScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text('Help Center'),
             actions: [
-              Icon(Icons.more_vert),
+              GestureDetector(
+                onTap: () => {print('ditekan')},
+                child: Container(
+                    margin: EdgeInsets.all(16), child: Icon(Icons.more_vert)),
+              )
             ],
             bottom: TabBar(
               tabs: [
@@ -29,10 +59,113 @@ class HelpScreen extends StatelessWidget {
             ),
           ),
           body: TabBarView(children: [
-            Text(
-              'test 1',
+            Container(
+              margin: EdgeInsets.all(16),
+              child: Text(
+                'test 1',
+              ),
             ),
-            Text('test 2')
+            Container(
+              margin: EdgeInsets.all(40),
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: 10), // Space between tiles
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius:
+                          BorderRadius.circular(10), // Rounded corners
+                    ),
+                    child: ListTile(
+                      onTap: () => {
+                        _launchUrl('tel:+123456789'),
+                      },
+                      leading: Icon(Icons.call),
+                      title: Text('Customer Services'),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(bottom: 10), // Space between tiles
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius:
+                          BorderRadius.circular(10), // Rounded corners
+                    ),
+                    child: ListTile(
+                      onTap: () => {
+                        _launchApp(
+                            'whatsapp://send?phone=123456789', // WhatsApp direct app link
+                            'https://play.google.com/store/apps/details?id=com.whatsapp')
+                      },
+                      leading: Icon(Ionicons.logo_whatsapp),
+                      title: Text('WhatsApp'),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(bottom: 10), // Space between tiles
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius:
+                          BorderRadius.circular(10), // Rounded corners
+                    ),
+                    child: ListTile(
+                      onTap: () =>
+                          {_launchUrl('https://www.banknagari.co.id/')},
+                      leading: Icon(Icons.web),
+                      title: Text('Website'),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(bottom: 10), // Space between tiles
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius:
+                          BorderRadius.circular(10), // Rounded corners
+                    ),
+                    child: ListTile(
+                      onTap: () => {
+                        'fb://profile/your_facebook_id',
+                        'https://www.facebook.com/your_page_name'
+                      },
+                      leading: Icon(Ionicons.logo_facebook),
+                      title: Text('Facebook'),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(bottom: 10), // Space between tiles
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius:
+                          BorderRadius.circular(10), // Rounded corners
+                    ),
+                    child: ListTile(
+                      onTap: () => {
+                        _launchApp('twitter://user?screen_name=example_user',
+                            'https://twitter.com/example_user')
+                      },
+                      leading: Icon(Ionicons.logo_twitter),
+                      title: Text('Twitter'),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(bottom: 10), // Space between tiles
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius:
+                          BorderRadius.circular(10), // Rounded corners
+                    ),
+                    child: ListTile(
+                      onTap: () => {
+                        _launchApp('instagram://user?username=bank_nagari',
+                            'https://www.instagram.com/bank_nagari')
+                      },
+                      leading: Icon(Ionicons.logo_instagram),
+                      title: Text('Instagram'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ]),
         ));
   }

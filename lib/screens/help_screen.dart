@@ -1,4 +1,6 @@
+import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({super.key});
@@ -13,14 +15,18 @@ class HelpScreen extends StatelessWidget {
             actions: [
               Icon(Icons.more_vert),
             ],
-            bottom: TabBar(tabs: [
-              Tab(
-                text: 'Help',
-              ),
-              Tab(
-                text: 'FAQ',
-              )
-            ]),
+            bottom: TabBar(
+              tabs: [
+                Tab(
+                  text: 'FAQ',
+                ),
+                Tab(
+                  text: 'Contact Us',
+                )
+              ],
+              indicatorColor: AppColors.secondaryColor,
+              indicatorWeight: 5,
+            ),
           ),
           body: TabBarView(children: [
             Text(

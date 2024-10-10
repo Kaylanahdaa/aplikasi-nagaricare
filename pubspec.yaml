@@ -37,6 +37,7 @@ dependencies:
   get: ^4.6.6
   google_fonts: ^6.2.1
   ionicons: ^0.2.2
+  line_awesome_flutter: ^3.0.1
   url_launcher: ^6.3.1
 
 dev_dependencies:

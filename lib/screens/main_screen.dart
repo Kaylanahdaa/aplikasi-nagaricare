@@ -94,7 +94,7 @@ class MainScreen extends StatelessWidget {
             index: landingPageController.tabIndex.value,
             children: [
               MenuScreen(),
-              MyProfile(),
+              MyProfileScreen(),
               HelpScreen(),
               // SettingsPage(),
             ],

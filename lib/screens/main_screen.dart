@@ -85,8 +85,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final LandingPageController landingPageController =
         Get.put(LandingPageController(), permanent: false);
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       bottomNavigationBar:
           buildBottomNavigationMenu(context, landingPageController),
       body: Obx(() => IndexedStack(
@@ -98,6 +97,6 @@ class MainScreen extends StatelessWidget {
               // SettingsPage(),
             ],
           )),
-    ));
+    );
   }
 }

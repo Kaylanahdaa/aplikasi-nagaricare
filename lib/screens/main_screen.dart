@@ -4,7 +4,9 @@ import 'package:aplikasi_nagaricare/screens/help_screen.dart';
 import 'package:aplikasi_nagaricare/screens/menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ionicons/ionicons.dart';
 import '../controllers/bottombarcontroller.dart';
+import 'profile_screen.dart';
 
 class MainScreen extends StatelessWidget {
   buildBottomNavigationMenu(context, landingPageController) {
@@ -47,24 +49,24 @@ class MainScreen extends StatelessWidget {
                 icon: Container(
                   margin: EdgeInsets.only(bottom: 7),
                   child: Icon(
-                    Icons.help,
+                    Ionicons.person,
+                    size: 20.0,
+                  ),
+                ),
+                label: 'Profile',
+                backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+              ),
+              BottomNavigationBarItem(
+                icon: Container(
+                  margin: EdgeInsets.only(bottom: 7),
+                  child: Icon(
+                    Icons.location_history,
                     size: 20.0,
                   ),
                 ),
                 label: 'Help',
                 backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
               ),
-              // BottomNavigationBarItem(
-              //   icon: Container(
-              //     margin: EdgeInsets.only(bottom: 7),
-              //     child: Icon(
-              //       Icons.location_history,
-              //       size: 20.0,
-              //     ),
-              //   ),
-              //   label: 'Places',
-              //   backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
-              // ),
               // BottomNavigationBarItem(
               //   icon: Container(
               //     margin: EdgeInsets.only(bottom: 7),
@@ -92,8 +94,8 @@ class MainScreen extends StatelessWidget {
             index: landingPageController.tabIndex.value,
             children: [
               MenuScreen(),
+              MyProfile(),
               HelpScreen(),
-              // PlacesPage(),
               // SettingsPage(),
             ],
           )),

@@ -1,6 +1,7 @@
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/screens/help_screen.dart';
-import 'package:aplikasi_nagaricare/screens/login_screen.dart';
+// import 'package:aplikasi_nagaricare/screens/login_screen.dart';
+import 'package:aplikasi_nagaricare/screens/menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/bottombarcontroller.dart';
@@ -92,7 +93,7 @@ class MainScreen extends StatelessWidget {
             index: landingPageController.tabIndex.value,
             children: [
               HelpScreenWidget(),
-              LoginScreen(),
+              MenuScreen(),
               // PlacesPage(),
               // SettingsPage(),
             ],

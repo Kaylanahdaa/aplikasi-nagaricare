@@ -72,44 +72,7 @@ class HelpScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextField(
-            decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                contentPadding: EdgeInsets.all(15),
-                hintText: 'Search for Help',
-                hintStyle: TextStyle(
-                  color: Color(0xffDDDADA),
-                  fontSize: 14,
-                ),
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Icon(Icons.search),
-                ),
-                suffixIcon: Container(
-                  width: 100,
-                  child: IntrinsicHeight(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        VerticalDivider(
-                          color: Colors.black,
-                          indent: 10,
-                          endIndent: 10,
-                          thickness: 0.1,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Icon(Ionicons.filter_circle),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide.none)),
-          ),
+          _textField(),
           SizedBox(height: 10),
           // Example Question 1
           ExpansionTile(
@@ -149,6 +112,47 @@ class HelpScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  TextField _textField() {
+    return TextField(
+      decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          contentPadding: EdgeInsets.all(15),
+          hintText: 'Search for Help',
+          hintStyle: TextStyle(
+            color: Color(0xffDDDADA),
+            fontSize: 14,
+          ),
+          prefixIcon: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Icon(Icons.search),
+          ),
+          suffixIcon: Container(
+            width: 100,
+            child: IntrinsicHeight(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  VerticalDivider(
+                    color: Colors.black,
+                    indent: 10,
+                    endIndent: 10,
+                    thickness: 0.1,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Icon(Ionicons.filter_circle),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide.none)),
     );
   }
 

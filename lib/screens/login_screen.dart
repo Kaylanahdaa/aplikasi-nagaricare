@@ -1,3 +1,4 @@
+import 'package:aplikasi_nagaricare/constants/app_image.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -5,6 +6,22 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const MaterialApp(
+      home: const Scaffold(
+        body: Column(
+          children: [
+            //image
+            Image(
+              image: AssetImage(LogoBank),
+            ),
+
+            // welcome text
+            Text("Selamat Datang di NagariCare!"),
+            Text("data")
+            //button
+          ],
+        ),
+      ),
+    );
   }
 }

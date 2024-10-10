@@ -1,7 +1,6 @@
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/screens/help_screen.dart';
-// import 'package:aplikasi_nagaricare/screens/login_screen.dart';
-import 'package:aplikasi_nagaricare/screens/menu_screen.dart';
+import 'package:aplikasi_nagaricare/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/bottombarcontroller.dart';
@@ -47,11 +46,11 @@ class MainScreen extends StatelessWidget {
                 icon: Container(
                   margin: EdgeInsets.only(bottom: 7),
                   child: Icon(
-                    Icons.help,
+                    Icons.search,
                     size: 20.0,
                   ),
                 ),
-                label: 'Help',
+                label: 'Explore',
                 backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
               ),
               // BottomNavigationBarItem(
@@ -92,8 +91,8 @@ class MainScreen extends StatelessWidget {
       body: Obx(() => IndexedStack(
             index: landingPageController.tabIndex.value,
             children: [
-              MenuScreen(),
               HelpScreen(),
+              LoginScreen(),
               // PlacesPage(),
               // SettingsPage(),
             ],

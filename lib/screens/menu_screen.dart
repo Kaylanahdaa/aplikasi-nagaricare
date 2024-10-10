@@ -13,7 +13,7 @@ class _MenuScreenState extends State<MenuScreen> {
     return Container(
         width: 375,
         height: 812,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color.fromRGBO(253, 253, 253, 1),
         ),
         child: Stack(children: <Widget>[
@@ -28,7 +28,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         top: -0.00006103515625,
                         left: 0,
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(4),
                               topRight: Radius.circular(4),
@@ -37,9 +37,9 @@ class _MenuScreenState extends State<MenuScreen> {
                             ),
                             color: Color.fromRGBO(18, 18, 33, 1),
                           ),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                          child: Row(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 8),
+                          child: const Row(
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               Text(
@@ -57,13 +57,13 @@ class _MenuScreenState extends State<MenuScreen> {
                             ],
                           ),
                         )),
-                    Positioned(
+                    const Positioned(
                         top: 15.99993896484375,
                         left: 219,
                         child: SizedBox(
                           height: 1,
                         )),
-                    Positioned(
+                    const Positioned(
                         top: 7.99993896484375,
                         left: 281.879150390625,
                         child: SizedBox(
@@ -77,7 +77,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   width: 305,
                   height: 258,
                   child: Stack(children: <Widget>[
-                    Positioned(
+                    const Positioned(
                         top: 0,
                         left: 0,
                         child: Text(
@@ -98,7 +98,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         child: Container(
                             width: 305,
                             height: 200,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(8),
                                 topRight: Radius.circular(8),
@@ -117,7 +117,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         child: Container(
                             width: 305,
                             height: 200,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(8),
                                 topRight: Radius.circular(8),
@@ -134,7 +134,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                     Color.fromRGBO(0, 0, 0, 0.6499999761581421)
                                   ]),
                             ))),
-                    Positioned(
+                    const Positioned(
                         top: 234,
                         left: 12,
                         child: Text(
@@ -150,7 +150,7 @@ class _MenuScreenState extends State<MenuScreen> {
                               height: 1.5 /*PERCENT not supported*/
                               ),
                         )),
-                    Positioned(
+                    const Positioned(
                         top: 234,
                         left: 75,
                         child: Text(
@@ -166,7 +166,7 @@ class _MenuScreenState extends State<MenuScreen> {
                               height: 1.5 /*PERCENT not supported*/
                               ),
                         )),
-                    Positioned(
+                    const Positioned(
                         top: 184,
                         left: 12,
                         child: Text(
@@ -189,7 +189,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   width: 305,
                   height: 460,
                   child: Stack(children: <Widget>[
-                    Positioned(
+                    const Positioned(
                         top: 0,
                         left: 0,
                         child: Text(
@@ -211,7 +211,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             width: 143,
                             height: 192,
                             child: Stack(children: <Widget>[
-                              Positioned(
+                              const Positioned(
                                   top: 183,
                                   left: 0,
                                   child: Text(
@@ -226,7 +226,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                         fontWeight: FontWeight.normal,
                                         height: 1),
                                   )),
-                              Positioned(
+                              const Positioned(
                                   top: 183,
                                   left: 57,
                                   child: Text(
@@ -241,7 +241,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                         fontWeight: FontWeight.normal,
                                         height: 1),
                                   )),
-                              Positioned(
+                              const Positioned(
                                   top: 104,
                                   left: 0,
                                   child: Text(
@@ -262,7 +262,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                   child: Container(
                                       width: 143,
                                       height: 96,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(8),
                                           topRight: Radius.circular(8),
@@ -283,7 +283,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             width: 143,
                             height: 192,
                             child: Stack(children: <Widget>[
-                              Positioned(
+                              const Positioned(
                                   top: 183,
                                   left: 0,
                                   child: Text(
@@ -298,7 +298,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                         fontWeight: FontWeight.normal,
                                         height: 1),
                                   )),
-                              Positioned(
+                              const Positioned(
                                   top: 183,
                                   left: 57,
                                   child: Text(
@@ -313,7 +313,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                         fontWeight: FontWeight.normal,
                                         height: 1),
                                   )),
-                              Positioned(
+                              const Positioned(
                                   top: 104,
                                   left: 0,
                                   child: Text(
@@ -334,7 +334,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                   child: Container(
                                       width: 143,
                                       height: 96,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(8),
                                           topRight: Radius.circular(8),
@@ -355,7 +355,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             width: 142,
                             height: 192,
                             child: Stack(children: <Widget>[
-                              Positioned(
+                              const Positioned(
                                   top: 183,
                                   left: 0,
                                   child: Text(
@@ -370,7 +370,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                         fontWeight: FontWeight.normal,
                                         height: 1),
                                   )),
-                              Positioned(
+                              const Positioned(
                                   top: 183,
                                   left: 56.60139846801758,
                                   child: Text(
@@ -385,7 +385,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                         fontWeight: FontWeight.normal,
                                         height: 1),
                                   )),
-                              Positioned(
+                              const Positioned(
                                   top: 104,
                                   left: 0,
                                   child: Text(
@@ -406,7 +406,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                   child: Container(
                                       width: 142,
                                       height: 96,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(8),
                                           topRight: Radius.circular(8),
@@ -427,7 +427,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             width: 142,
                             height: 192,
                             child: Stack(children: <Widget>[
-                              Positioned(
+                              const Positioned(
                                   top: 183,
                                   left: 0,
                                   child: Text(
@@ -442,7 +442,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                         fontWeight: FontWeight.normal,
                                         height: 1),
                                   )),
-                              Positioned(
+                              const Positioned(
                                   top: 183,
                                   left: 56.60139846801758,
                                   child: Text(
@@ -457,7 +457,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                         fontWeight: FontWeight.normal,
                                         height: 1),
                                   )),
-                              Positioned(
+                              const Positioned(
                                   top: 104,
                                   left: 0,
                                   child: Text(
@@ -478,7 +478,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                   child: Container(
                                       width: 142,
                                       height: 96,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(8),
                                           topRight: Radius.circular(8),

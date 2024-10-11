@@ -160,6 +160,7 @@ class HelpScreen extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(40),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
             margin: EdgeInsets.only(bottom: 10), // Space between tiles

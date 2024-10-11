@@ -1,12 +1,17 @@
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:get/get.dart';
+import '../controllers/profile_controller.dart'; // Import your ProfileController
 
 class MyProfileScreen extends StatelessWidget {
   const MyProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final ProfileController profileController =
+        Get.put(ProfileController()); // Initialize the controller
+
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -34,7 +39,7 @@ class MyProfileScreen extends StatelessWidget {
               const SizedBox(height: 10),
               Text('Nama',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-              Text('Email', style: TextStyle(fontSize: 18)),
+              Text('Pekerjaan', style: TextStyle(fontSize: 18)),
               const SizedBox(height: 20),
               SizedBox(
                 width: 200,
@@ -42,7 +47,7 @@ class MyProfileScreen extends StatelessWidget {
                   onPressed: () => {},
                   child: const Text(
                     'Edit Profile',
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.white),
                   ),
                   style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primaryColor,
@@ -53,132 +58,115 @@ class MyProfileScreen extends StatelessWidget {
               const SizedBox(height: 30),
               const Divider(),
               const SizedBox(height: 10),
-              // MENU
+              // EDIT FROM HERE
               ListTile(
-                  leading: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: AppColors.secondaryColor.withOpacity(0.1)),
-                    child: const Icon(
-                      LineAwesomeIcons.cog_solid,
-                      color: AppColors.secondaryColor,
-                    ),
+                leading: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: AppColors.secondaryColor.withOpacity(0.1),
                   ),
-                  title: Text('Settings'),
-                  trailing: Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.grey.withOpacity(0.1)),
-                    child: const Icon(
-                      LineAwesomeIcons.angle_right_solid,
-                      size: 18,
-                      color: Colors.grey,
-                    ),
-                  )),
+                  child: const Icon(
+                    LineAwesomeIcons.envelope,
+                    color: AppColors.secondaryColor,
+                  ),
+                ),
+                title: Text('Your Email'),
+                subtitle: Text("ini email")
+                // Obx(() => Text(profileController.email.value))
+                ,
+                // trailing: Container(
+                //   width: 30,
+                //   height: 30,
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(100),
+                //     color: Colors.grey.withOpacity(0.1),
+                //   ),
+                //   child: const Icon(
+                //     LineAwesomeIcons.angle_right_solid,
+                //     size: 18,
+                //     color: Colors.grey,
+                //   ),
+                // ),
+              ),
               ListTile(
-                  leading: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: AppColors.secondaryColor.withOpacity(0.1)),
-                    child: const Icon(
-                      LineAwesomeIcons.cog_solid,
-                      color: AppColors.secondaryColor,
-                    ),
+                leading: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: AppColors.secondaryColor.withOpacity(0.1),
                   ),
-                  title: Text('Menu 1'),
-                  trailing: Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.grey.withOpacity(0.1)),
-                    child: const Icon(
-                      LineAwesomeIcons.angle_right_solid,
-                      size: 18,
-                      color: Colors.grey,
-                    ),
-                  )),
+                  child: const Icon(
+                    LineAwesomeIcons.phone_solid,
+                    color: AppColors.secondaryColor,
+                  ),
+                ),
+                title: Text('Your Phone'),
+                subtitle: Text("ini phone")
+                // Obx(() => Text(profileController.phone.value))
+                ,
+                // trailing: Container(
+                //   width: 30,
+                //   height: 30,
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(100),
+                //     color: Colors.grey.withOpacity(0.1),
+                //   ),
+                //   child: const Icon(
+                //     LineAwesomeIcons.angle_right_solid,
+                //     size: 18,
+                //     color: Colors.grey,
+                //   ),
+                // ),
+              ),
               ListTile(
-                  leading: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: AppColors.secondaryColor.withOpacity(0.1)),
-                    child: const Icon(
-                      LineAwesomeIcons.cog_solid,
-                      color: AppColors.secondaryColor,
-                    ),
+                leading: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: AppColors.secondaryColor.withOpacity(0.1),
                   ),
-                  title: Text('Menu 1'),
-                  trailing: Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.grey.withOpacity(0.1)),
-                    child: const Icon(
-                      LineAwesomeIcons.angle_right_solid,
-                      size: 18,
-                      color: Colors.grey,
-                    ),
-                  )),
-              ListTile(
-                  leading: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: AppColors.secondaryColor.withOpacity(0.1)),
-                    child: const Icon(
-                      LineAwesomeIcons.cog_solid,
-                      color: AppColors.secondaryColor,
-                    ),
+                  child: const Icon(
+                    LineAwesomeIcons.lock_solid,
+                    color: AppColors.secondaryColor,
                   ),
-                  title: Text('Menu 1'),
-                  trailing: Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.grey.withOpacity(0.1)),
-                    child: const Icon(
-                      LineAwesomeIcons.angle_right_solid,
-                      size: 18,
-                      color: Colors.grey,
-                    ),
-                  )),
-              ListTile(
-                  leading: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: AppColors.secondaryColor.withOpacity(0.1)),
-                    child: const Icon(
-                      LineAwesomeIcons.cog_solid,
-                      color: AppColors.secondaryColor,
-                    ),
+                ),
+                title: Text('Password'),
+                subtitle: Text("Ini pass")
+                // Obx(() => Text(profileController.password.value))
+                ,
+                trailing: Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: Colors.grey.withOpacity(0.1),
                   ),
-                  title: Text('Menu 1'),
-                  trailing: Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.grey.withOpacity(0.1)),
-                    child: const Icon(
-                      LineAwesomeIcons.angle_right_solid,
-                      size: 18,
-                      color: Colors.grey,
-                    ),
-                  ))
+                  child: const Icon(
+                    LineAwesomeIcons.eye,
+                    size: 18,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+              const Divider(),
+              SizedBox(
+                width: 500,
+                child: ElevatedButton(
+                  onPressed: () => {},
+                  child: const Text(
+                    'LOGOUT',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      side: BorderSide.none,
+                      shape: StadiumBorder()),
+                ),
+              )
             ],
           ),
         ),

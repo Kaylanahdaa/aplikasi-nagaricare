@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '/models/post_model.dart';
 import '/screens/post_screen.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:ionicons/ionicons.dart';
 
 class Posts extends StatefulWidget {

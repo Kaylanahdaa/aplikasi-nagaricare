@@ -3,9 +3,7 @@ import 'package:aplikasi_nagaricare/widgets/carousel_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
-import '/widgets/popular_topics.dart';
 import '/widgets/posts.dart';
-import '/widgets/top_bar.dart';
 import 'package:ionicons/ionicons.dart';
 
 class HomePage extends StatelessWidget {

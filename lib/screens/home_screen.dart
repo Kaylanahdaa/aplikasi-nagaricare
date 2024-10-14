@@ -1,6 +1,7 @@
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
+import 'package:aplikasi_nagaricare/widgets/carousel_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; // GetX package
+import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 import '/widgets/popular_topics.dart';
 import '/widgets/posts.dart';
@@ -71,7 +72,7 @@ class HomePage extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.all(20.0),
                     child: Text(
-                      "DIBAWAH INI CAROUSEL",
+                      "Update Terbaru Bank Nagari",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -79,7 +80,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  PopularTopics(),
+                  CarouselMenu(),
                   Padding(
                     padding: EdgeInsets.only(left: 20.0, top: 20.0),
                     child: Text(

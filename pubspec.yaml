@@ -68,6 +68,13 @@ flutter:
     - assets/images/rectangle1.png
     - assets/images/rectangle0.png
     - assets/images/rectangle.png
+    - assets/images/author1.jpg
+    - assets/images/author2.jpg
+    - assets/images/author3.jpg
+    - assets/images/author4.jpg
+    - assets/images/author5.jpg
+    - assets/images/author6.jpg
+    - assets/images/author7.jpg
     # - assets/images/vector.svg
     # - assets/images/vector1.svg
     # - assets/images/vector2.svg

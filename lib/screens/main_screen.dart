@@ -1,7 +1,7 @@
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/screens/help_screen.dart';
+import 'package:aplikasi_nagaricare/screens/home_screen.dart';
 // import 'package:aplikasi_nagaricare/screens/login_screen.dart';
-import 'package:aplikasi_nagaricare/screens/menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -93,7 +93,7 @@ class MainScreen extends StatelessWidget {
       body: Obx(() => IndexedStack(
             index: landingPageController.tabIndex.value,
             children: [
-              MenuScreen(),
+              HomePage(),
               MyProfileScreen(),
               HelpScreen(),
               // SettingsPage(),

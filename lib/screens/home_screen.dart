@@ -2,6 +2,7 @@ import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/widgets/carousel_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../controllers/home_controller.dart';
 import '/widgets/posts.dart';
 import 'package:ionicons/ionicons.dart';
@@ -12,6 +13,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {},
+        backgroundColor: AppColors.primaryColor,
+        child: Icon(Ionicons.chatbubble_ellipses_outline, color: Colors.white),
+        shape: CircleBorder(),
+      ),
       backgroundColor: AppColors.primaryColor,
       body: SafeArea(
         child: ListView(

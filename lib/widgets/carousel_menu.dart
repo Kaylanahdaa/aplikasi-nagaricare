@@ -17,30 +17,33 @@ class CarouselMenu extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         /// Outer Style Indicators Banner Slider
-        CarouselSlider(
-          options: CarouselOptions(
-            autoPlay: true,
-            enlargeCenterPage: true,
-            enableInfiniteScroll: true,
-            aspectRatio: 16 / 8,
-            viewportFraction: .95,
-            onPageChanged: (index, reason) {
-              controller.changePage(index);
-            },
-          ),
-          items: AppData.outerStyleImages.map((imagePath) {
-            return Builder(
-              builder: (BuildContext context) {
-                /// Custom Image Viewer widget
-                return CustomImageViewer.show(
-                  context: context,
-                  url: imagePath,
-                  fit: BoxFit.fill,
-                  radius: 0,
-                );
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: CarouselSlider(
+            options: CarouselOptions(
+              autoPlay: true,
+              enlargeCenterPage: true,
+              enableInfiniteScroll: true,
+              aspectRatio: 16 / 8,
+              viewportFraction: .95,
+              onPageChanged: (index, reason) {
+                controller.changePage(index);
               },
-            );
-          }).toList(),
+            ),
+            items: AppData.outerStyleImages.map((imagePath) {
+              return Builder(
+                builder: (BuildContext context) {
+                  /// Custom Image Viewer widget
+                  return CustomImageViewer.show(
+                    context: context,
+                    url: imagePath,
+                    fit: BoxFit.fill,
+                    radius: 24,
+                  );
+                },
+              );
+            }).toList(),
+          ),
         ),
 
         const SizedBox(height: 10),

@@ -41,6 +41,7 @@ dependencies:
   url_launcher: ^6.3.1
   cached_network_image: ^3.3.1
   carousel_slider: ^5.0.0
+  flutter_otp_text_field: ^1.1.0+2
 
 dev_dependencies:
   flutter_lints: ^4.0.0
@@ -77,6 +78,11 @@ flutter:
     - assets/images/author5.jpg
     - assets/images/author6.jpg
     - assets/images/author7.jpg
+    - assets/images/logo_banknagari.png
+    - assets/images/logo_nagaricare.png
+    - assets/images/logo_google.png
+    - assets/images/logo_otp.png
+    - assets/fonts/
     # - assets/images/vector.svg
     # - assets/images/vector1.svg
     # - assets/images/vector2.svg

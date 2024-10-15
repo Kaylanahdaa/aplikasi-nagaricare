@@ -1,6 +1,7 @@
-// import 'package:aplikasi_nagaricare/screens/help_screen.dart';
-import 'package:aplikasi_nagaricare/screens/main_screen.dart';
+import 'package:aplikasi_nagaricare/screens/auth/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:aplikasi_nagaricare/screens/auth/welcome/welcome_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,13 +10,12 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const GetMaterialApp(
+      title: 'NagariCare',
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      home: MainScreen(),
+      home: WelcomeScreen(),
     );
   }
 }

@@ -38,17 +38,6 @@ class MainScreen extends StatelessWidget {
                 icon: Container(
                   margin: EdgeInsets.only(bottom: 7),
                   child: Icon(
-                    Icons.home,
-                    size: 20.0,
-                  ),
-                ),
-                label: 'Home',
-                backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
-              ),
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(bottom: 7),
-                  child: Icon(
                     Ionicons.person,
                     size: 20.0,
                   ),
@@ -60,7 +49,18 @@ class MainScreen extends StatelessWidget {
                 icon: Container(
                   margin: EdgeInsets.only(bottom: 7),
                   child: Icon(
-                    Icons.location_history,
+                    Ionicons.home,
+                    size: 20.0,
+                  ),
+                ),
+                label: 'Home',
+                backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+              ),
+              BottomNavigationBarItem(
+                icon: Container(
+                  margin: EdgeInsets.only(bottom: 7),
+                  child: Icon(
+                    Ionicons.help_circle,
                     size: 20.0,
                   ),
                 ),
@@ -93,8 +93,8 @@ class MainScreen extends StatelessWidget {
       body: Obx(() => IndexedStack(
             index: landingPageController.tabIndex.value,
             children: [
-              HomePage(),
               MyProfileScreen(),
+              HomePage(),
               HelpScreen(),
               // SettingsPage(),
             ],

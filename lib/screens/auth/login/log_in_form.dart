@@ -1,9 +1,9 @@
+import 'package:aplikasi_nagaricare/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/constants/app_fonts.dart';
 import 'package:aplikasi_nagaricare/constants/app_text.dart';
 import 'package:aplikasi_nagaricare/screens/auth/forget_password/forget_password_options/forget_password_model_bottom_sheet.dart';
-import 'package:aplikasi_nagaricare/screens/auth/welcome/welcome_screen.dart';
 import 'package:get/get.dart';
 
 class LogInForm extends StatelessWidget {
@@ -72,7 +72,7 @@ class LogInForm extends StatelessWidget {
                       foregroundColor: AppColors.backgroundColor,
                       backgroundColor: AppColors.accentColor),
                   onPressed: () {
-                    Get.off(() => const WelcomeScreen());
+                    Get.off(() => MainScreen());
                   },
                   child: Text(
                     "Log in".toUpperCase(),

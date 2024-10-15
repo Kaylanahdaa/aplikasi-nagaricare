@@ -1,7 +1,7 @@
+import 'package:aplikasi_nagaricare/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/constants/app_fonts.dart';
-import 'package:aplikasi_nagaricare/screens/auth/welcome/welcome_screen.dart';
 import 'package:get/get.dart';
 
 class SignUpForm extends StatelessWidget {
@@ -89,7 +89,7 @@ class SignUpForm extends StatelessWidget {
                       foregroundColor: AppColors.backgroundColor,
                       backgroundColor: AppColors.accentColor),
                   onPressed: () {
-                    Get.to(() => const WelcomeScreen());
+                    Get.to(() => MainScreen());
                   },
                   child: Text(
                     "Sign Up".toUpperCase(),

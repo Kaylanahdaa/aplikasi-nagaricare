@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1060173404019",
+    "project_id": "project-banknagari-f28db",
+    "storage_bucket": "project-banknagari-f28db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060173404019:android:6ccf787c6d1f4472029706",
+        "android_client_info": {
+          "package_name": "com.example.nagaricare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIscnH0WIR-HqZ4pWUGgualNYUA9uWkRY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

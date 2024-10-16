@@ -1,4 +1,4 @@
-import 'package:aplikasi_nagaricare/screens/main_screen.dart';
+import 'package:aplikasi_nagaricare/screens/auth/controllers/signup_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/constants/app_fonts.dart';
@@ -11,13 +11,18 @@ class SignUpForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SignupController());
+    final _formKey = GlobalKey<FormState>();
+
     return Container(
       child: Form(
+        key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 30),
             TextFormField(
+              controller: controller.fullname,
               decoration: InputDecoration(
                   floatingLabelStyle: TextStyle(color: AppColors.accentColor),
                   iconColor: AppColors.secondaryColor,
@@ -37,6 +42,7 @@ class SignUpForm extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             TextFormField(
+              controller: controller.email,
               decoration: InputDecoration(
                   iconColor: AppColors.secondaryColor,
                   label: const Text(
@@ -51,6 +57,7 @@ class SignUpForm extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             TextFormField(
+              controller: controller.password,
               obscureText: true,
               decoration: InputDecoration(
                   iconColor: AppColors.secondaryColor,
@@ -66,6 +73,7 @@ class SignUpForm extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             TextFormField(
+              controller: controller.phoneNo,
               decoration: InputDecoration(
                   iconColor: AppColors.secondaryColor,
                   label: const Text(
@@ -78,7 +86,7 @@ class SignUpForm extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15), // Sudut radius 15
                   )),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -89,7 +97,11 @@ class SignUpForm extends StatelessWidget {
                       foregroundColor: AppColors.backgroundColor,
                       backgroundColor: AppColors.accentColor),
                   onPressed: () {
-                    Get.to(() => MainScreen());
+                    if (_formKey.currentState!.validate()) {
+                      SignupController.instance.registerUser(
+                          controller.email.text.trim(),
+                          controller.password.text.trim());
+                    }
                   },
                   child: Text(
                     "Sign Up".toUpperCase(),

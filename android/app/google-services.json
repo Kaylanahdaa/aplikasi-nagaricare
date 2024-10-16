@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1060173404019:android:127841b937880366029706",
+        "android_client_info": {
+          "package_name": "com.example.aplikasi_nagaricare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIscnH0WIR-HqZ4pWUGgualNYUA9uWkRY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1060173404019:android:6ccf787c6d1f4472029706",
         "android_client_info": {
           "package_name": "com.example.nagaricare"

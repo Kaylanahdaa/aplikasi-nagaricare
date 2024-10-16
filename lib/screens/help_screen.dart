@@ -1,4 +1,6 @@
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
+import 'package:aplikasi_nagaricare/repository/authentication_repository/authentication_repository.dart';
+import 'package:aplikasi_nagaricare/screens/auth/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -39,11 +41,26 @@ class HelpScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text('Help Center'),
             actions: [
-              GestureDetector(
-                onTap: () => {print('ditekan')},
-                child: Container(
-                    margin: EdgeInsets.all(16), child: Icon(Icons.more_vert)),
-              )
+              PopupMenuButton<String>(
+                icon: Icon(Icons.more_vert),
+                onSelected: (value) async {
+                  if (value == 'logout') {
+                    await AuthenticationRepository.instance.logout().then(
+                      (value) {
+                        Get.offAll(() => WelcomeScreen());
+                      },
+                    );
+                  }
+                },
+                itemBuilder: (BuildContext context) {
+                  return [
+                    PopupMenuItem<String>(
+                      value: 'logout',
+                      child: Text('Logout'),
+                    ),
+                  ];
+                },
+              ),
             ],
             bottom: TabBar(
               tabs: [

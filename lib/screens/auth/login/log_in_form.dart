@@ -1,4 +1,4 @@
-import 'package:aplikasi_nagaricare/screens/main_screen.dart';
+import 'package:aplikasi_nagaricare/screens/auth/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/constants/app_fonts.dart';
@@ -13,37 +13,57 @@ class LogInForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
+    final _formKey = GlobalKey<FormState>();
+
     return Container(
       child: Form(
+        key: _formKey,
         child: Column(
           children: [
             const SizedBox(height: 30),
             TextFormField(
+              controller: controller.email,
               decoration: InputDecoration(
-                  iconColor: AppColors.secondaryColor,
-                  label: const Text(
-                    'Email',
-                    style: TextStyle(
-                        fontSize: 15, fontFamily: AppFonts.primaryFont),
-                  ),
-                  prefixIcon: const Icon(Icons.email_outlined),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15), // Sudut radius 15
-                  )),
+                iconColor: AppColors.secondaryColor,
+                label: const Text(
+                  'Email',
+                  style:
+                      TextStyle(fontSize: 15, fontFamily: AppFonts.primaryFont),
+                ),
+                prefixIcon: const Icon(Icons.email_outlined),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15), // Sudut radius 15
+                ),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your email';
+                }
+                return null;
+              },
             ),
             const SizedBox(height: 10),
             TextFormField(
+              controller: controller.password,
               obscureText: true,
               decoration: InputDecoration(
-                  label: const Text(
-                    'Password',
-                    style: TextStyle(
-                        fontSize: 15, fontFamily: AppFonts.primaryFont),
-                  ),
-                  prefixIcon: const Icon(Icons.fingerprint),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15), // Sudut radius 15
-                  )),
+                label: const Text(
+                  'Password',
+                  style:
+                      TextStyle(fontSize: 15, fontFamily: AppFonts.primaryFont),
+                ),
+                prefixIcon: const Icon(Icons.fingerprint),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15), // Sudut radius 15
+                ),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your password';
+                }
+                return null;
+              },
             ),
 
             // FORGET PASSWORD
@@ -72,7 +92,9 @@ class LogInForm extends StatelessWidget {
                       foregroundColor: AppColors.backgroundColor,
                       backgroundColor: AppColors.accentColor),
                   onPressed: () {
-                    Get.off(() => MainScreen());
+                    if (_formKey.currentState!.validate()) {
+                      LoginController.instance.login();
+                    }
                   },
                   child: Text(
                     "Log in".toUpperCase(),

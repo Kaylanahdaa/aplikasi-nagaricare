@@ -1,5 +1,6 @@
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/widgets/carousel_menu.dart';
+import 'package:aplikasi_nagaricare/widgets/post_forum.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -14,7 +15,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () => showPostTweetModal(context),
         backgroundColor: AppColors.primaryColor,
         child: Icon(Ionicons.chatbubble_ellipses_outline, color: Colors.white),
         shape: CircleBorder(),

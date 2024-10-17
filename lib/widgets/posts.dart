@@ -4,7 +4,10 @@ import '/screens/post_screen.dart';
 import 'package:ionicons/ionicons.dart';
 
 class Posts extends StatefulWidget {
+  const Posts({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _PostsState createState() => _PostsState();
 }
 
@@ -24,23 +27,23 @@ class _PostsState extends State<Posts> {
                   },
                   child: Container(
                     height: 180,
-                    margin: EdgeInsets.all(15.0),
+                    margin: const EdgeInsets.all(15.0),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10.0),
                         boxShadow: [
                           BoxShadow(
                               color: Colors.black26.withOpacity(0.05),
-                              offset: Offset(0.0, 6.0),
+                              offset: const Offset(0.0, 6.0),
                               blurRadius: 10.0,
                               spreadRadius: 0.10)
                         ]),
                     child: Padding(
-                      padding: EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.all(15.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Container(
+                          SizedBox(
                             height: 70,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,29 +63,31 @@ class _PostsState extends State<Posts> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: <Widget>[
-                                          Container(
+                                          SizedBox(
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width *
                                                 0.65,
                                             child: Text(
                                               question.question,
-                                              style: TextStyle(
+                                              style: const TextStyle(
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold,
                                                   letterSpacing: .4),
                                             ),
                                           ),
-                                          SizedBox(height: 2.0),
+                                          const SizedBox(height: 2.0),
                                           Row(
                                             children: <Widget>[
                                               Text(
                                                 question.author.name,
                                                 style: TextStyle(
-                                                    color: Colors.grey
+                                                    color: Colors.red
                                                         .withOpacity(0.6)),
                                               ),
-                                              SizedBox(width: 15),
+                                              const SizedBox(width: 15),
                                               Text(
                                                 question.created_at,
                                                 style: TextStyle(
@@ -99,12 +104,12 @@ class _PostsState extends State<Posts> {
                                 Icon(
                                   Ionicons.bookmark,
                                   color: Colors.grey.withOpacity(0.6),
-                                  size: 26,
+                                  size: 24,
                                 )
                               ],
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             height: 50,
                             child: Center(
                               child: Text(
@@ -116,7 +121,7 @@ class _PostsState extends State<Posts> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
@@ -128,7 +133,7 @@ class _PostsState extends State<Posts> {
                                     color: Colors.grey.withOpacity(0.6),
                                     size: 22,
                                   ),
-                                  SizedBox(width: 4.0),
+                                  const SizedBox(width: 4.0),
                                   Text(
                                     "${question.votes} votes",
                                     style: TextStyle(
@@ -145,7 +150,7 @@ class _PostsState extends State<Posts> {
                                     color: Colors.grey.withOpacity(0.6),
                                     size: 16,
                                   ),
-                                  SizedBox(width: 4.0),
+                                  const SizedBox(width: 4.0),
                                   Text(
                                     "${question.repliesCount} replies",
                                     style: TextStyle(
@@ -161,7 +166,7 @@ class _PostsState extends State<Posts> {
                                     color: Colors.grey.withOpacity(0.6),
                                     size: 18,
                                   ),
-                                  SizedBox(width: 4.0),
+                                  const SizedBox(width: 4.0),
                                   Text(
                                     "${question.views} views",
                                     style: TextStyle(

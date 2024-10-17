@@ -9,78 +9,74 @@ import '../controllers/bottombarcontroller.dart';
 import 'profile_screen.dart';
 
 class MainScreen extends StatelessWidget {
+  const MainScreen({super.key});
+
   buildBottomNavigationMenu(context, landingPageController) {
     final TextStyle unselectedLabelStyle = TextStyle(
         color: Colors.white.withOpacity(0.5),
         fontWeight: FontWeight.w500,
         fontSize: 12);
 
-    final TextStyle selectedLabelStyle = TextStyle(
+    const TextStyle selectedLabelStyle = TextStyle(
         color: Colors.white, fontWeight: FontWeight.w500, fontSize: 12);
 
-    return Obx(() => MediaQuery(
-        data:
-            MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
-        child: SizedBox(
-          height: 56,
-          child: BottomNavigationBar(
-            showUnselectedLabels: true,
-            showSelectedLabels: true,
-            onTap: landingPageController.changeTabIndex,
-            currentIndex: landingPageController.tabIndex.value,
-            backgroundColor: AppColors.primaryColor,
-            unselectedItemColor: Colors.white.withOpacity(0.5),
-            selectedItemColor: Colors.white,
-            unselectedLabelStyle: unselectedLabelStyle,
-            selectedLabelStyle: selectedLabelStyle,
-            items: [
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(bottom: 7),
-                  child: Icon(
-                    Ionicons.person,
-                    size: 20.0,
-                  ),
+    return Obx(() => BottomNavigationBar(
+          showUnselectedLabels: true,
+          showSelectedLabels: true,
+          onTap: landingPageController.changeTabIndex,
+          currentIndex: landingPageController.tabIndex.value,
+          backgroundColor: AppColors.primaryColor,
+          unselectedItemColor: Colors.white.withOpacity(0.5),
+          selectedItemColor: Colors.white,
+          unselectedLabelStyle: unselectedLabelStyle,
+          selectedLabelStyle: selectedLabelStyle,
+          items: [
+            BottomNavigationBarItem(
+              icon: Container(
+                margin: const EdgeInsets.only(bottom: 8, top: 8),
+                child: const Icon(
+                  Ionicons.person,
+                  size: 20.0,
                 ),
-                label: 'Profile',
-                backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
               ),
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(bottom: 7),
-                  child: Icon(
-                    Ionicons.home,
-                    size: 20.0,
-                  ),
+              label: 'Profile',
+              backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
+            ),
+            BottomNavigationBarItem(
+              icon: Container(
+                margin: const EdgeInsets.only(bottom: 7),
+                child: const Icon(
+                  Ionicons.home,
+                  size: 20.0,
                 ),
-                label: 'Home',
-                backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
               ),
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(bottom: 7),
-                  child: Icon(
-                    Ionicons.help_circle,
-                    size: 20.0,
-                  ),
+              label: 'Home',
+              backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
+            ),
+            BottomNavigationBarItem(
+              icon: Container(
+                margin: const EdgeInsets.only(bottom: 7),
+                child: const Icon(
+                  Ionicons.help_circle,
+                  size: 20.0,
                 ),
-                label: 'Help',
-                backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
               ),
-              // BottomNavigationBarItem(
-              //   icon: Container(
-              //     margin: EdgeInsets.only(bottom: 7),
-              //     child: Icon(
-              //       Icons.settings,
-              //       size: 20.0,
-              //     ),
-              //   ),
-              //   label: 'Settings',
-              //   backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
-              // ),
-            ],
-          ),
-        )));
+              label: 'Help',
+              backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
+            ),
+            // BottomNavigationBarItem(
+            //   icon: Container(
+            //     margin: EdgeInsets.only(bottom: 7),
+            //     child: Icon(
+            //       Icons.settings,
+            //       size: 20.0,
+            //     ),
+            //   ),
+            //   label: 'Settings',
+            //   backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+            // ),
+          ],
+        ));
   }
 
   @override
@@ -93,9 +89,9 @@ class MainScreen extends StatelessWidget {
       body: Obx(() => IndexedStack(
             index: landingPageController.tabIndex.value,
             children: [
-              MyProfileScreen(),
+              const MyProfileScreen(),
               HomePage(),
-              HelpScreen(),
+              const HelpScreen(),
               // SettingsPage(),
             ],
           )),

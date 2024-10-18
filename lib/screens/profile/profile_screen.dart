@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import '../controllers/profile_controller.dart';
+import '../../controllers/profile_controller.dart';
 
 class MyProfileScreen extends StatelessWidget {
   const MyProfileScreen({Key? key}) : super(key: key);

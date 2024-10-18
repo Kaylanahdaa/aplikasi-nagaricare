@@ -1,12 +1,12 @@
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
-import 'package:aplikasi_nagaricare/screens/help_screen.dart';
+import 'package:aplikasi_nagaricare/screens/help/help_screen.dart';
 import 'package:aplikasi_nagaricare/screens/home_screen.dart';
 // import 'package:aplikasi_nagaricare/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import '../controllers/bottombarcontroller.dart';
-import 'profile_screen.dart';
+import 'profile/profile_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});

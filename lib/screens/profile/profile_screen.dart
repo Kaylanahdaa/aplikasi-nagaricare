@@ -15,7 +15,9 @@ class MyProfileScreen extends StatelessWidget {
     final ProfileController profileController = Get.put(ProfileController());
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Center(
           child: Text(
             'My Profile',
@@ -68,9 +70,7 @@ class MyProfileScreen extends StatelessWidget {
                             SizedBox(
                               width: 200,
                               child: ElevatedButton(
-                                onPressed: () {
-                                  // Add functionality to edit profile
-                                },
+                                onPressed: () {},
                                 child: const Text(
                                   'Edit Profile',
                                   style: TextStyle(color: Colors.white),
@@ -85,7 +85,6 @@ class MyProfileScreen extends StatelessWidget {
                             const SizedBox(height: 30),
                             const Divider(),
                             const SizedBox(height: 10),
-                            // Profile picture and other UI elements
                             Obx(() {
                               return ListTile(
                                 leading: Container(
@@ -138,7 +137,7 @@ class MyProfileScreen extends StatelessWidget {
                                   showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
-                                      return CupertinoAlertDialog(
+                                      return AlertDialog(
                                         title: Text("Konfirmasi Logout"),
                                         content: Text(
                                             "Apakah kamu yakin ingin logout?"),
@@ -146,20 +145,17 @@ class MyProfileScreen extends StatelessWidget {
                                           TextButton(
                                             child: Text("Tidak"),
                                             onPressed: () {
-                                              Navigator.of(context)
-                                                  .pop(); // Close dialog
+                                              Navigator.of(context).pop();
                                             },
                                           ),
                                           TextButton(
                                             child: Text("Iya"),
                                             onPressed: () {
-                                              // If "Iya", logout and navigate to WelcomeScreen
                                               AuthenticationRepository.instance
                                                   .logout()
                                                   .then(
                                                 (value) {
-                                                  Navigator.of(context)
-                                                      .pop(); // Close dialog before logout
+                                                  Navigator.of(context).pop();
                                                   Get.offAll(
                                                       () => WelcomeScreen());
                                                 },

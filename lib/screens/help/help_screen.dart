@@ -38,8 +38,10 @@ class HelpScreen extends StatelessWidget {
     return DefaultTabController(
         length: 2,
         child: Scaffold(
+          backgroundColor: Colors.white,
           appBar: AppBar(
             title: Text('Help Center'),
+            backgroundColor: Colors.white,
             actions: [
               PopupMenuButton<String>(
                 icon: Icon(Icons.more_vert),

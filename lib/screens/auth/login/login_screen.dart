@@ -1,3 +1,4 @@
+import 'package:aplikasi_nagaricare/repository/authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/constants/app_fonts.dart';
@@ -42,7 +43,8 @@ class LoginScreen extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15)),
                       ),
-                      onPressed: () {},
+                      onPressed: () =>
+                          AuthenticationRepository().signInWithGoogle(),
                       icon: const Image(
                         image: AssetImage(logoGoogle),
                         width: 20.0,

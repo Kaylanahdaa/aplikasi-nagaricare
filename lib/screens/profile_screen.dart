@@ -3,17 +3,16 @@ import 'package:aplikasi_nagaricare/repository/authentication_repository/authent
 import 'package:aplikasi_nagaricare/screens/auth/welcome/welcome_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:get/get.dart';
-import '../controllers/profile_controller.dart'; // Import your ProfileController
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import '../controllers/profile_controller.dart';
 
 class MyProfileScreen extends StatelessWidget {
-  const MyProfileScreen({super.key});
+  const MyProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ProfileController profileController =
-        Get.put(ProfileController()); // Initialize the controller
+    final ProfileController profileController = Get.put(ProfileController());
 
     return Scaffold(
       appBar: AppBar(
@@ -23,11 +22,10 @@ class MyProfileScreen extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
-        actions: [],
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.all(58),
+          padding: EdgeInsets.all(20),
           child: Column(
             children: [
               SizedBox(
@@ -36,172 +34,160 @@ class MyProfileScreen extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100),
                   child: Image.network(
-                      'https://images.pexels.com/photos/1819650/pexels-photo-1819650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text('Nama',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-              Text('Pekerjaan', style: TextStyle(fontSize: 18)),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: 200,
-                child: ElevatedButton(
-                  onPressed: () => {},
-                  child: const Text(
-                    'Edit Profile',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryColor,
-                      side: BorderSide.none,
-                      shape: StadiumBorder()),
-                ),
-              ),
-              const SizedBox(height: 30),
-              const Divider(),
-              const SizedBox(height: 10),
-              // EDIT FROM HERE
-              ListTile(
-                leading: Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: AppColors.secondaryColor.withOpacity(0.1),
-                  ),
-                  child: const Icon(
-                    LineAwesomeIcons.envelope,
-                    color: AppColors.secondaryColor,
-                  ),
-                ),
-                title: Text('Your Email'),
-                subtitle: Text("ini email")
-                // Obx(() => Text(profileController.email.value))
-                ,
-                // trailing: Container(
-                //   width: 30,
-                //   height: 30,
-                //   decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(100),
-                //     color: Colors.grey.withOpacity(0.1),
-                //   ),
-                //   child: const Icon(
-                //     LineAwesomeIcons.angle_right_solid,
-                //     size: 18,
-                //     color: Colors.grey,
-                //   ),
-                // ),
-              ),
-              ListTile(
-                leading: Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: AppColors.secondaryColor.withOpacity(0.1),
-                  ),
-                  child: const Icon(
-                    LineAwesomeIcons.phone_solid,
-                    color: AppColors.secondaryColor,
-                  ),
-                ),
-                title: Text('Your Phone'),
-                subtitle: Text("ini phone")
-                // Obx(() => Text(profileController.phone.value))
-                ,
-                // trailing: Container(
-                //   width: 30,
-                //   height: 30,
-                //   decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(100),
-                //     color: Colors.grey.withOpacity(0.1),
-                //   ),
-                //   child: const Icon(
-                //     LineAwesomeIcons.angle_right_solid,
-                //     size: 18,
-                //     color: Colors.grey,
-                //   ),
-                // ),
-              ),
-              ListTile(
-                leading: Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: AppColors.secondaryColor.withOpacity(0.1),
-                  ),
-                  child: const Icon(
-                    LineAwesomeIcons.lock_solid,
-                    color: AppColors.secondaryColor,
-                  ),
-                ),
-                title: Text('Password'),
-                subtitle: Text("Ini pass")
-                // Obx(() => Text(profileController.password.value))
-                ,
-                trailing: Container(
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: Colors.grey.withOpacity(0.1),
-                  ),
-                  child: const Icon(
-                    LineAwesomeIcons.eye,
-                    size: 18,
-                    color: Colors.grey,
+                    'https://images.pexels.com/photos/1819650/pexels-photo-1819650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
-              const Divider(),
-              SizedBox(
-                width: 500,
-                child: ElevatedButton(
-                  onPressed: () => {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return CupertinoAlertDialog(
-                          title: Text("Konfirmasi Logout"),
-                          content: Text("Apakah kamu yakin ingin logout?"),
-                          actions: [
-                            TextButton(
-                              child: Text("Tidak"),
-                              onPressed: () {
-                                // Jika "Tidak", tutup dialog
-                                Navigator.of(context).pop();
-                              },
+              SizedBox(height: 10),
+              FutureBuilder<void>(
+                future: profileController
+                    .fetchUserProfile(), // Call fetchUserProfile
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else {
+                    return SingleChildScrollView(
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          children: [
+                            Obx(() {
+                              return Text(
+                                profileController.displayName.value.isNotEmpty
+                                    ? profileController.displayName.value
+                                    : "No Name Provided",
+                                style: TextStyle(
+                                    fontSize: 24, fontWeight: FontWeight.bold),
+                              );
+                            }),
+                            const SizedBox(height: 5),
+                            const SizedBox(height: 20),
+                            SizedBox(
+                              width: 200,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  // Add functionality to edit profile
+                                },
+                                child: const Text(
+                                  'Edit Profile',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColors.primaryColor,
+                                  side: BorderSide.none,
+                                  shape: StadiumBorder(),
+                                ),
+                              ),
                             ),
-                            TextButton(
-                              child: Text("Iya"),
-                              onPressed: () {
-                                // Jika "Iya", logout dan pergi ke WelcomeScreen
-                                AuthenticationRepository.instance.logout().then(
-                                  (value) {
-                                    Navigator.of(context)
-                                        .pop(); // Tutup dialog sebelum logout
-                                    Get.offAll(() => WelcomeScreen());
-                                  },
-                                );
-                              },
+                            const SizedBox(height: 30),
+                            const Divider(),
+                            const SizedBox(height: 10),
+                            // Profile picture and other UI elements
+                            Obx(() {
+                              return ListTile(
+                                leading: Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: AppColors.secondaryColor
+                                        .withOpacity(0.1),
+                                  ),
+                                  child: const Icon(
+                                    LineAwesomeIcons.envelope,
+                                    color: AppColors.secondaryColor,
+                                  ),
+                                ),
+                                title: Text('Your Email'),
+                                subtitle: Text(
+                                    profileController.email.value.isNotEmpty
+                                        ? profileController.email.value
+                                        : "No email provided"),
+                              );
+                            }),
+                            Obx(() {
+                              return ListTile(
+                                leading: Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: AppColors.secondaryColor
+                                        .withOpacity(0.1),
+                                  ),
+                                  child: const Icon(
+                                    LineAwesomeIcons.phone_solid,
+                                    color: AppColors.secondaryColor,
+                                  ),
+                                ),
+                                title: Text('Your Phone'),
+                                subtitle: Text(
+                                    profileController.phone.value.isNotEmpty
+                                        ? profileController.phone.value
+                                        : "No phone provided"),
+                              );
+                            }),
+                            const Divider(),
+                            SizedBox(
+                              width: 500,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return CupertinoAlertDialog(
+                                        title: Text("Konfirmasi Logout"),
+                                        content: Text(
+                                            "Apakah kamu yakin ingin logout?"),
+                                        actions: [
+                                          TextButton(
+                                            child: Text("Tidak"),
+                                            onPressed: () {
+                                              Navigator.of(context)
+                                                  .pop(); // Close dialog
+                                            },
+                                          ),
+                                          TextButton(
+                                            child: Text("Iya"),
+                                            onPressed: () {
+                                              // If "Iya", logout and navigate to WelcomeScreen
+                                              AuthenticationRepository.instance
+                                                  .logout()
+                                                  .then(
+                                                (value) {
+                                                  Navigator.of(context)
+                                                      .pop(); // Close dialog before logout
+                                                  Get.offAll(
+                                                      () => WelcomeScreen());
+                                                },
+                                              );
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                },
+                                child: const Text(
+                                  'LOGOUT',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.red,
+                                  side: BorderSide.none,
+                                  shape: StadiumBorder(),
+                                ),
+                              ),
                             ),
                           ],
-                        );
-                      },
-                    )
-                  },
-                  child: const Text(
-                    'LOGOUT',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    side: BorderSide.none,
-                    shape: StadiumBorder(),
-                  ),
-                ),
+                        ),
+                      ),
+                    );
+                  }
+                },
               ),
             ],
           ),

@@ -1,4 +1,7 @@
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
+import 'package:aplikasi_nagaricare/repository/authentication_repository/authentication_repository.dart';
+import 'package:aplikasi_nagaricare/screens/auth/welcome/welcome_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -156,17 +159,50 @@ class MyProfileScreen extends StatelessWidget {
               SizedBox(
                 width: 500,
                 child: ElevatedButton(
-                  onPressed: () => {},
+                  onPressed: () => {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CupertinoAlertDialog(
+                          title: Text("Konfirmasi Logout"),
+                          content: Text("Apakah kamu yakin ingin logout?"),
+                          actions: [
+                            TextButton(
+                              child: Text("Tidak"),
+                              onPressed: () {
+                                // Jika "Tidak", tutup dialog
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            TextButton(
+                              child: Text("Iya"),
+                              onPressed: () {
+                                // Jika "Iya", logout dan pergi ke WelcomeScreen
+                                AuthenticationRepository.instance.logout().then(
+                                  (value) {
+                                    Navigator.of(context)
+                                        .pop(); // Tutup dialog sebelum logout
+                                    Get.offAll(() => WelcomeScreen());
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    )
+                  },
                   child: const Text(
                     'LOGOUT',
                     style: TextStyle(color: Colors.white),
                   ),
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      side: BorderSide.none,
-                      shape: StadiumBorder()),
+                    backgroundColor: Colors.red,
+                    side: BorderSide.none,
+                    shape: StadiumBorder(),
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),

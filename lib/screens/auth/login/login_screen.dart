@@ -66,7 +66,7 @@ class LoginScreen extends StatelessWidget {
                                 fontSize: 15,
                                 fontFamily: AppFonts.primaryFont)),
                         TextSpan(
-                            text: 'Sign In',
+                            text: 'Sign Up',
                             style: TextStyle(
                                 color: AppColors.accentColor,
                                 fontSize: 15,

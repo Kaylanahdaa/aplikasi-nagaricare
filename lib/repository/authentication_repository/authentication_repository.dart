@@ -110,7 +110,7 @@ class AuthenticationRepository extends GetxController {
       if (email != null && name != null) {
         final response = await http.post(
           Uri.parse(
-              'http://http://192.168.100.110:3000/users/signin'), // Update with your backend URL
+              'http://192.168.100.110:3000/users/signin'), // Update with your backend URL
           headers: {
             'Content-Type': 'application/json',
           },

@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:aplikasi_nagaricare/repository/authentication_repository/exceptions/login_email_password_failure.dart';
 import 'package:aplikasi_nagaricare/repository/authentication_repository/exceptions/signup_email_password_failure.dart';
 import 'package:aplikasi_nagaricare/screens/auth/welcome/welcome_screen.dart';
@@ -52,17 +54,18 @@ class AuthenticationRepository extends GetxController {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      firebaseUser.value != null
-          ? Get.offAll(() => WelcomeScreen())
-          : Get.to(() => const WelcomeScreen());
+      // Add a debug log to verify user creation
+      print('User created: ${_auth.currentUser?.email}');
+      return null; // Return null if successful
     } on FirebaseAuthException catch (e) {
       final ex = SignupEmailPasswordFailure.code(e.code);
-      return ex.message;
-    } catch (_) {
+      print('Firebase Auth Exception: ${ex.message}');
+      return ex.message; // Return the error message
+    } catch (e) {
       const ex = SignupEmailPasswordFailure();
-      return ex.message;
+      print('General Exception: ${ex.message}');
+      return ex.message; // Return a generic error message
     }
-    return null;
   }
 
   Future<String?> loginWithEmailAndPassword(
@@ -82,7 +85,7 @@ class AuthenticationRepository extends GetxController {
     print("Logout function executed"); // Tambahkan log di sini
   }
 
-  signInWithGoogle() async {
+  Future<void> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? gUser = await googleSignIn.signIn();
       if (gUser == null) return; // User canceled sign-in
@@ -95,11 +98,42 @@ class AuthenticationRepository extends GetxController {
         idToken: gAuth?.idToken,
       );
 
+      // Sign in to Firebase
       await _auth.signInWithCredential(credential);
+
+      // Prepare the user data to send to the backend
+      final String? email = _auth.currentUser?.email;
+      final String? name = gUser.displayName; // Get user's name
+      // You can also collect the phone number if needed
+
+      // Send a POST request to your backend to save user data
+      if (email != null && name != null) {
+        final response = await http.post(
+          Uri.parse(
+              'http://http://192.168.100.110:3000/users/signin'), // Update with your backend URL
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: jsonEncode({
+            'email': email,
+            'name': name,
+            // Add phone number if necessary
+          }),
+        );
+
+        if (response.statusCode == 200) {
+          // Successfully saved user data to MySQL
+          print('User signed in and data saved successfully');
+        } else {
+          // Handle error from backend
+          print('Failed to save user data: ${response.body}');
+        }
+      }
+
       Get.offAll(() => MainScreen());
     } catch (e) {
       print('Error signing in with Google: $e');
-      // You can also show an error message to the user here
+      // Show an error message to the user here
     }
   }
 }

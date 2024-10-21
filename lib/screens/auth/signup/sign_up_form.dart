@@ -22,7 +22,7 @@ class SignUpForm extends StatelessWidget {
           children: [
             const SizedBox(height: 30),
             TextFormField(
-              controller: controller.fullname,
+              controller: controller.fullnameC,
               decoration: InputDecoration(
                   floatingLabelStyle: TextStyle(color: AppColors.accentColor),
                   iconColor: AppColors.secondaryColor,
@@ -42,7 +42,7 @@ class SignUpForm extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             TextFormField(
-              controller: controller.email,
+              controller: controller.emailC,
               decoration: InputDecoration(
                   iconColor: AppColors.secondaryColor,
                   label: const Text(
@@ -57,7 +57,7 @@ class SignUpForm extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             TextFormField(
-              controller: controller.password,
+              controller: controller.passwordC,
               obscureText: true,
               decoration: InputDecoration(
                   iconColor: AppColors.secondaryColor,
@@ -73,7 +73,7 @@ class SignUpForm extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             TextFormField(
-              controller: controller.phoneNo,
+              controller: controller.phoneNoC,
               decoration: InputDecoration(
                   iconColor: AppColors.secondaryColor,
                   label: const Text(
@@ -98,9 +98,8 @@ class SignUpForm extends StatelessWidget {
                       backgroundColor: AppColors.accentColor),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      SignupController.instance.registerUser(
-                          controller.email.text.trim(),
-                          controller.password.text.trim());
+                      // Call registerUser without needing to pass parameters
+                      SignupController.instance.registerUser();
                     }
                   },
                   child: Text(

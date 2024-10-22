@@ -61,11 +61,11 @@ class _PostScreenState extends State<PostScreen> {
                         children: <Widget>[
                           Row(
                             children: <Widget>[
-                              CircleAvatar(
-                                backgroundImage:
-                                    AssetImage(widget.question.author.imageUrl),
-                                radius: 22,
-                              ),
+                              // CircleAvatar(
+                              //   backgroundImage:
+                              //       AssetImage(widget.question.author.imageUrl),
+                              //   radius: 22,
+                              // ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
                                 child: Column(

@@ -90,7 +90,7 @@ class HomePage extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 20.0, top: 20.0),
                     child: Text(
-                      "Postingan Terbaru",
+                      "Postingan Anda",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

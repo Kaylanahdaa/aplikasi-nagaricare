@@ -50,11 +50,11 @@ class _PostsState extends State<Posts> {
                               children: <Widget>[
                                 Row(
                                   children: <Widget>[
-                                    CircleAvatar(
-                                      backgroundImage:
-                                          AssetImage(question.author.imageUrl),
-                                      radius: 22,
-                                    ),
+                                    // CircleAvatar(
+                                    //   backgroundImage:
+                                    //       AssetImage(question.author.imageUrl),
+                                    //   radius: 22,
+                                    // ),
                                     Padding(
                                       padding: const EdgeInsets.only(left: 8.0),
                                       child: Column(
@@ -101,11 +101,11 @@ class _PostsState extends State<Posts> {
                                     ),
                                   ],
                                 ),
-                                Icon(
-                                  Ionicons.bookmark,
-                                  color: Colors.grey.withOpacity(0.6),
-                                  size: 24,
-                                )
+                                // Icon(
+                                //   Ionicons.bookmark,
+                                //   color: Colors.grey.withOpacity(0.6),
+                                //   size: 24,
+                                // )
                               ],
                             ),
                           ),
@@ -125,56 +125,56 @@ class _PostsState extends State<Posts> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Icon(
-                                    Ionicons.thumbs_up,
-                                    color: Colors.grey.withOpacity(0.6),
-                                    size: 22,
-                                  ),
-                                  const SizedBox(width: 4.0),
-                                  Text(
-                                    "${question.votes} votes",
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.grey.withOpacity(0.6),
-                                        fontWeight: FontWeight.w600),
-                                  )
-                                ],
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Icon(
-                                    Ionicons.mail,
-                                    color: Colors.grey.withOpacity(0.6),
-                                    size: 16,
-                                  ),
-                                  const SizedBox(width: 4.0),
-                                  Text(
-                                    "${question.repliesCount} replies",
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.grey.withOpacity(0.6)),
-                                  )
-                                ],
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Icon(
-                                    Ionicons.eye,
-                                    color: Colors.grey.withOpacity(0.6),
-                                    size: 18,
-                                  ),
-                                  const SizedBox(width: 4.0),
-                                  Text(
-                                    "${question.views} views",
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.grey.withOpacity(0.6)),
-                                  )
-                                ],
-                              )
+                              // Row(
+                              //   crossAxisAlignment: CrossAxisAlignment.center,
+                              //   children: <Widget>[
+                              //     Icon(
+                              //       Ionicons.thumbs_up,
+                              //       color: Colors.grey.withOpacity(0.6),
+                              //       size: 22,
+                              //     ),
+                              //     const SizedBox(width: 4.0),
+                              //     Text(
+                              //       "${question.votes} votes",
+                              //       style: TextStyle(
+                              //           fontSize: 14,
+                              //           color: Colors.grey.withOpacity(0.6),
+                              //           fontWeight: FontWeight.w600),
+                              //     )
+                              //   ],
+                              // ),
+                              // Row(
+                              //   children: <Widget>[
+                              //     Icon(
+                              //       Ionicons.mail,
+                              //       color: Colors.grey.withOpacity(0.6),
+                              //       size: 16,
+                              //     ),
+                              //     const SizedBox(width: 4.0),
+                              //     Text(
+                              //       "${question.repliesCount} replies",
+                              //       style: TextStyle(
+                              //           fontSize: 14,
+                              //           color: Colors.grey.withOpacity(0.6)),
+                              //     )
+                              //   ],
+                              // ),
+                              // Row(
+                              //   children: <Widget>[
+                              //     Icon(
+                              //       Ionicons.eye,
+                              //       color: Colors.grey.withOpacity(0.6),
+                              //       size: 18,
+                              //     ),
+                              //     const SizedBox(width: 4.0),
+                              //     Text(
+                              //       "${question.views} views",
+                              //       style: TextStyle(
+                              //           fontSize: 14,
+                              //           color: Colors.grey.withOpacity(0.6)),
+                              //     )
+                              //   ],
+                              // )
                             ],
                           )
                         ],

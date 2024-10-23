@@ -27,87 +27,93 @@ class HomePage extends StatelessWidget {
       ),
       backgroundColor: AppColors.primaryColor,
       body: SafeArea(
-        child: ListView(
-          children: <Widget>[
-            Container(
-              height: 100,
-              width: MediaQuery.of(context).size.width,
-              decoration: const BoxDecoration(color: AppColors.primaryColor),
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
+        child: RefreshIndicator(
+          onRefresh: () async {
+            // Fetch the new posts when the user pulls to refresh
+            await controller.fetchPosts();
+          },
+          child: ListView(
+            children: <Widget>[
+              Container(
+                height: 100,
+                width: MediaQuery.of(context).size.width,
+                decoration: const BoxDecoration(color: AppColors.primaryColor),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      const Text(
+                        "Forum NagariCare",
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 8.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Find Topics you like to read",
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.6),
+                              fontSize: 14.0,
+                            ),
+                          ),
+                          const Icon(
+                            Ionicons.search,
+                            size: 20,
+                            color: Colors.white,
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(35.0),
+                    topRight: Radius.circular(35.0),
+                  ),
+                ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    const Text(
-                      "Forum NagariCare",
-                      style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
+                    const Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: Text(
+                        "Update Terbaru Bank Nagari",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 8.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "Find Topics you like to read",
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.6),
-                            fontSize: 14.0,
-                          ),
+                    const CarouselMenu(),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 20.0, top: 20.0),
+                      child: Text(
+                        "Postingan Anda",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
                         ),
-                        const Icon(
-                          Ionicons.search,
-                          size: 20,
-                          color: Colors.white,
-                        )
-                      ],
-                    )
+                      ),
+                    ),
+                    Posts(),
                   ],
                 ),
               ),
-            ),
-            Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(35.0),
-                  topRight: Radius.circular(35.0),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  const Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: Text(
-                      "Update Terbaru Bank Nagari",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  const CarouselMenu(),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 20.0, top: 20.0),
-                    child: Text(
-                      "Postingan Anda",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  Posts(),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

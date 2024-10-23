@@ -1,61 +1,55 @@
-import 'package:aplikasi_nagaricare/controllers/forum_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '/controllers/forum_controller.dart';
 import '/models/post_model.dart';
 import 'package:ionicons/ionicons.dart';
 
-class PostScreen extends StatefulWidget {
+class PostScreen extends StatelessWidget {
   final int idPosts; // ID of the post to fetch
+
   PostScreen({required this.idPosts});
 
   @override
-  _PostScreenState createState() => _PostScreenState();
-}
-
-class _PostScreenState extends State<PostScreen> {
-  final ForumController forumController =
-      Get.put(ForumController()); // Initialize controller
-
-  @override
-  void initState() {
-    super.initState();
-    // Fetch the post data using the ID passed to the screen
-    forumController.fetchPostById(widget.idPosts);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final ForumController forumController = Get.put(ForumController());
+
+    // Fetch the post data using the ID passed to the screen when controller is ready
+    forumController.fetchPostById(idPosts);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Obx(() {
           if (forumController.isLoading.value) {
-            return Center(
-                child: CircularProgressIndicator()); // Show loading spinner
+            return const Center(
+              child: CircularProgressIndicator(), // Show loading spinner
+            );
           }
 
           Post? post = forumController.posts
-              .firstWhereOrNull((p) => p.idPosts == widget.idPosts);
+              .firstWhereOrNull((p) => p.idPosts == idPosts);
           if (post == null) {
-            return Center(
+            return const Center(
                 child: Text("Post not found")); // Handle if post is not found
           }
 
           return ListView(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
                 child: Row(
                   children: <Widget>[
                     IconButton(
-                        onPressed: () => Navigator.pop(context),
-                        icon: Icon(
-                          Ionicons.arrow_back,
-                          size: 20,
-                          color: Colors.black,
-                        )),
-                    SizedBox(width: 5.0),
-                    Text(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(
+                        Ionicons.arrow_back,
+                        size: 20,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(width: 5.0),
+                    const Text(
                       "View Post",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
@@ -64,17 +58,19 @@ class _PostScreenState extends State<PostScreen> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 15.0),
+                margin: const EdgeInsets.symmetric(horizontal: 15.0),
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black26.withOpacity(0.05),
-                          offset: Offset(0.0, 6.0),
-                          blurRadius: 10.0,
-                          spreadRadius: 0.10)
-                    ]),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26.withOpacity(0.05),
+                      offset: const Offset(0.0, 6.0),
+                      blurRadius: 10.0,
+                      spreadRadius: 0.10,
+                    )
+                  ],
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
@@ -95,30 +91,30 @@ class _PostScreenState extends State<PostScreen> {
                                         CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      Container(
-                                        child: Text(
-                                          post.email,
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              letterSpacing: .4),
+                                      Text(
+                                        post.email,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: .4,
                                         ),
                                       ),
-                                      SizedBox(height: 2.0),
+                                      const SizedBox(height: 2.0),
                                       Text(
                                         post.createdAt, // Use the formatted date
-                                        style: TextStyle(color: Colors.grey),
-                                      )
+                                        style:
+                                            const TextStyle(color: Colors.grey),
+                                      ),
                                     ],
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ],
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: 15.0),
+                        padding: const EdgeInsets.symmetric(vertical: 15.0),
                         child: Text(
                           post.title,
                           style: TextStyle(
@@ -131,9 +127,10 @@ class _PostScreenState extends State<PostScreen> {
                       Text(
                         post.content,
                         style: TextStyle(
-                            color: Colors.black.withOpacity(0.4),
-                            fontSize: 17,
-                            letterSpacing: .2),
+                          color: Colors.black.withOpacity(0.4),
+                          fontSize: 17,
+                          letterSpacing: .2,
+                        ),
                       ),
                     ],
                   ),

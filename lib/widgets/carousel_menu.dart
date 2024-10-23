@@ -1,3 +1,5 @@
+import 'package:aplikasi_nagaricare/constants/app_colors.dart';
+
 import '../controllers/carousel_menu_controller.dart';
 import '../models/image_carousel.dart';
 import '../widgets/image_viewer_carousel.dart';
@@ -66,7 +68,7 @@ class CarouselMenu extends StatelessWidget {
                           EdgeInsets.symmetric(horizontal: isSelected ? 6 : 3),
                       decoration: BoxDecoration(
                         color: isSelected
-                            ? Colors.deepPurpleAccent
+                            ? AppColors.primaryColor
                             : Colors.grey.shade400,
                         borderRadius: BorderRadius.circular(40),
                       ),

@@ -20,14 +20,16 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () => showPostTweetModal(context),
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: AppColors.secondaryColor,
         shape: const CircleBorder(),
         child: const Icon(Ionicons.chatbubble_ellipses_outline,
-            color: Colors.white),
+            color: AppColors.backgroundColor),
       ),
       backgroundColor: AppColors.primaryColor,
       body: SafeArea(
         child: RefreshIndicator(
+          color: AppColors.secondaryColor,
+          backgroundColor: AppColors.backgroundColor,
           onRefresh: () async {
             // Fetch the new posts when the user pulls to refresh
             await controller.fetchPosts();

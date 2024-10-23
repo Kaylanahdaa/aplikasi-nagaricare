@@ -1,5 +1,6 @@
 import 'dart:io';
 // import 'package:aplikasi_nagaricare/constants/app_colors.dart';
+import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/controllers/post_forum_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -58,6 +59,7 @@ class PostForumWidget extends StatelessWidget {
                       maxLines: null,
                       decoration: InputDecoration(
                         hintText: "What's happening?",
+                        hintStyle: TextStyle(color: Colors.grey.shade400),
                         border: InputBorder.none,
                       ),
                     ),
@@ -94,7 +96,7 @@ class PostForumWidget extends StatelessWidget {
               child: Row(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.photo, color: Colors.blue),
+                    icon: Icon(Icons.photo, color: AppColors.primaryColor),
                     onPressed: postForumController.pickImage,
                   ),
                   Spacer(),

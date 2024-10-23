@@ -4,9 +4,9 @@ import 'package:aplikasi_nagaricare/widgets/carousel_menu.dart';
 import 'package:aplikasi_nagaricare/widgets/post_forum.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+// import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../controllers/home_controller.dart';
-import '/widgets/posts.dart';
+// import '/widgets/posts.dart';
 import 'package:ionicons/ionicons.dart';
 
 class HomePage extends StatelessWidget {

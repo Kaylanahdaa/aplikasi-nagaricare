@@ -1,16 +1,86 @@
-# aplikasi_nagaricare
+![logo_nagaricare](https://github.com/user-attachments/assets/c52de57e-5d05-4d73-889e-41b9bd2b220b)
 
-A new Flutter project.
 
-## Getting Started
+<div align='center'>
+  
+<a href='https://github.com/Kaylanahdaa/aplikasi-nagaricare'>
+  
+<img src='https://img.shields.io/github/v/release/Kaylanahdaa/aplikasi-nagaricare?color=%23FDD835&label=version&style=for-the-badge'>
+  
+</a>
+  
+<a href='https://github.com/Kaylanahdaa/aplikasi-nagaricare/blob/main/LICENSE'>
+  
+<img src='https://img.shields.io/github/license/Kaylanahdaa/aplikasi-nagaricare?style=for-the-badge'>
+  
+</a>
+  
+</div>
 
-This project is a starting point for a Flutter application.
+<br />
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<div align='center'>
+  
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### NagariCare App is now on Development! 🚀
+
+- **iOS/macOS**: Coming soon!
+- **Web**: Coming soon!
+- **Android**: Coming soon!
+
+---
+
+<div align="center">
+
+**[PROJECT PHILOSOPHY](https://github.com/Kaylanahdaa/aplikasi-nagaricare#-project-philosophy) • 
+[TECH STACK](https://github.com/Kaylanahdaa/aplikasi-nagaricare#-tech-stack) • 
+[CONTRIBUTING](https://github.com/Kaylanahdaa/aplikasi-nagaricare#%EF%B8%8F-contributing) • 
+[SPREAD THE WORD](https://github.com/Kaylanahdaa/aplikasi-nagaricare#-spread-the-word) • 
+[LICENSE](https://github.com/Kaylanahdaa/aplikasi-nagaricare#%EF%B8%8F-license)**
+
+</div>
+
+---
+
+# 🧐 Project Philosophy
+
+> NagariCare is an initiative aimed at fostering community engagement through open discussions and local updates. Users can participate in forums and keep themselves updated with important local events. 
+>
+> The app promotes transparency and information sharing across various topics of interest.
+
+---
+
+# 👨‍💻 Tech Stack
+
+NagariCare uses the following technologies:
+
+- **Flutter**: A cross-platform app development framework that allows us to deploy a single codebase across mobile, desktop, and the web.
+- **Backend**: Golang for the server-side logic with Fiber framework for handling requests.
+- **Database**: MySQL database connected to the backend using Fiber and Goose for migrations.
+- **State Management**: GetX for state management and reactive programming.
+- **Authentication**: Firebase for user authentication.
+- **Local Image Storage**: Users can upload profile pictures stored on the server and referenced via MySQL.
+  
+# ✍️ Contributing
+
+Interested in contributing? Check out our [Contribution Guide](https://github.com/Kaylanahdaa/aplikasi-nagaricare/wiki/Contribution-Guide) for details. We value all types of contributions and encourage feedback from developers who want to improve this community-focused app.
+
+# 🌟 Spread the Word!
+
+Help us grow the NagariCare app:
+
+- Give the project a **GitHub Star**!
+- Share it on social media using the hashtag **#NagariCareApp**!
+  
+---
+
+<div align='center'>
+
+### 💛 *Your contribution helps us build a better community*.
+
+</div>
+
+---

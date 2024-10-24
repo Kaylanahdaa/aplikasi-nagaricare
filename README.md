@@ -1,5 +1,5 @@
 <div align='center'>
-  ![logo_nagaricare](https://github.com/user-attachments/assets/3d7e79dd-4aaf-4d23-bda5-9eacbf55aa88)
+  <img src="https://github.com/user-attachments/assets/3d7e79dd-4aaf-4d23-bda5-9eacbf55aa88" alt="logo_nagaricare" />
 </div>
 
 <div align='center'>

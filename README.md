@@ -6,7 +6,7 @@
   
 </a>
   
-<a href='https://github.com/Kaylanahdaa/aplikasi-nagaricare/blob/main/LICENSE'>
+
   
 <img src='https://img.shields.io/github/license/Kaylanahdaa/aplikasi-nagaricare?style=for-the-badge'>
   

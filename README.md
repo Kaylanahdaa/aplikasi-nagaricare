@@ -8,7 +8,7 @@
   
 
   
-<img src='https://img.shields.io/github/license/Kaylanahdaa/aplikasi-nagaricare?style=for-the-badge'>
+
   
 </a>
   

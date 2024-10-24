@@ -4,10 +4,6 @@
 
 <div align='center'>
   
-<a href='https://github.com/Kaylanahdaa/aplikasi-nagaricare'>
-  
-<img src='https://img.shields.io/github/v/release/Kaylanahdaa/aplikasi-nagaricare?color=%23FDD835&label=version&style=for-the-badge'>
-  
 </a>
   
 <a href='https://github.com/Kaylanahdaa/aplikasi-nagaricare/blob/main/LICENSE'>

@@ -3,11 +3,15 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 
 class ProfileController extends GetxController {
   var email = ''.obs;
   var phone = ''.obs;
   var displayName = ''.obs;
+  var selectedProfImage = Rx<XFile?>(null);
+
+  final ImagePicker profPicker = ImagePicker();
 
   @override
   void onInit() {
@@ -46,6 +50,26 @@ class ProfileController extends GetxController {
       } catch (e) {
         print("Error fetching user profile: $e");
       }
+    }
+  }
+
+  // Function to pick image from gallery
+  Future<void> pickImage() async {
+    final pickedFile = await profPicker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      selectedProfImage.value = pickedFile;
+    }
+  }
+
+  // Function to remove the selected image
+  void removeImage() {
+    selectedProfImage.value = null;
+  }
+
+  // Function to change profile picture (upload and save path)
+  Future<void> changePicture() async {
+    if (selectedProfImage.value != null) {
+      // TODO: Upload image and update user profile
     }
   }
 

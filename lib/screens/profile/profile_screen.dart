@@ -27,21 +27,52 @@ class MyProfileScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(20),
+          // padding: EdgeInsets.all(5),
           child: Column(
             children: [
-              SizedBox(
-                width: 120,
-                height: 120,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.network(
-                    'https://images.pexels.com/photos/1819650/pexels-photo-1819650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-                    fit: BoxFit.cover,
+              Column(
+                children: <Widget>[
+                  Container(
+                    height: 10 * 10,
+                    width: 10 * 10,
+                    margin: EdgeInsets.only(top: 10 * 3),
+                    child: Stack(
+                      children: <Widget>[
+                        CircleAvatar(
+                          radius: 10 * 5,
+                          backgroundImage: NetworkImage(
+                            'https://images.pexels.com/photos/1819650/pexels-photo-1819650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Container(
+                            height: 10 * 2.5,
+                            width: 10 * 2.5,
+                            decoration: BoxDecoration(
+                              color: AppColors.accentColor,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Center(
+                              child: GestureDetector(
+                                onTap: () {
+                                  profileController.pickImage();
+                                },
+                                child: Icon(
+                                  LineAwesomeIcons.pen_solid,
+                                  color: AppColors.backgroundColor,
+                                  size: 10 * 1.5,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                ],
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 5),
               FutureBuilder<void>(
                 future: profileController
                     .fetchUserProfile(), // Call fetchUserProfile
@@ -76,13 +107,13 @@ class MyProfileScreen extends StatelessWidget {
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.primaryColor,
+                                  backgroundColor: AppColors.accentColor,
                                   side: BorderSide.none,
                                   shape: StadiumBorder(),
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 30),
+                            const SizedBox(height: 10),
                             const Divider(),
                             const SizedBox(height: 10),
                             Obx(() {
@@ -129,7 +160,9 @@ class MyProfileScreen extends StatelessWidget {
                                         : "No phone provided"),
                               );
                             }),
+                            const SizedBox(height: 10),
                             const Divider(),
+                            const SizedBox(height: 10),
                             SizedBox(
                               width: 500,
                               child: ElevatedButton(
@@ -140,7 +173,7 @@ class MyProfileScreen extends StatelessWidget {
                                       return AlertDialog(
                                         title: Text("Konfirmasi Logout"),
                                         content: Text(
-                                            "Apakah kamu yakin ingin logout?"),
+                                            "Apakah anda yakin ingin logout?"),
                                         actions: [
                                           TextButton(
                                             child: Text("Tidak"),
@@ -192,3 +225,44 @@ class MyProfileScreen extends StatelessWidget {
     );
   }
 }
+
+// var profilePicture = Column(
+//   children: <Widget>[
+//     Container(
+//       height: 10 * 10,
+//       width: 10 * 10,
+//       margin: EdgeInsets.only(top: 10 * 3),
+//       child: Stack(
+//         children: <Widget>[
+//           CircleAvatar(
+//             radius: 10 * 5,
+//             backgroundImage: NetworkImage(
+//               'https://images.pexels.com/photos/1819650/pexels-photo-1819650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+//             ),
+//           ),
+//           Align(
+//             alignment: Alignment.bottomRight,
+//             child: Container(
+//               height: 10 * 2.5,
+//               width: 10 * 2.5,
+//               decoration: BoxDecoration(
+//                 color: AppColors.accentColor,
+//                 shape: BoxShape.circle,
+//               ),
+//               child: Center(
+//                 child: GestureDetector(
+//                   onTap: () {},
+//                   child: Icon(
+//                     LineAwesomeIcons.pen_solid,
+//                     color: AppColors.backgroundColor,
+//                     size: 10 * 1.5,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     ),
+//   ],
+// );

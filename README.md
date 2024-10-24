@@ -1,5 +1,5 @@
 <div align='center'>
-  ![logo_nagaricare](https://github.com/user-attachments/assets/c52de57e-5d05-4d73-889e-41b9bd2b220b)
+  ![logo_nagaricare](https://github.com/user-attachments/assets/3d7e79dd-4aaf-4d23-bda5-9eacbf55aa88)
 </div>
 
 <div align='center'>

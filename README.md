@@ -1,5 +1,6 @@
-![logo_nagaricare](https://github.com/user-attachments/assets/c52de57e-5d05-4d73-889e-41b9bd2b220b)
-
+<div align='center'>
+  ![logo_nagaricare](https://github.com/user-attachments/assets/c52de57e-5d05-4d73-889e-41b9bd2b220b)
+</div>
 
 <div align='center'>
   

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 import '../screens/forum/post_screen.dart';
+import 'package:get_time_ago/get_time_ago.dart'; // Import the package
 
 class Posts extends StatefulWidget {
   const Posts({super.key});
@@ -34,6 +35,9 @@ class _PostsState extends State<Posts> {
       // Return posts UI when posts are fetched
       return Column(
         children: controller.posts.map((post) {
+          // Parse the createdAt string to DateTime
+          DateTime createdAtDateTime = DateTime.parse(post.createdAt);
+
           return GestureDetector(
             onTap: () {
               Navigator.push(
@@ -99,8 +103,9 @@ class _PostsState extends State<Posts> {
                                                   Colors.red.withOpacity(0.6)),
                                         ),
                                         const SizedBox(width: 15),
+                                        // Use getTimeAgo to display the time difference
                                         Text(
-                                          post.createdAt,
+                                          GetTimeAgo.parse(createdAtDateTime),
                                           style: TextStyle(
                                               color:
                                                   Colors.grey.withOpacity(0.6)),

@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
         child: const Icon(Ionicons.chatbubble_ellipses_outline,
             color: AppColors.backgroundColor),
       ),
-      backgroundColor: AppColors.primaryColor,
+      backgroundColor: AppColors.accentColor,
       body: SafeArea(
         child: RefreshIndicator(
           color: AppColors.secondaryColor,
@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
               Container(
                 height: 100,
                 width: MediaQuery.of(context).size.width,
-                decoration: const BoxDecoration(color: AppColors.primaryColor),
+                decoration: const BoxDecoration(color: AppColors.accentColor),
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Column(

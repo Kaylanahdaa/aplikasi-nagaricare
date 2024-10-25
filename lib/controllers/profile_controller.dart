@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
@@ -53,11 +52,13 @@ class ProfileController extends GetxController {
     }
   }
 
-  // Function to pick image from gallery
-  Future<void> pickImage() async {
-    final pickedFile = await profPicker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      selectedProfImage.value = pickedFile;
+  Future<XFile?> pickImage(ImageSource source) async {
+    try {
+      final XFile? image = await profPicker.pickImage(source: source);
+      return image;
+    } catch (e) {
+      print("Error picking image: $e");
+      return null;
     }
   }
 

@@ -3,13 +3,25 @@ import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 import '../screens/forum/post_screen.dart';
 
-class Posts extends StatelessWidget {
+class Posts extends StatefulWidget {
   const Posts({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final HomePageController controller = Get.put(HomePageController());
+  _PostsState createState() => _PostsState();
+}
 
+class _PostsState extends State<Posts> {
+  final HomePageController controller = Get.put(HomePageController());
+
+  @override
+  void initState() {
+    super.initState();
+    // Call the function to fetch posts for the current user
+    controller.fetchPostsByCurrentUser();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     // Using Obx to reactively update the UI when posts change
     return Obx(() {
       // Check if posts are empty

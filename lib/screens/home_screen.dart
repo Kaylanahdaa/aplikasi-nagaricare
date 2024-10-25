@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomePageController controller = Get.put(HomePageController());
     // Fetch posts when the widget is built
-    controller.fetchPosts();
+    controller.fetchPostsByCurrentUser();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () => showPostTweetModal(context),
@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
           backgroundColor: AppColors.backgroundColor,
           onRefresh: () async {
             // Fetch the new posts when the user pulls to refresh
-            await controller.fetchPosts();
+            await controller.fetchPostsByCurrentUser();
           },
           child: ListView(
             children: <Widget>[

@@ -87,6 +87,7 @@ flutter:
     - assets/images/logo_nagaricare.png
     - assets/images/logo_google.png
     - assets/images/logo_otp.png
+    - assets/images/logo_default_photo.png
     - assets/fonts/
     # - assets/images/vector.svg
     # - assets/images/vector1.svg

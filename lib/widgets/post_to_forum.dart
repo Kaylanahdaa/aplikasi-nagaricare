@@ -45,21 +45,17 @@ class PostForumWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextField(
-                    onChanged: (text) => postForumController.email.value = text,
-                    decoration: InputDecoration(
-                      hintText: "Email",
-                      hintStyle: TextStyle(color: Colors.grey.shade400),
-                      border: InputBorder.none,
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  TextField(
                     onChanged: (text) => postForumController.title.value = text,
                     decoration: InputDecoration(
                       hintText: "Title",
-                      hintStyle: TextStyle(color: Colors.grey.shade400),
+                      hintStyle: TextStyle(
+                        color: Colors.grey.shade400,
+                        fontSize: 32, // Larger font for title hint
+                      ),
                       border: InputBorder.none,
                     ),
+                    style:
+                        TextStyle(fontSize: 32), // Larger font for title input
                   ),
                   SizedBox(height: 10),
                   TextField(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 import '../screens/forum/post_screen.dart';
-import 'package:get_time_ago/get_time_ago.dart'; // Import the package
+import 'package:timeago/timeago.dart' as timeago;
 
 class Posts extends StatefulWidget {
   const Posts({super.key});
@@ -28,8 +28,36 @@ class _PostsState extends State<Posts> {
       // Check if posts are empty
       if (controller.posts.isEmpty) {
         return Center(
-            child:
-                CircularProgressIndicator()); // Show loader while posts are being fetched
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.post_add,
+                color: Colors.grey,
+                size: 80,
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Anda belum memiliki post',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[700],
+                ),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Mulai untuk post sesuatu',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey[600],
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 300),
+            ],
+          ),
+        );
       }
 
       // Return posts UI when posts are fetched
@@ -105,7 +133,7 @@ class _PostsState extends State<Posts> {
                                         const SizedBox(width: 15),
                                         // Use getTimeAgo to display the time difference
                                         Text(
-                                          GetTimeAgo.parse(createdAtDateTime),
+                                          timeago.format(createdAtDateTime),
                                           style: TextStyle(
                                               color:
                                                   Colors.grey.withOpacity(0.6)),

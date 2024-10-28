@@ -95,10 +95,10 @@ class PostForumWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(
                 children: [
-                  IconButton(
-                    icon: Icon(Icons.photo, color: AppColors.primaryColor),
-                    onPressed: postForumController.pickImage,
-                  ),
+                  // IconButton(
+                  //   icon: Icon(Icons.photo, color: AppColors.primaryColor),
+                  //   onPressed: postForumController.pickImage,
+                  // ),
                   Spacer(),
                 ],
               ),

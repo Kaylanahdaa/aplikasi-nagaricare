@@ -32,30 +32,80 @@ class PostForumController extends GetxController {
 
         if (response.statusCode == 201) {
           // Close the keyboard and the modal after a successful post
-          FocusScope.of(Get.context!).unfocus(); // Close the keyboard
+          FocusScope.of(Get.context!).unfocus();
           Get.back(); // Close modal after successful post
 
           Get.snackbar(
-            icon: Container(
-              margin: EdgeInsets.all(8),
-              child: Icon(
-                Icons.check_circle_outline,
-                color: Colors.green,
+            '',
+            '',
+            titleText: Row(
+              children: [
+                Icon(
+                  Icons.check_circle_outline,
+                  color: Colors.green,
+                  size: 24,
+                ),
+                SizedBox(width: 8),
+                Text(
+                  'Success',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green[800],
+                  ),
+                ),
+              ],
+            ),
+            messageText: Text(
+              'Post berhasil dibuat!',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.black87,
               ),
             ),
-            'Success',
-            'Post created successfully!',
+            snackPosition: SnackPosition.TOP,
             backgroundColor: Colors.white,
+            borderRadius: 12,
+            margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            duration: Duration(seconds: 3),
           );
           controller.fetchPostsByCurrentUser();
         } else {
           Get.snackbar(
-            icon: Icon(
-              Icons.cancel_outlined,
-              color: Colors.red,
+            '',
+            '',
+            titleText: Row(
+              children: [
+                Icon(
+                  Icons.cancel_outlined,
+                  color: Colors.red,
+                  size: 24,
+                ),
+                SizedBox(width: 8),
+                Text(
+                  'Error',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red[800],
+                  ),
+                ),
+              ],
             ),
-            'Error',
-            'Failed to create post',
+            messageText: Text(
+              'Gagal membuat post',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.black87,
+              ),
+            ),
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: Colors.white,
+            borderRadius: 12,
+            margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            duration: Duration(seconds: 3),
           );
         }
       } catch (e) {

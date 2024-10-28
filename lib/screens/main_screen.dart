@@ -25,7 +25,7 @@ class MainScreen extends StatelessWidget {
           showSelectedLabels: true,
           onTap: landingPageController.changeTabIndex,
           currentIndex: landingPageController.tabIndex.value,
-          backgroundColor: AppColors.primaryColor,
+          backgroundColor: AppColors.accentColor,
           unselectedItemColor: Colors.white.withOpacity(0.5),
           selectedItemColor: Colors.white,
           unselectedLabelStyle: unselectedLabelStyle,

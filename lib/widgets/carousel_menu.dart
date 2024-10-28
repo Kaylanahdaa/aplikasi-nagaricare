@@ -68,7 +68,7 @@ class CarouselMenu extends StatelessWidget {
                           EdgeInsets.symmetric(horizontal: isSelected ? 6 : 3),
                       decoration: BoxDecoration(
                         color: isSelected
-                            ? AppColors.primaryColor
+                            ? AppColors.accentColor
                             : Colors.grey.shade400,
                         borderRadius: BorderRadius.circular(40),
                       ),

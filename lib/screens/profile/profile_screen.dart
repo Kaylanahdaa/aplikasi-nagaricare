@@ -81,7 +81,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                               child: GestureDetector(
                                 onTap: () => selectImage(profileController),
                                 child: Icon(
-                                  LineAwesomeIcons.pen_solid,
+                                  Icons.add_a_photo,
                                   color: AppColors.backgroundColor,
                                   size: 10 * 1.5,
                                 ),
@@ -186,7 +186,55 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             const Divider(),
                             const SizedBox(height: 10),
                             SizedBox(
-                              width: 500,
+                              width: 200,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text("Konfirmasi Hapus"),
+                                        content: Text(
+                                            "Apakah anda yakin ingin menghapus akun?"),
+                                        actions: [
+                                          TextButton(
+                                            child: Text("Kembali"),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                          TextButton(
+                                            child: Text("Hapus"),
+                                            onPressed: () {
+                                              AuthenticationRepository.instance
+                                                  .logout()
+                                                  .then(
+                                                (value) {
+                                                  Navigator.of(context).pop();
+                                                  Get.offAll(
+                                                      () => WelcomeScreen());
+                                                },
+                                              );
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                },
+                                child: const Text(
+                                  'DELETE',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColors.alertColor,
+                                  side: BorderSide.none,
+                                  shape: StadiumBorder(),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 200,
                               child: ElevatedButton(
                                 onPressed: () {
                                   showDialog(
@@ -227,7 +275,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.red,
+                                  backgroundColor: AppColors.secondaryColor,
                                   side: BorderSide.none,
                                   shape: StadiumBorder(),
                                 ),

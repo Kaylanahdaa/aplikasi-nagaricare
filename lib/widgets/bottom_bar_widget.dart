@@ -81,13 +81,13 @@ class BottomBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final LandingPageController landingPageController =
-        Get.put(LandingPageController(), permanent: false);
+    final BottomBarController bottomBarController =
+        Get.put(BottomBarController(), permanent: false);
     return Scaffold(
       bottomNavigationBar:
-          buildBottomNavigationMenu(context, landingPageController),
+          buildBottomNavigationMenu(context, bottomBarController),
       body: Obx(() => IndexedStack(
-            index: landingPageController.tabIndex.value,
+            index: bottomBarController.tabIndex.value,
             children: [
               const MyProfileScreen(),
               HomePage(),

@@ -1,31 +1,56 @@
+import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
+import 'package:ionicons/ionicons.dart';
 
 class PostForumController extends GetxController {
-  var forumText = ''.obs;
-  var selectedImage = Rx<XFile?>(null);
+  var title = ''.obs;
+  var content = ''.obs;
+  var email = ''.obs; // Add an email field for the post request
 
-  final ImagePicker _picker = ImagePicker();
+  // Function to post data to the backend
+  Future<void> postForum() async {
+    if (title.isNotEmpty && content.isNotEmpty && email.isNotEmpty) {
+      try {
+        final response = await http.post(
+          Uri.parse('http://192.168.100.110:3000/posts'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({
+            "title": title.value,
+            "content": content.value,
+            "email": email.value, // Include the email in the request body
+          }),
+        );
 
-  void pickImage() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      selectedImage.value = pickedFile;
-    }
-  }
-
-  void removeImage() {
-    selectedImage.value = null;
-  }
-
-  void postForum() {
-    if (forumText.isNotEmpty || selectedImage.value != null) {
-      // Handle post logic here
-      print('Forum posted: $forumText');
-      if (selectedImage.value != null) {
-        print('With image: ${selectedImage.value!.path}');
+        if (response.statusCode == 201) {
+          // Status 201 for Created
+          Get.back(); // Close modal after successful post
+          Get.snackbar(
+              icon: Container(
+                margin: EdgeInsets.all(8),
+                child: Icon(
+                  Icons.check_circle_outline,
+                  color: Colors.green,
+                ),
+              ),
+              'Success',
+              'Post created successfully!',
+              backgroundColor: Colors.white);
+        } else {
+          Get.snackbar(
+              icon: Icon(
+                Icons.cancel_outlined,
+                color: Colors.red,
+              ),
+              'Error',
+              'Failed to create post');
+        }
+      } catch (e) {
+        Get.snackbar('Error', 'An error occurred: $e');
       }
-      Get.back(); // Close modal after posting
+    } else {
+      Get.snackbar('Error', 'Title, content, and email are required');
     }
   }
 }

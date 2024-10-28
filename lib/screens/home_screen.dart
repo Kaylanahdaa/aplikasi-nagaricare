@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
     controller.fetchPostsByCurrentUser();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => showPostTweetModal(context),
+        onPressed: () => showPostModal(context),
         backgroundColor: AppColors.secondaryColor,
         shape: const CircleBorder(),
         child: const Icon(Ionicons.chatbubble_ellipses_outline,

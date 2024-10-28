@@ -1,6 +1,3 @@
-import 'dart:io';
-// import 'package:aplikasi_nagaricare/constants/app_colors.dart';
-import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/controllers/post_forum_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,63 +40,37 @@ class PostForumWidget extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Row(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CircleAvatar(
-                    backgroundImage:
-                        NetworkImage('https://via.placeholder.com/150'),
-                    radius: 24,
-                  ),
-                  SizedBox(width: 12),
-                  Expanded(
-                    child: TextField(
-                      onChanged: (text) =>
-                          postForumController.forumText.value = text,
-                      maxLines: null,
-                      decoration: InputDecoration(
-                        hintText: "What's happening?",
-                        hintStyle: TextStyle(color: Colors.grey.shade400),
-                        border: InputBorder.none,
-                      ),
+                  TextField(
+                    onChanged: (text) => postForumController.email.value = text,
+                    decoration: InputDecoration(
+                      hintText: "Email",
+                      hintStyle: TextStyle(color: Colors.grey.shade400),
+                      border: InputBorder.none,
                     ),
                   ),
-                ],
-              ),
-            ),
-            Obx(() {
-              if (postForumController.selectedImage.value != null) {
-                return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Stack(
-                    children: [
-                      Image.file(
-                        File(postForumController.selectedImage.value!.path),
-                        height: 150,
-                      ),
-                      Positioned(
-                        right: 0,
-                        child: IconButton(
-                          icon: Icon(Icons.cancel, color: Colors.red),
-                          onPressed: postForumController.removeImage,
-                        ),
-                      ),
-                    ],
+                  SizedBox(height: 10),
+                  TextField(
+                    onChanged: (text) => postForumController.title.value = text,
+                    decoration: InputDecoration(
+                      hintText: "Title",
+                      hintStyle: TextStyle(color: Colors.grey.shade400),
+                      border: InputBorder.none,
+                    ),
                   ),
-                );
-              } else {
-                return SizedBox.shrink();
-              }
-            }),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                children: [
-                  // IconButton(
-                  //   icon: Icon(Icons.photo, color: AppColors.primaryColor),
-                  //   onPressed: postForumController.pickImage,
-                  // ),
-                  Spacer(),
+                  SizedBox(height: 10),
+                  TextField(
+                    onChanged: (text) =>
+                        postForumController.content.value = text,
+                    maxLines: null,
+                    decoration: InputDecoration(
+                      hintText: "What's happening?",
+                      hintStyle: TextStyle(color: Colors.grey.shade400),
+                      border: InputBorder.none,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -110,7 +81,7 @@ class PostForumWidget extends StatelessWidget {
   }
 }
 
-void showPostTweetModal(BuildContext context) {
+void showPostModal(BuildContext context) {
   showBarModalBottomSheet(
     context: context,
     builder: (context) => PostForumWidget(),

@@ -46,13 +46,17 @@ class HomePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      const Text(
-                        "Forum NagariCare",
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      Row(
+                        children: [
+                          const Text(
+                            "Forum NagariCare",
+                            style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 8.0),
                       Row(
@@ -99,15 +103,26 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     const CarouselMenu(),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 20.0, top: 20.0),
-                      child: Text(
-                        "Postingan Anda",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0, top: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Postingan Anda",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          TextButton(
+                              onPressed: () => {print("test button")},
+                              child: const Text(
+                                "Lihat Semua",
+                                style: TextStyle(color: AppColors.accentColor),
+                              ))
+                        ],
                       ),
                     ),
                     PostsWidget(),

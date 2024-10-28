@@ -4,7 +4,10 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:ionicons/ionicons.dart';
 
+import 'home_controller.dart';
+
 class PostForumController extends GetxController {
+  final HomePageController controller = Get.put(HomePageController());
   var title = ''.obs;
   var content = ''.obs;
   var email = ''.obs; // Add an email field for the post request
@@ -37,6 +40,7 @@ class PostForumController extends GetxController {
               'Success',
               'Post created successfully!',
               backgroundColor: Colors.white);
+          controller.fetchPostsByCurrentUser();
         } else {
           Get.snackbar(
               icon: Icon(

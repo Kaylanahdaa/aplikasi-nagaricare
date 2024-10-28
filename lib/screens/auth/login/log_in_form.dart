@@ -25,6 +25,7 @@ class LogInForm extends StatelessWidget {
             TextFormField(
               controller: controller.email,
               decoration: InputDecoration(
+                floatingLabelStyle: TextStyle(color: AppColors.accentColor),
                 iconColor: AppColors.secondaryColor,
                 label: const Text(
                   'Email',
@@ -32,6 +33,11 @@ class LogInForm extends StatelessWidget {
                       TextStyle(fontSize: 15, fontFamily: AppFonts.primaryFont),
                 ),
                 prefixIcon: const Icon(Icons.email_outlined),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide:
+                      BorderSide(color: AppColors.accentColor, width: 2.5),
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15), // Sudut radius 15
                 ),
@@ -48,12 +54,18 @@ class LogInForm extends StatelessWidget {
               controller: controller.password,
               obscureText: true,
               decoration: InputDecoration(
+                floatingLabelStyle: TextStyle(color: AppColors.accentColor),
                 label: const Text(
                   'Password',
                   style:
                       TextStyle(fontSize: 15, fontFamily: AppFonts.primaryFont),
                 ),
                 prefixIcon: const Icon(Icons.fingerprint),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide:
+                      BorderSide(color: AppColors.accentColor, width: 2.5),
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15), // Sudut radius 15
                 ),

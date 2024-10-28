@@ -33,8 +33,9 @@ class SignUpForm extends StatelessWidget {
                   ),
                   prefixIcon: const Icon(Icons.person_outline_rounded),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: AppColors.accentColor),
                     borderRadius: BorderRadius.circular(15),
+                    borderSide:
+                        BorderSide(color: AppColors.accentColor, width: 2.5),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
@@ -44,6 +45,7 @@ class SignUpForm extends StatelessWidget {
             TextFormField(
               controller: controller.emailC,
               decoration: InputDecoration(
+                  floatingLabelStyle: TextStyle(color: AppColors.accentColor),
                   iconColor: AppColors.secondaryColor,
                   label: const Text(
                     'Email',
@@ -51,6 +53,11 @@ class SignUpForm extends StatelessWidget {
                         fontSize: 15, fontFamily: AppFonts.primaryFont),
                   ),
                   prefixIcon: const Icon(Icons.email_outlined),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide:
+                        BorderSide(color: AppColors.accentColor, width: 2.5),
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15), // Sudut radius 15
                   )),
@@ -60,6 +67,7 @@ class SignUpForm extends StatelessWidget {
               controller: controller.passwordC,
               obscureText: true,
               decoration: InputDecoration(
+                  floatingLabelStyle: TextStyle(color: AppColors.accentColor),
                   iconColor: AppColors.secondaryColor,
                   label: const Text(
                     'Password',
@@ -67,6 +75,11 @@ class SignUpForm extends StatelessWidget {
                         fontSize: 15, fontFamily: AppFonts.primaryFont),
                   ),
                   prefixIcon: const Icon(Icons.fingerprint),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide:
+                        BorderSide(color: AppColors.accentColor, width: 2.5),
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15), // Sudut radius 15
                   )),
@@ -75,6 +88,7 @@ class SignUpForm extends StatelessWidget {
             TextFormField(
               controller: controller.phoneNoC,
               decoration: InputDecoration(
+                  floatingLabelStyle: TextStyle(color: AppColors.accentColor),
                   iconColor: AppColors.secondaryColor,
                   label: const Text(
                     'Nomor Telepon',
@@ -82,6 +96,11 @@ class SignUpForm extends StatelessWidget {
                         fontSize: 15, fontFamily: AppFonts.primaryFont),
                   ),
                   prefixIcon: const Icon(Icons.numbers),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide:
+                        BorderSide(color: AppColors.accentColor, width: 2.5),
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15), // Sudut radius 15
                   )),

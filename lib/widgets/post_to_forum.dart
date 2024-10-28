@@ -1,3 +1,4 @@
+import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/controllers/post_forum_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,7 +32,7 @@ class PostForumWidget extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
+                      backgroundColor: AppColors.accentColor,
                       shape: StadiumBorder(),
                     ),
                   ),

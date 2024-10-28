@@ -1,5 +1,5 @@
 import 'package:aplikasi_nagaricare/repository/authentication_repository/authentication_repository.dart';
-import 'package:aplikasi_nagaricare/screens/main_screen.dart';
+import 'package:aplikasi_nagaricare/widgets/bottom_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +20,7 @@ class LoginController extends GetxController {
               Duration(seconds: 3), // Pastikan error berisi pesan yang sesuai
         ));
       } else {
-        Get.offAll(() => MainScreen());
+        Get.offAll(() => BottomBarWidget());
       }
     } catch (e) {
       // Tangkap exception di sini

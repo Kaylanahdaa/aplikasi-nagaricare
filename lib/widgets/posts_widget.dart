@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
-import '../screens/forum/post_screen.dart';
+import '../screens/forum/detail_post_screen.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class Posts extends StatefulWidget {
-  const Posts({super.key});
+class PostsWidget extends StatefulWidget {
+  const PostsWidget({super.key});
 
   @override
-  _PostsState createState() => _PostsState();
+  _PostsWidgetState createState() => _PostsWidgetState();
 }
 
-class _PostsState extends State<Posts> {
+class _PostsWidgetState extends State<PostsWidget> {
   final HomePageController controller = Get.put(HomePageController());
 
   @override
@@ -71,7 +71,7 @@ class _PostsState extends State<Posts> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => PostScreen(idPosts: post.idPosts),
+                  builder: (_) => DetailPostScreen(idPosts: post.idPosts),
                 ),
               );
             },

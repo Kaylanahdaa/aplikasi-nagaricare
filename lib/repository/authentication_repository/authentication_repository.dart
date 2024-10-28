@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:aplikasi_nagaricare/repository/authentication_repository/exceptions/login_email_password_failure.dart';
 import 'package:aplikasi_nagaricare/repository/authentication_repository/exceptions/signup_email_password_failure.dart';
 import 'package:aplikasi_nagaricare/screens/auth/welcome/welcome_screen.dart';
-import 'package:aplikasi_nagaricare/screens/main_screen.dart';
+import 'package:aplikasi_nagaricare/widgets/bottom_bar_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -45,7 +45,7 @@ class AuthenticationRepository extends GetxController {
   _setInitialScreen(User? user) {
     user == null
         ? Get.offAll(() => const WelcomeScreen())
-        : Get.offAll(() => MainScreen());
+        : Get.offAll(() => BottomBarWidget());
   }
 
   //FUNC
@@ -130,7 +130,7 @@ class AuthenticationRepository extends GetxController {
         }
       }
 
-      Get.offAll(() => MainScreen());
+      Get.offAll(() => BottomBarWidget());
     } catch (e) {
       print('Error signing in with Google: $e');
       // Show an error message to the user here

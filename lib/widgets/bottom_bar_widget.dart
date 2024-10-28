@@ -5,11 +5,11 @@ import 'package:aplikasi_nagaricare/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
-import '../controllers/bottombarcontroller.dart';
-import 'profile/profile_screen.dart';
+import '../controllers/bottom_bar_controller.dart';
+import '../screens/profile/profile_screen.dart';
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+class BottomBarWidget extends StatelessWidget {
+  const BottomBarWidget({super.key});
 
   buildBottomNavigationMenu(context, landingPageController) {
     final TextStyle unselectedLabelStyle = TextStyle(

@@ -9,7 +9,7 @@ import '../controllers/home_controller.dart';
 // import '/widgets/posts.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../widgets/posts.dart';
+import '../widgets/posts_widget.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -110,7 +110,7 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Posts(),
+                    PostsWidget(),
                   ],
                 ),
               ),

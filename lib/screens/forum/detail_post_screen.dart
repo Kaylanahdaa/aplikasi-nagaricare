@@ -4,10 +4,10 @@ import '/controllers/forum_controller.dart';
 import '/models/post_model.dart';
 import 'package:ionicons/ionicons.dart';
 
-class PostScreen extends StatelessWidget {
+class DetailPostScreen extends StatelessWidget {
   final int idPosts; // ID of the post to fetch
 
-  PostScreen({required this.idPosts});
+  DetailPostScreen({required this.idPosts});
 
   @override
   Widget build(BuildContext context) {

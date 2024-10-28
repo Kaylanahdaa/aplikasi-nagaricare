@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../../controllers/home_controller.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import '/models/post_model.dart'; // Ensure you import your Post model
-import 'post_screen.dart';
+import 'detail_post_screen.dart';
 import 'package:ionicons/ionicons.dart';
 
 class Posts extends StatefulWidget {
@@ -70,7 +70,7 @@ class _PostsState extends State<Posts> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => PostScreen(idPosts: post.idPosts),
+                  builder: (_) => DetailPostScreen(idPosts: post.idPosts),
                 ),
               );
             },

@@ -5,7 +5,9 @@ import '../screens/forum/detail_post_screen.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class PostsWidget extends StatefulWidget {
-  const PostsWidget({super.key});
+  final int? postLimit; // Add optional parameter for post limit
+
+  const PostsWidget({super.key, this.postLimit}); // Use it in the constructor
 
   @override
   _PostsWidgetState createState() => _PostsWidgetState();
@@ -17,15 +19,12 @@ class _PostsWidgetState extends State<PostsWidget> {
   @override
   void initState() {
     super.initState();
-    // Call the function to fetch posts for the current user
     controller.fetchPostsByCurrentUser();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Using Obx to reactively update the UI when posts change
     return Obx(() {
-      // Check if posts are empty
       if (controller.posts.isEmpty) {
         return Center(
           child: Column(
@@ -60,12 +59,19 @@ class _PostsWidgetState extends State<PostsWidget> {
         );
       }
 
-      // Return posts UI when posts are fetched
-      return Column(
-        children: controller.posts.map((post) {
-          // Parse the createdAt string to DateTime
-          DateTime createdAtDateTime = DateTime.parse(post.createdAt);
+      // Sort posts by createdAt (newest first)
+      var sortedPosts = controller.posts.toList()
+        ..sort((a, b) =>
+            DateTime.parse(b.createdAt).compareTo(DateTime.parse(a.createdAt)));
 
+      // Apply postLimit if set
+      var limitedPosts = widget.postLimit != null
+          ? sortedPosts.take(widget.postLimit!).toList()
+          : sortedPosts;
+
+      return Column(
+        children: limitedPosts.map((post) {
+          DateTime createdAtDateTime = DateTime.parse(post.createdAt);
           return GestureDetector(
             onTap: () {
               Navigator.push(
@@ -131,7 +137,6 @@ class _PostsWidgetState extends State<PostsWidget> {
                                                   Colors.red.withOpacity(0.6)),
                                         ),
                                         const SizedBox(width: 15),
-                                        // Use getTimeAgo to display the time difference
                                         Text(
                                           timeago.format(createdAtDateTime),
                                           style: TextStyle(

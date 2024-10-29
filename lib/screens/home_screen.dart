@@ -1,14 +1,11 @@
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/constants/app_fonts.dart';
 import 'package:aplikasi_nagaricare/screens/forum/all_post_screen.dart';
-// import 'package:aplikasi_nagaricare/screens/forum/post_screen.dart';
 import 'package:aplikasi_nagaricare/widgets/carousel_menu.dart';
 import 'package:aplikasi_nagaricare/widgets/post_to_forum.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../controllers/home_controller.dart';
-// import '/widgets/posts.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../widgets/posts_widget.dart';
@@ -114,7 +111,7 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const PostsWidget(),
+                    const PostsWidget(postLimit: 3),
                   ],
                 ),
               ),

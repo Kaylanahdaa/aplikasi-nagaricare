@@ -1,13 +1,14 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
-import '../models/post_model.dart'; // Import your Post model
+import '../models/post_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class HomePageController extends GetxController {
   var posts = <Post>[].obs; // Reactive list of Post objects
+  var filteredPosts = <Post>[].obs; // Reactive list for search results
 
   @override
   void onInit() {
@@ -58,6 +59,18 @@ class HomePageController extends GetxController {
       }
     } else {
       print("No user is currently logged in.");
+    }
+  }
+
+  // Search function to filter posts by title
+  void search(String query) {
+    if (query.isEmpty) {
+      filteredPosts.assignAll(posts); // Reset filteredPosts when query is empty
+    } else {
+      filteredPosts.value = posts
+          .where(
+              (post) => post.title.toLowerCase().contains(query.toLowerCase()))
+          .toList();
     }
   }
 }

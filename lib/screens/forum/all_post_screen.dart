@@ -2,12 +2,16 @@ import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/widgets/posts_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:get/get.dart';
+import '../../controllers/home_controller.dart';
 
 class AllPostScreen extends StatelessWidget {
   const AllPostScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final HomePageController controller = Get.put(HomePageController());
+
     return Scaffold(
       backgroundColor: AppColors.accentColor,
       body: ListView(children: <Widget>[
@@ -30,9 +34,10 @@ class AllPostScreen extends StatelessWidget {
                   const Text(
                     "Semua Postingan",
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 28,
-                        fontWeight: FontWeight.w600),
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ],
               ),
@@ -40,27 +45,38 @@ class AllPostScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      "Find Topics you like to read",
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.6),
-                        fontSize: 14.0,
+                    // Search Bar
+                    Expanded(
+                      child: TextField(
+                        onChanged: (value) {
+                          controller.search(value); // Call search function
+                        },
+                        style: const TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          hintText: "Find topics you like to read",
+                          hintStyle:
+                              TextStyle(color: Colors.white.withOpacity(0.6)),
+                          filled: true,
+                          fillColor: Colors.white.withOpacity(0.1),
+                          prefixIcon:
+                              const Icon(Ionicons.search, color: Colors.white),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide.none,
+                          ),
+                        ),
                       ),
                     ),
-                    const Icon(
-                      Ionicons.search,
-                      size: 20,
-                      color: Colors.white,
-                    )
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
-        PostsWidget(),
+        PostsWidget()
+        // Obx(() => PostsWidget(
+        //     posts: controller.filteredPosts)), // Display filteredPosts
       ]),
     );
   }

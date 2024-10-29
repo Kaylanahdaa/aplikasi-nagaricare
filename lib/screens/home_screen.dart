@@ -125,7 +125,7 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const PostsWidget(postLimit: 3),
+                    PostsWidget(postLimit: 3),
                   ],
                 ),
               ),

@@ -92,7 +92,7 @@ class CarouselMenu extends StatelessWidget {
                             : Colors.grey.shade400,
                         borderRadius: BorderRadius.circular(40),
                       ),
-                      duration: const Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 500),
                       curve: Curves.ease,
                     ),
                   );

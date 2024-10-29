@@ -96,7 +96,7 @@ class CustomImageViewer {
                       child: TextButton(
                         onPressed: () {
                           Navigator.pop(context);
-                          _isModalShowing = false; // Reset the flag on close
+                          // Reset the flag when "OK" button is pressed
                         },
                         child: const Text(
                           "OK",
@@ -114,6 +114,8 @@ class CustomImageViewer {
           },
         );
       },
-    );
+    ).then((_) {
+      _isModalShowing = false; // Reset the flag when modal is dismissed
+    });
   }
 }

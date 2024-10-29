@@ -16,7 +16,10 @@ class CustomImageViewer {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text('Berita Bank Nagari'),
+                title: Text(
+                  'Berita Bank Nagari',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 content: Text(
                     "Non est Lorem est consequat et id aliqua ad aute nisi deserunt."),
                 actions: [
@@ -27,7 +30,7 @@ class CustomImageViewer {
                     child: Text(
                       "OK",
                       style: TextStyle(
-                          color: AppColors.primaryColor,
+                          color: AppColors.accentColor,
                           fontWeight: FontWeight.bold),
                     ),
                   )

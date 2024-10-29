@@ -4,14 +4,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import 'controllers/home_controller.dart';
+import 'localization/messages.dart';
 
 void main() async {
   WidgetsFlutterBinding();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) => Get.put(AuthenticationRepository()));
   Get.put(HomePageController(), permanent: false);
+  timeago.setLocaleMessages('en-short', EnShortMessages());
   runApp(const MyApp());
 }
 

@@ -138,7 +138,8 @@ class _PostsWidgetState extends State<PostsWidget> {
                                         ),
                                         const SizedBox(width: 15),
                                         Text(
-                                          timeago.format(createdAtDateTime),
+                                          timeago.format(createdAtDateTime,
+                                              locale: 'en-short'),
                                           style: TextStyle(
                                               color:
                                                   Colors.grey.withOpacity(0.6)),

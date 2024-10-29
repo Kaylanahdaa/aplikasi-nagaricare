@@ -1,11 +1,12 @@
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import '../controllers/carousel_menu_controller.dart';
 import '../models/image_carousel.dart';
-import '../widgets/image_viewer_carousel.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'image_viewer_carousel.dart';
 
 class CarouselMenu extends StatelessWidget {
   const CarouselMenu({super.key});
@@ -20,7 +21,7 @@ class CarouselMenu extends StatelessWidget {
       children: [
         /// Outer Style Indicators Banner Slider
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: CarouselSlider(
             options: CarouselOptions(
               autoPlay: true,
@@ -33,21 +34,40 @@ class CarouselMenu extends StatelessWidget {
               },
             ),
             items: AppData.outerStyleImages.map((imagePath) {
-              return Builder(
-                builder: (BuildContext context) {
-                  /// Custom Image Viewer widget
-                  return CustomImageViewer.show(
+              return GestureDetector(
+                onTap: () {
+                  // Directly trigger the bottom modal when the image is tapped
+                  CustomImageViewer.show(
                     context: context,
                     url: imagePath,
                     fit: BoxFit.fill,
                     radius: 24,
                   );
                 },
+                child: CachedNetworkImage(
+                  imageUrl: imagePath,
+                  fit: BoxFit.cover,
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).dialogBackgroundColor,
+                      borderRadius: BorderRadius.circular(24),
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  placeholder: (context, url) => Container(
+                    height: 200,
+                    color: Colors.grey[200],
+                  ),
+                  errorWidget: (context, url, error) =>
+                      const Icon(Icons.error_outline),
+                ),
               );
             }).toList(),
           ),
         ),
-
         const SizedBox(height: 10),
 
         /// Indicators

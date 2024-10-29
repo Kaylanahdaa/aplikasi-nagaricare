@@ -1,5 +1,6 @@
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/constants/app_fonts.dart';
+import 'package:aplikasi_nagaricare/constants/app_image.dart';
 import 'package:aplikasi_nagaricare/screens/forum/all_post_screen.dart';
 import 'package:aplikasi_nagaricare/widgets/carousel_menu.dart';
 import 'package:aplikasi_nagaricare/widgets/post_to_forum.dart';
@@ -41,19 +42,30 @@ class HomePage extends StatelessWidget {
                 height: 100,
                 decoration: const BoxDecoration(color: AppColors.accentColor),
                 child: const Padding(
-                  padding: EdgeInsets.all(12.0),
+                  padding: EdgeInsets.symmetric(horizontal: 8),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        "Forum NagariCare",
-                        style: TextStyle(
-                          fontFamily: AppFonts.primaryFont,
-                          fontSize: 28,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      Row(
+                        children: [
+                          Image(
+                            image: AssetImage(logoApp),
+                            width: 100,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Forum NagariCare",
+                            style: TextStyle(
+                              fontFamily: AppFonts.primaryFont,
+                              fontSize: 30,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        ],
                       ),
                     ],
                   ),

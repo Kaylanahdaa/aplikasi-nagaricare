@@ -3,6 +3,7 @@ import 'package:aplikasi_nagaricare/repository/authentication_repository/authent
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'controllers/home_controller.dart';
 
@@ -19,9 +20,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    final textTheme = Theme.of(context).textTheme;
+    return GetMaterialApp(
       title: 'NagariCare',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          textTheme: GoogleFonts.poppinsTextTheme(textTheme).copyWith(
+        bodyMedium: GoogleFonts.poppins(textStyle: textTheme.bodyMedium),
+      )),
       home: CircularProgressIndicator(),
     );
   }

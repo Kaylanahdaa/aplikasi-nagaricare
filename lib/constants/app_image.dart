@@ -2,7 +2,7 @@
 
 // -- Splash Screen Image
 const String LogoBank = "assets/images/logo_banknagari.png";
-const String logoApp = "assets/images/logo_nagaricare.png";
+const String logoApp = "assets/images/logo_nagaricare_removebg.png";
 const String logoGoogle = "assets/images/logo_google.png";
 const String logoForgetPassword = "assets/images/logo_forget_password.png";
 const String logoOtp = "assets/images/logo_otp.png";

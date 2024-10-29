@@ -29,6 +29,50 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     }
   }
 
+  // Open edit profile dialog
+  void _openEditProfileDialog(ProfileController profileController) {
+    TextEditingController nameController =
+        TextEditingController(text: profileController.displayName.value);
+    TextEditingController emailController =
+        TextEditingController(text: profileController.email.value);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Edit Profile"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: nameController,
+                decoration: InputDecoration(labelText: "Name"),
+              ),
+              TextField(
+                controller: emailController,
+                decoration: InputDecoration(labelText: "Email"),
+              ),
+              const SizedBox(height: 10),
+            ],
+          ),
+          actions: [
+            TextButton(
+              child: Text("Cancel"),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            TextButton(
+              child: Text("Save"),
+              onPressed: () async {
+                await profileController.updateDisplayName(nameController.text);
+                Navigator.of(context).pop(); // Close dialog
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final ProfileController profileController = Get.put(ProfileController());
@@ -52,8 +96,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               Column(
                 children: <Widget>[
                   Container(
-                    height: 10 * 10,
-                    width: 10 * 10,
+                    height: 100,
+                    width: 100,
                     margin: EdgeInsets.only(top: 10 * 3),
                     child: Stack(
                       children: <Widget>[
@@ -123,7 +167,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             SizedBox(
                               width: 200,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () =>
+                                    _openEditProfileDialog(profileController),
                                 child: const Text(
                                   'Edit Profile',
                                   style: TextStyle(color: Colors.white),
@@ -146,11 +191,11 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(100),
                                     color: AppColors.secondaryColor
-                                        .withOpacity(0.1),
+                                        .withOpacity(0.2),
                                   ),
                                   child: const Icon(
                                     LineAwesomeIcons.envelope,
-                                    color: AppColors.secondaryColor,
+                                    color: AppColors.accentColor,
                                   ),
                                 ),
                                 title: Text('Your Email'),
@@ -168,11 +213,11 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(100),
                                     color: AppColors.secondaryColor
-                                        .withOpacity(0.1),
+                                        .withOpacity(0.2),
                                   ),
                                   child: const Icon(
                                     LineAwesomeIcons.phone_solid,
-                                    color: AppColors.secondaryColor,
+                                    color: AppColors.accentColor,
                                   ),
                                 ),
                                 title: Text('Your Phone'),
@@ -185,54 +230,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             const SizedBox(height: 10),
                             const Divider(),
                             const SizedBox(height: 10),
-                            SizedBox(
-                              width: 200,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: Text("Konfirmasi Hapus"),
-                                        content: Text(
-                                            "Apakah anda yakin ingin menghapus akun?"),
-                                        actions: [
-                                          TextButton(
-                                            child: Text("Kembali"),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                          TextButton(
-                                            child: Text("Hapus"),
-                                            onPressed: () {
-                                              AuthenticationRepository.instance
-                                                  .logout()
-                                                  .then(
-                                                (value) {
-                                                  Navigator.of(context).pop();
-                                                  Get.offAll(
-                                                      () => WelcomeScreen());
-                                                },
-                                              );
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                },
-                                child: const Text(
-                                  'DELETE',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.alertColor,
-                                  side: BorderSide.none,
-                                  shape: StadiumBorder(),
-                                ),
-                              ),
-                            ),
                             SizedBox(
                               width: 200,
                               child: ElevatedButton(
@@ -275,7 +272,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.secondaryColor,
+                                  backgroundColor: AppColors.alertColor,
                                   side: BorderSide.none,
                                   shape: StadiumBorder(),
                                 ),

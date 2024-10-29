@@ -74,15 +74,6 @@ class ProfileController extends GetxController {
     }
   }
 
-  Future<void> updateEmail(String newEmail) async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      // ignore: deprecated_member_use
-      await user.updateEmail(newEmail);
-      email.value = newEmail; // Update observable
-    }
-  }
-
   Future<void> updateDisplayName(String newName) async {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {

@@ -37,7 +37,7 @@ class DetailPostScreen extends StatelessWidget {
             children: <Widget>[
               Container(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
+                    const EdgeInsets.symmetric(vertical: 20.0, horizontal: 5.0),
                 child: Row(
                   children: <Widget>[
                     IconButton(

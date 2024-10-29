@@ -1,4 +1,6 @@
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
+import 'package:aplikasi_nagaricare/constants/app_fonts.dart';
+import 'package:aplikasi_nagaricare/screens/forum/all_post_screen.dart';
 // import 'package:aplikasi_nagaricare/screens/forum/post_screen.dart';
 import 'package:aplikasi_nagaricare/widgets/carousel_menu.dart';
 import 'package:aplikasi_nagaricare/widgets/post_to_forum.dart';
@@ -12,6 +14,8 @@ import 'package:ionicons/ionicons.dart';
 import '../widgets/posts_widget.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final HomePageController controller = Get.put(HomePageController());
@@ -38,44 +42,22 @@ class HomePage extends StatelessWidget {
             children: <Widget>[
               Container(
                 height: 100,
-                width: MediaQuery.of(context).size.width,
                 decoration: const BoxDecoration(color: AppColors.accentColor),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(12.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Row(
-                        children: [
-                          const Text(
-                            "Forum NagariCare",
-                            style: TextStyle(
-                              fontSize: 24,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        "Forum NagariCare",
+                        style: TextStyle(
+                          fontFamily: AppFonts.primaryFont,
+                          fontSize: 28,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                      const SizedBox(height: 8.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            "Find Topics you like to read",
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(0.6),
-                              fontSize: 14.0,
-                            ),
-                          ),
-                          const Icon(
-                            Ionicons.search,
-                            size: 20,
-                            color: Colors.white,
-                          )
-                        ],
-                      )
                     ],
                   ),
                 ),
@@ -117,7 +99,14 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                           TextButton(
-                              onPressed: () => {print("test button")},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => const AllPostScreen(),
+                                  ),
+                                );
+                              },
                               child: const Text(
                                 "Lihat Semua",
                                 style: TextStyle(color: AppColors.accentColor),
@@ -125,7 +114,7 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    PostsWidget(),
+                    const PostsWidget(),
                   ],
                 ),
               ),

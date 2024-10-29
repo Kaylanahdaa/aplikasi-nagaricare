@@ -17,6 +17,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomePageController controller = Get.put(HomePageController());
+    final deviceWidth = MediaQuery.of(context).size.width;
+
     // Fetch posts when the widget is built
     controller.fetchPostsByCurrentUser();
     return Scaffold(
@@ -41,30 +43,30 @@ class HomePage extends StatelessWidget {
               Container(
                 height: 100,
                 decoration: const BoxDecoration(color: AppColors.accentColor),
-                child: const Padding(
+                child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Row(
                         children: [
                           Image(
                             image: AssetImage(logoApp),
-                            width: 100,
+                            width: deviceWidth *
+                                0.20, // Set logo width as 25% of device width
                           ),
-                          SizedBox(
-                            width: 10,
-                          ),
+                          const SizedBox(width: 8),
                           Text(
                             "Forum NagariCare",
                             style: TextStyle(
                               fontFamily: AppFonts.primaryFont,
-                              fontSize: 30,
+                              fontSize: deviceWidth *
+                                  0.070, // Set font size as 7.5% of device width
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ],

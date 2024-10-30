@@ -74,13 +74,12 @@
 //       repliesCount: 120,
 //       replies: replies),
 // ];
-
 class Post {
-  final int idPosts; // ID from the backend
-  final String title; // Title of the post
-  final String content; // Content of the post
-  final String createdAt; // Created at timestamp, formatted as a string
-  final String email; // Email of the user who created the post
+  final int idPosts;
+  final String title;
+  final String content;
+  final String createdAt;
+  String email;
 
   Post({
     required this.idPosts,
@@ -96,7 +95,7 @@ class Post {
       title: json['title'],
       content: json['content'],
       createdAt: json['created_at'],
-      email: json['email'],
+      email: json['email'] ?? '',
     );
   }
 

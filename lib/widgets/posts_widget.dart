@@ -5,10 +5,9 @@ import '../screens/forum/detail_post_screen.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class PostsWidget extends StatefulWidget {
-  final int? postLimit; // Add optional parameter for post limit
+  final int? postLimit;
 
-  const PostsWidget({super.key, this.postLimit}); // Use it in the constructor
-
+  const PostsWidget({super.key, this.postLimit});
   @override
   _PostsWidgetState createState() => _PostsWidgetState();
 }

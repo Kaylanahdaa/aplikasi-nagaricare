@@ -19,15 +19,12 @@ class AuthenticationRepository extends GetxController {
   final _auth = FirebaseAuth.instance;
   late final Rx<User?> firebaseUser;
 
-  //Will be load when app launches this func will be called and set the firebaseUser state
   @override
   void onReady() {
-    // Inisialisasi firebaseUser dan bind stream dari Firebase Authentication
     firebaseUser = Rx<User?>(_auth.currentUser);
     firebaseUser.bindStream(_auth.userChanges());
     ever(firebaseUser, _setInitialScreen);
 
-    // Tambahkan pemantauan state signed in/out menggunakan authStateChanges
     _auth.authStateChanges().listen((User? user) {
       if (user == null) {
         print('User is currently signed out!');
@@ -36,35 +33,30 @@ class AuthenticationRepository extends GetxController {
       }
     });
 
-    super.onReady(); // Pastikan untuk memanggil super.onReady()
+    super.onReady();
   }
 
-  /// If we are setting initial screen from here
-  /// then in the main.dart => App() add CircularProgressIndicator()
-// Tambahkan log untuk verifikasi
   _setInitialScreen(User? user) {
     user == null
         ? Get.offAll(() => const WelcomeScreen())
         : Get.offAll(() => BottomBarWidget());
   }
 
-  //FUNC
   Future<String?> createUserWithEmailAndPassword(
       String email, String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      // Add a debug log to verify user creation
       print('User created: ${_auth.currentUser?.email}');
-      return null; // Return null if successful
+      return null;
     } on FirebaseAuthException catch (e) {
       final ex = SignupEmailPasswordFailure.code(e.code);
       print('Firebase Auth Exception: ${ex.message}');
-      return ex.message; // Return the error message
+      return ex.message;
     } catch (e) {
       const ex = SignupEmailPasswordFailure();
       print('General Exception: ${ex.message}');
-      return ex.message; // Return a generic error message
+      return ex.message;
     }
   }
 
@@ -82,13 +74,13 @@ class AuthenticationRepository extends GetxController {
 
   Future<void> logout() async {
     await _auth.signOut();
-    print("Logout function executed"); // Tambahkan log di sini
+    print("Logout function executed");
   }
 
   Future<void> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? gUser = await googleSignIn.signIn();
-      if (gUser == null) return; // User canceled sign-in
+      if (gUser == null) return;
 
       final GoogleSignInAuthentication? gAuth = await gUser.authentication;
       if (gAuth?.accessToken == null || gAuth?.idToken == null) return;
@@ -101,31 +93,25 @@ class AuthenticationRepository extends GetxController {
       // Sign in to Firebase
       await _auth.signInWithCredential(credential);
 
-      // Prepare the user data to send to the backend
       final String? email = _auth.currentUser?.email;
-      final String? name = gUser.displayName; // Get user's name
-      // You can also collect the phone number if needed
+      final String? name = gUser.displayName;
 
       // Send a POST request to your backend to save user data
       if (email != null && name != null) {
         final response = await http.post(
-          Uri.parse(
-              'http://192.168.100.110:3000/users/signin'), // Update with your backend URL
+          Uri.parse('http://192.168.100.110:3000/users/signin'),
           headers: {
             'Content-Type': 'application/json',
           },
           body: jsonEncode({
             'email': email,
             'name': name,
-            // Add phone number if necessary
           }),
         );
 
         if (response.statusCode == 200) {
-          // Successfully saved user data to MySQL
           print('User signed in and data saved successfully');
         } else {
-          // Handle error from backend
           print('Failed to save user data: ${response.body}');
         }
       }
@@ -133,7 +119,6 @@ class AuthenticationRepository extends GetxController {
       Get.offAll(() => BottomBarWidget());
     } catch (e) {
       print('Error signing in with Google: $e');
-      // Show an error message to the user here
     }
   }
 }

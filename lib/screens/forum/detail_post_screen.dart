@@ -13,7 +13,6 @@ class DetailPostScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ForumController forumController = Get.put(ForumController());
 
-    // Fetch the post data using the ID passed to the screen when controller is ready
     forumController.fetchPostById(idPosts);
 
     return Scaffold(
@@ -22,15 +21,14 @@ class DetailPostScreen extends StatelessWidget {
         child: Obx(() {
           if (forumController.isLoading.value) {
             return const Center(
-              child: CircularProgressIndicator(), // Show loading spinner
+              child: CircularProgressIndicator(),
             );
           }
 
           Post? post = forumController.posts
               .firstWhereOrNull((p) => p.idPosts == idPosts);
           if (post == null) {
-            return const Center(
-                child: Text("Post not found")); // Handle if post is not found
+            return const Center(child: Text("Post not found"));
           }
 
           return ListView(

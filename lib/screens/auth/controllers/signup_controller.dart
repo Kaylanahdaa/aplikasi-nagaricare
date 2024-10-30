@@ -14,7 +14,6 @@ class SignupController extends GetxController {
 
   // Function for registering user
   void registerUser() async {
-    // Trimmed input values
     final email = emailC.text.trim();
     final password = passwordC.text.trim();
     final fullname = fullnameC.text.trim();
@@ -40,10 +39,8 @@ class SignupController extends GetxController {
       // Proceed only if the user has been successfully registered in Firebase
       var currentUser = AuthenticationRepository.instance.firebaseUser.value;
       if (currentUser != null) {
-        // Send the POST request to the backend
         var response = await http.post(
-          Uri.parse(
-              "http://192.168.100.110:3000/users"), // Ensure this API URL is correct
+          Uri.parse("http://192.168.100.110:3000/users"),
           body: {
             'email': email,
             'name': fullname,
@@ -51,14 +48,11 @@ class SignupController extends GetxController {
           },
         );
 
-        // Check if the request was successful
         if (response.statusCode == 200) {
           Get.showSnackbar(const GetSnackBar(
             message: "Registration successful! Data sent to backend.",
             duration: Duration(seconds: 3),
           ));
-
-          // Clear text fields after successful registration
           emailC.clear();
           passwordC.clear();
           fullnameC.clear();
@@ -70,14 +64,12 @@ class SignupController extends GetxController {
           ));
         }
       } else {
-        // Handle case where Firebase registration didn't succeed
         Get.showSnackbar(const GetSnackBar(
           message: "Firebase registration failed. No user created.",
           duration: Duration(seconds: 3),
         ));
       }
     } catch (e) {
-      // Handle Firebase registration failure
       print('Firebase registration failed: $e');
       Get.showSnackbar(GetSnackBar(
         message: 'Registration failed: ${e.toString()}',

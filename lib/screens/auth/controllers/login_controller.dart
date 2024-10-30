@@ -16,14 +16,12 @@ class LoginController extends GetxController {
       if (error != null) {
         Get.showSnackbar(GetSnackBar(
           message: error,
-          duration:
-              Duration(seconds: 3), // Pastikan error berisi pesan yang sesuai
+          duration: Duration(seconds: 3),
         ));
       } else {
         Get.offAll(() => BottomBarWidget());
       }
     } catch (e) {
-      // Tangkap exception di sini
       Get.showSnackbar(GetSnackBar(
         message: 'An error occurred: $e',
       ));

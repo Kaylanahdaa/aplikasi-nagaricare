@@ -22,26 +22,33 @@ class ProfileController extends GetxController {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       email.value = user.email ?? '';
-      displayName.value = user.displayName ?? '';
 
       try {
         final response = await http.get(
-          Uri.parse("http://192.168.100.110:3000/users/details?email=$email"),
+          Uri.parse("http://192.168.100.110:3000/users"),
         );
 
         print('Response status: ${response.statusCode}');
-        print(
-            'Response body: ${response.body}'); // Debug: Print the full response
+        print('Response body: ${response.body}');
 
         if (response.statusCode == 200) {
           final data = json.decode(response.body);
 
-          // Ensure data is a Map<String, dynamic>
-          if (data is Map<String, dynamic>) {
-            displayName.value = data['name'] ?? '';
-            phone.value = data['phone'] ?? '';
+          // Check if data is a List
+          if (data is List) {
+            final userData = data.firstWhere(
+              (user) => user['email'] == email.value,
+              orElse: () => null,
+            );
+
+            if (userData != null) {
+              displayName.value = userData['name'] ?? '';
+              phone.value = userData['phone'] ?? '';
+            } else {
+              print("User not found for email: ${email.value}");
+            }
           } else {
-            print("Expected a Map but got: ${data.runtimeType}");
+            print("Expected a List but got: ${data.runtimeType}");
           }
         } else {
           print("Failed to load user data with status: ${response.statusCode}");

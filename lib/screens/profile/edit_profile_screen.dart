@@ -176,6 +176,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       width: deviceWidth * 0.35,
                       child: ElevatedButton(
                         onPressed: () {
+                          // Log untuk memastikan data yang dikirim
+                          print("Updating profile with: ");
+                          print("Name: ${nameController.text}");
+                          print("Email: ${emailController.text}");
+                          print("Phone: ${phoneController.text}");
+
+                          // Update observables dan panggil metode edit
+                          profileController.name.value =
+                              nameController.text.trim();
+                          profileController.email.value =
+                              emailController.text.trim();
+                          profileController.phone.value =
+                              phoneController.text.trim();
+
                           profileController.editUser();
                         },
                         style: ElevatedButton.styleFrom(

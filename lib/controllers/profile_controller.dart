@@ -75,13 +75,9 @@ class ProfileController extends GetxController {
           Uri.parse("http://192.168.100.110:3000/users"),
         );
 
-        print('Response status: ${response.statusCode}');
-        print('Response body: ${response.body}');
-
         if (response.statusCode == 200) {
           final data = json.decode(response.body);
 
-          // Check if data is a List
           if (data is List) {
             final userData = data.firstWhere(
               (user) => user['email'] == email.value,
@@ -91,14 +87,10 @@ class ProfileController extends GetxController {
             if (userData != null) {
               name.value = userData['name'] ?? '';
               phone.value = userData['phone'] ?? '';
-            } else {
-              print("User not found for email: ${email.value}");
+              // Log data yang baru diambil
+              print('Fetched updated user data: $userData');
             }
-          } else {
-            print("Expected a List but got: ${data.runtimeType}");
           }
-        } else {
-          print("Failed to load user data with status: ${response.statusCode}");
         }
       } catch (e) {
         print("Error fetching user profile: $e");
@@ -152,7 +144,8 @@ class ProfileController extends GetxController {
             }),
           );
 
-          if (response.statusCode == 201) {
+          if (response.statusCode == 200 || response.statusCode == 204) {
+            // Success logic here
             FocusScope.of(Get.context!).unfocus();
             Get.back(); // Close modal after successful update user data
 
@@ -191,7 +184,7 @@ class ProfileController extends GetxController {
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               duration: Duration(seconds: 3),
             );
-            fetchUserProfile();
+            fetchUserProfile(); // Fetch updated user profile
           } else {
             log("Failed to update user profile with status: ${response.statusCode}");
             Get.snackbar(

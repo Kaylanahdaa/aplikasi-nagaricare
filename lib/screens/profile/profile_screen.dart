@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'package:image_picker/image_picker.dart';
+import 'package:aplikasi_nagaricare/screens/profile/edit_profile_screen.dart';
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/repository/authentication_repository/authentication_repository.dart';
 import 'package:aplikasi_nagaricare/screens/auth/welcome/welcome_screen.dart';
@@ -9,7 +9,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:aplikasi_nagaricare/controllers/profile_controller.dart';
 
 class MyProfileScreen extends StatefulWidget {
-  const MyProfileScreen({Key? key}) : super(key: key);
+  const MyProfileScreen({super.key});
 
   @override
   State<MyProfileScreen> createState() => _MyProfileScreenState();
@@ -17,61 +17,6 @@ class MyProfileScreen extends StatefulWidget {
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
   Uint8List? _image;
-
-  void selectImage(ProfileController profileController) async {
-    final ImagePicker _picker = ImagePicker();
-    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      Uint8List imgBytes = await image.readAsBytes();
-      setState(() {
-        _image = imgBytes;
-      });
-    }
-  }
-
-  // Open edit profile dialog
-  void _openEditProfileDialog(ProfileController profileController) {
-    TextEditingController nameController =
-        TextEditingController(text: profileController.displayName.value);
-    TextEditingController emailController =
-        TextEditingController(text: profileController.email.value);
-
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text("Edit Profile"),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: nameController,
-                decoration: InputDecoration(labelText: "Name"),
-              ),
-              TextField(
-                controller: emailController,
-                decoration: InputDecoration(labelText: "Email"),
-              ),
-              const SizedBox(height: 10),
-            ],
-          ),
-          actions: [
-            TextButton(
-              child: Text("Cancel"),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            TextButton(
-              child: Text("Save"),
-              onPressed: () async {
-                await profileController.updateDisplayName(nameController.text);
-                Navigator.of(context).pop(); // Close dialog
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +26,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Center(
+        title: const Center(
           child: Text(
             'My Profile',
             style: TextStyle(fontWeight: FontWeight.bold),
@@ -89,204 +34,181 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          // padding: EdgeInsets.all(5),
-          child: Column(
-            children: [
-              Column(
-                children: <Widget>[
-                  Container(
-                    height: 100,
-                    width: 100,
-                    margin: EdgeInsets.only(top: 10 * 3),
-                    child: Stack(
-                      children: <Widget>[
-                        _image != null
-                            ? CircleAvatar(
-                                radius: 50,
-                                backgroundImage: MemoryImage(_image!),
-                              )
-                            : const CircleAvatar(
-                                radius: 50,
-                                backgroundImage: NetworkImage(
-                                  'https://images.pexels.com/photos/1819650/pexels-photo-1819650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-                                ),
+        child: Column(
+          children: [
+            Column(
+              children: <Widget>[
+                Container(
+                  height: 100,
+                  width: 100,
+                  margin: const EdgeInsets.only(top: 10 * 3),
+                  child: Stack(
+                    children: <Widget>[
+                      _image != null
+                          ? CircleAvatar(
+                              radius: 50,
+                              backgroundImage: MemoryImage(_image!),
+                            )
+                          : const CircleAvatar(
+                              radius: 50,
+                              backgroundImage: NetworkImage(
+                                'https://images.pexels.com/photos/1819650/pexels-photo-1819650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
                               ),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: Container(
-                            height: 10 * 2.5,
-                            width: 10 * 2.5,
-                            decoration: BoxDecoration(
-                              color: AppColors.accentColor,
-                              shape: BoxShape.circle,
                             ),
-                            child: Center(
-                              child: GestureDetector(
-                                onTap: () => selectImage(profileController),
-                                child: Icon(
-                                  Icons.add_a_photo,
-                                  color: AppColors.backgroundColor,
-                                  size: 10 * 1.5,
-                                ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            FutureBuilder<void>(
+              future:
+                  profileController.fetchUserProfile(), // Call fetchUserProfile
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else {
+                  return SingleChildScrollView(
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        children: [
+                          Obx(() {
+                            return Text(
+                              profileController.displayName.value.isNotEmpty
+                                  ? profileController.displayName.value
+                                  : "No Name Provided",
+                              style: const TextStyle(
+                                  fontSize: 24, fontWeight: FontWeight.bold),
+                            );
+                          }),
+                          const SizedBox(height: 5),
+                          const SizedBox(height: 20),
+                          SizedBox(
+                            width: 200,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Get.to(const EditProfileScreen());
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.accentColor,
+                                side: BorderSide.none,
+                                shape: const StadiumBorder(),
+                              ),
+                              child: const Text(
+                                'Edit Profile',
+                                style: TextStyle(color: Colors.white),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 5),
-              FutureBuilder<void>(
-                future: profileController
-                    .fetchUserProfile(), // Call fetchUserProfile
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
-                  } else {
-                    return SingleChildScrollView(
-                      child: Container(
-                        padding: const EdgeInsets.all(20),
-                        child: Column(
-                          children: [
-                            Obx(() {
-                              return Text(
-                                profileController.displayName.value.isNotEmpty
-                                    ? profileController.displayName.value
-                                    : "No Name Provided",
-                                style: TextStyle(
-                                    fontSize: 24, fontWeight: FontWeight.bold),
-                              );
-                            }),
-                            const SizedBox(height: 5),
-                            const SizedBox(height: 20),
-                            SizedBox(
-                              width: 200,
-                              child: ElevatedButton(
-                                onPressed: () =>
-                                    _openEditProfileDialog(profileController),
-                                child: const Text(
-                                  'Edit Profile',
-                                  style: TextStyle(color: Colors.white),
+                          const SizedBox(height: 10),
+                          const Divider(),
+                          const SizedBox(height: 10),
+                          Obx(() {
+                            return ListTile(
+                              leading: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color:
+                                      AppColors.secondaryColor.withOpacity(0.2),
                                 ),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.accentColor,
-                                  side: BorderSide.none,
-                                  shape: StadiumBorder(),
+                                child: const Icon(
+                                  LineAwesomeIcons.envelope,
+                                  color: AppColors.accentColor,
                                 ),
                               ),
-                            ),
-                            const SizedBox(height: 10),
-                            const Divider(),
-                            const SizedBox(height: 10),
-                            Obx(() {
-                              return ListTile(
-                                leading: Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    color: AppColors.secondaryColor
-                                        .withOpacity(0.2),
-                                  ),
-                                  child: const Icon(
-                                    LineAwesomeIcons.envelope,
-                                    color: AppColors.accentColor,
-                                  ),
+                              title: const Text('Your Email'),
+                              subtitle: Text(
+                                  profileController.email.value.isNotEmpty
+                                      ? profileController.email.value
+                                      : "No email provided"),
+                            );
+                          }),
+                          Obx(() {
+                            return ListTile(
+                              leading: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color:
+                                      AppColors.secondaryColor.withOpacity(0.2),
                                 ),
-                                title: Text('Your Email'),
-                                subtitle: Text(
-                                    profileController.email.value.isNotEmpty
-                                        ? profileController.email.value
-                                        : "No email provided"),
-                              );
-                            }),
-                            Obx(() {
-                              return ListTile(
-                                leading: Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    color: AppColors.secondaryColor
-                                        .withOpacity(0.2),
-                                  ),
-                                  child: const Icon(
-                                    LineAwesomeIcons.phone_solid,
-                                    color: AppColors.accentColor,
-                                  ),
-                                ),
-                                title: Text('Your Phone'),
-                                subtitle: Text(
-                                    profileController.phone.value.isNotEmpty
-                                        ? profileController.phone.value
-                                        : "No phone provided"),
-                              );
-                            }),
-                            const SizedBox(height: 10),
-                            const Divider(),
-                            const SizedBox(height: 10),
-                            SizedBox(
-                              width: 200,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: Text("Konfirmasi Logout"),
-                                        content: Text(
-                                            "Apakah anda yakin ingin logout?"),
-                                        actions: [
-                                          TextButton(
-                                            child: Text("Tidak"),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                          TextButton(
-                                            child: Text("Iya"),
-                                            onPressed: () {
-                                              AuthenticationRepository.instance
-                                                  .logout()
-                                                  .then(
-                                                (value) {
-                                                  Navigator.of(context).pop();
-                                                  Get.offAll(
-                                                      () => WelcomeScreen());
-                                                },
-                                              );
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                },
-                                child: const Text(
-                                  'LOGOUT',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.alertColor,
-                                  side: BorderSide.none,
-                                  shape: StadiumBorder(),
+                                child: const Icon(
+                                  LineAwesomeIcons.phone_solid,
+                                  color: AppColors.accentColor,
                                 ),
                               ),
+                              title: const Text('Your Phone'),
+                              subtitle: Text(
+                                  profileController.phone.value.isNotEmpty
+                                      ? profileController.phone.value
+                                      : "No phone provided"),
+                            );
+                          }),
+                          const SizedBox(height: 10),
+                          const Divider(),
+                          const SizedBox(height: 10),
+                          SizedBox(
+                            width: 200,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Konfirmasi Logout"),
+                                      content: const Text(
+                                          "Apakah anda yakin ingin logout?"),
+                                      actions: [
+                                        TextButton(
+                                          child: const Text("Tidak"),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: const Text("Iya"),
+                                          onPressed: () {
+                                            AuthenticationRepository.instance
+                                                .logout()
+                                                .then(
+                                              (value) {
+                                                Navigator.of(context).pop();
+                                                Get.offAll(() =>
+                                                    const WelcomeScreen());
+                                              },
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.alertColor,
+                                side: BorderSide.none,
+                                shape: const StadiumBorder(),
+                              ),
+                              child: const Text(
+                                'LOGOUT',
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    );
-                  }
-                },
-              ),
-            ],
-          ),
+                    ),
+                  );
+                }
+              },
+            ),
+          ],
         ),
       ),
     );

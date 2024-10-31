@@ -80,8 +80,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         children: [
                           Obx(() {
                             return Text(
-                              profileController.displayName.value.isNotEmpty
-                                  ? profileController.displayName.value
+                              profileController.name.value.isNotEmpty
+                                  ? profileController.name.value
                                   : "No Name Provided",
                               style: const TextStyle(
                                   fontSize: 24, fontWeight: FontWeight.bold),

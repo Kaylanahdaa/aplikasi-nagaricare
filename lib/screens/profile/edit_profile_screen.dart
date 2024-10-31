@@ -31,7 +31,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     final deviceWidth = MediaQuery.of(context).size.width;
     final ProfileController profileController = Get.put(ProfileController());
     TextEditingController nameController =
-        TextEditingController(text: profileController.displayName.value);
+        TextEditingController(text: profileController.name.value);
     TextEditingController emailController =
         TextEditingController(text: profileController.email.value);
     TextEditingController phoneController =
@@ -176,7 +176,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       width: deviceWidth * 0.35,
                       child: ElevatedButton(
                         onPressed: () {
-                          // TO DO
+                          profileController.editUser();
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.accentColor,

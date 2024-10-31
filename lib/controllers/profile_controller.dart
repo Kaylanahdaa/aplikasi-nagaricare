@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
@@ -7,7 +9,8 @@ import 'package:image_picker/image_picker.dart';
 class ProfileController extends GetxController {
   var email = ''.obs;
   var phone = ''.obs;
-  var displayName = ''.obs;
+  var name = ''.obs;
+  var profilePicture = ''.obs;
   var selectedProfImage = Rx<XFile?>(null);
 
   final ImagePicker profPicker = ImagePicker();
@@ -86,7 +89,7 @@ class ProfileController extends GetxController {
             );
 
             if (userData != null) {
-              displayName.value = userData['name'] ?? '';
+              name.value = userData['name'] ?? '';
               phone.value = userData['phone'] ?? '';
             } else {
               print("User not found for email: ${email.value}");
@@ -125,22 +128,120 @@ class ProfileController extends GetxController {
     }
   }
 
-  Future<void> updateDisplayName(String newName) async {
+  // Function to edit user data
+  Future<void> editUser() async {
     final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      await user.updateProfile(displayName: newName);
-      displayName.value = newName; // Update observable
+    final email = user?.email ?? ''; // Get email from logged-in user
+
+    if (name.isNotEmpty && email.isNotEmpty && phone.isNotEmpty) {
+      print('Fetching user ID for email: $email'); // Debug: log the email
+      final userId = await getUserId(email);
+
+      if (userId != null) {
+        print(
+            'User ID fetched successfully: $userId'); // Debug: log the fetched user ID
+        try {
+          final response = await http.put(
+            Uri.parse('http://192.168.100.110:3000/users/$userId'),
+            headers: {'Content-Type': 'application/json'},
+            body: jsonEncode({
+              "name": name.value,
+              "email": email,
+              "phone": phone.value.isEmpty ? "" : phone.value,
+              "profile_picture": profilePicture.isEmpty ? "" : profilePicture,
+            }),
+          );
+
+          if (response.statusCode == 201) {
+            FocusScope.of(Get.context!).unfocus();
+            Get.back(); // Close modal after successful update user data
+
+            Get.snackbar(
+              '',
+              '',
+              titleText: Row(
+                children: [
+                  Icon(
+                    Icons.check_circle_outline,
+                    color: Colors.green,
+                    size: 24,
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    'Success',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green[800],
+                    ),
+                  ),
+                ],
+              ),
+              messageText: Text(
+                'Profil berhasil diperbarui!',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.black87,
+                ),
+              ),
+              snackPosition: SnackPosition.TOP,
+              backgroundColor: Colors.white,
+              borderRadius: 12,
+              margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              duration: Duration(seconds: 3),
+            );
+            fetchUserProfile();
+          } else {
+            log("Failed to update user profile with status: ${response.statusCode}");
+            Get.snackbar(
+              '',
+              '',
+              titleText: Row(
+                children: [
+                  Icon(
+                    Icons.cancel_outlined,
+                    color: Colors.red,
+                    size: 24,
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    'Error',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red[800],
+                    ),
+                  ),
+                ],
+              ),
+              messageText: Text(
+                'Gagal memperbarui profil',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.black87,
+                ),
+              ),
+              snackPosition: SnackPosition.TOP,
+              backgroundColor: Colors.white,
+              borderRadius: 12,
+              margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              duration: Duration(seconds: 3),
+            );
+          }
+        } catch (e) {
+          Get.snackbar('Error', 'An error occurred: $e');
+        }
+      } else {
+        Get.snackbar('Error', 'User ID is null');
+      }
+    } else {
+      Get.snackbar('Error', 'Title and content are required');
     }
   }
+}
 
-  Future<void> updatePassword(String newPassword) async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      await user.updatePassword(newPassword);
-    }
-  }
-
-  Future<void> logout() async {
-    await FirebaseAuth.instance.signOut();
-  }
+Future<void> logout() async {
+  await FirebaseAuth.instance.signOut();
 }

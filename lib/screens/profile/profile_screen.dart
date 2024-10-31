@@ -51,8 +51,11 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             )
                           : const CircleAvatar(
                               radius: 50,
-                              backgroundImage: NetworkImage(
-                                'https://images.pexels.com/photos/1819650/pexels-photo-1819650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+                              backgroundColor: Colors.grey,
+                              child: Icon(
+                                Icons.person,
+                                size: 50,
+                                color: Colors.white,
                               ),
                             ),
                     ],

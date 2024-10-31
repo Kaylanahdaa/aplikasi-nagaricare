@@ -28,6 +28,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final deviceWidth = MediaQuery.of(context).size.width;
     final ProfileController profileController = Get.put(ProfileController());
     TextEditingController nameController =
         TextEditingController(text: profileController.displayName.value);
@@ -152,9 +153,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                      width: 200,
+                      width: deviceWidth * 0.35,
                       child: ElevatedButton(
                         onPressed: () {
                           Get.back();
@@ -171,7 +173,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       )),
                   const SizedBox(width: 30),
                   SizedBox(
-                      width: 200,
+                      width: deviceWidth * 0.35,
                       child: ElevatedButton(
                         onPressed: () {
                           // TO DO

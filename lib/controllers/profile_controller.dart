@@ -18,6 +18,50 @@ class ProfileController extends GetxController {
     fetchUserProfile();
   }
 
+  // Function to get the user ID from the database based on the email
+  Future<int?> getUserId(String email) async {
+    try {
+      final response = await http.get(
+        Uri.parse("http://192.168.100.110:3000/users"),
+      );
+
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+
+        // Check if data is a List
+        if (data is List) {
+          // Find the user data matching the email
+          final userData = data.firstWhere(
+            (user) => user['email'] == email,
+            orElse: () => null,
+          );
+
+          if (userData != null) {
+            int? userId = int.tryParse(userData['id_user'].toString());
+            print('Retrieved User ID: $userId'); // Debug: log user ID
+            print(
+                'Email associated with User ID: ${userData['email']}'); // Debug: log email
+            return userId;
+          } else {
+            Get.snackbar('Error', 'User not found for email: $email');
+          }
+        } else {
+          print("Expected a List but got: ${data.runtimeType}");
+        }
+      } else {
+        Get.snackbar(
+            'Error', 'Failed to retrieve user ID: ${response.statusCode}');
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'An error occurred: $e');
+      print('Error fetching user ID: $e'); // Debug: log the error
+    }
+    return null;
+  }
+
   Future<void> fetchUserProfile() async {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {

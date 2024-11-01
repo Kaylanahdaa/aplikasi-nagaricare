@@ -16,6 +16,8 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   Uint8List? _image;
+  final TextEditingController emailController = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
 
   void selectImageFromGallery(ProfileController profileController) async {
     await _selectImage(profileController, ImageSource.gallery);
@@ -42,6 +44,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     setState(() {
       _image = null; // Set to null to reset to default avatar
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    _focusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -166,10 +183,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               const SizedBox(height: 20),
               // Editable Email field
               TextField(
+                readOnly: true,
                 controller: emailController,
-                decoration: const InputDecoration(
+                focusNode: _focusNode,
+                decoration: InputDecoration(
                   labelText: 'Your Email',
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey)),
                   border: OutlineInputBorder(),
+                  labelStyle: TextStyle(
+                    color: _focusNode.hasFocus
+                        ? Colors.grey
+                        : Colors.grey, // Change color based on focus
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
@@ -178,7 +204,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 controller: phoneController,
                 decoration: const InputDecoration(
                   labelText: 'Your Phone',
-                  border: OutlineInputBorder(),
+                  focusedBorder: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1)),
                 ),
               ),
               const SizedBox(height: 20),

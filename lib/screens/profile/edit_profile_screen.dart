@@ -17,7 +17,9 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   Uint8List? _image;
   final TextEditingController emailController = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
+  final TextEditingController phoneController = TextEditingController();
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _phoneFocusNode = FocusNode();
 
   void selectImageFromGallery(ProfileController profileController) async {
     await _selectImage(profileController, ImageSource.gallery);
@@ -53,13 +55,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     profileController.fetchUserProfile();
     _focusNode.addListener(() {
       setState(() {});
+    _emailFocusNode.addListener(() {
+      setState(
+          () {}); // Rebuilds the widget to update label colors based on focus
+    });
+    _phoneFocusNode.addListener(() {
+      setState(
+          () {}); // Rebuilds the widget to update label colors based on focus
     });
   }
 
   @override
   void dispose() {
     emailController.dispose();
-    _focusNode.dispose();
+    _emailFocusNode.dispose();
+    phoneController.dispose(); // Corrected from phonecon to phoneController
+    _phoneFocusNode.dispose();
     super.dispose();
   }
 
@@ -169,7 +180,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 200),
+                      constraints: const BoxConstraints(maxWidth: 300),
                       child: TextField(
                         controller: nameController,
                         textAlign: TextAlign.center,
@@ -196,16 +207,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               TextField(
                 readOnly: true,
                 controller: emailController,
-                focusNode: _focusNode,
+                focusNode: _emailFocusNode,
                 decoration: InputDecoration(
                   labelText: 'Your Email',
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  border: OutlineInputBorder(),
+                      borderSide:
+                          BorderSide(color: AppColors.accentColor, width: 2)),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1)),
                   labelStyle: TextStyle(
-                    color: _focusNode.hasFocus
-                        ? Colors.grey
-                        : Colors.grey, // Change color based on focus
+                    color: _emailFocusNode.hasFocus
+                        ? AppColors.accentColor
+                        : AppColors.textColor, // Change color based on focus
                   ),
                 ),
               ),
@@ -213,11 +226,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               // Editable Phone field
               TextField(
                 controller: phoneController,
-                decoration: const InputDecoration(
+                focusNode: _phoneFocusNode,
+                decoration: InputDecoration(
                   labelText: 'Your Phone',
-                  focusedBorder: OutlineInputBorder(),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: AppColors.accentColor, width: 2)),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey, width: 1)),
+                  labelStyle: TextStyle(
+                    color: _phoneFocusNode.hasFocus
+                        ? AppColors.accentColor
+                        : AppColors.textColor, // Change color based on focus
+                  ),
                 ),
               ),
               const SizedBox(height: 20),

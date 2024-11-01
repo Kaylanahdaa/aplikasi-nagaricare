@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 class SignupController extends GetxController {
   static SignupController get instance => Get.find();
+  var isPasswordHidden = true.obs;
 
   // Controllers for input form
   final emailC = TextEditingController();

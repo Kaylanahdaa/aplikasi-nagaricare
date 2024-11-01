@@ -8,6 +8,7 @@ class LoginController extends GetxController {
 
   final email = TextEditingController();
   final password = TextEditingController();
+  var isPasswordHidden = true.obs;
 
   Future<void> login() async {
     try {

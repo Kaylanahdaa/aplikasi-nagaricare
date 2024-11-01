@@ -63,26 +63,42 @@ class SignUpForm extends StatelessWidget {
                   )),
             ),
             const SizedBox(height: 10),
-            TextFormField(
-              controller: controller.passwordC,
-              obscureText: true,
-              decoration: InputDecoration(
-                  floatingLabelStyle: TextStyle(color: AppColors.accentColor),
-                  iconColor: AppColors.secondaryColor,
-                  label: const Text(
-                    'Password',
-                    style: TextStyle(
-                        fontSize: 15, fontFamily: AppFonts.primaryFont),
-                  ),
-                  prefixIcon: const Icon(Icons.fingerprint),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide:
-                        BorderSide(color: AppColors.accentColor, width: 2.5),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15), // Sudut radius 15
-                  )),
+            Obx(
+              () => TextFormField(
+                controller: controller.passwordC,
+                obscureText: controller.isPasswordHidden.value,
+                decoration: InputDecoration(
+                    floatingLabelStyle: TextStyle(color: AppColors.accentColor),
+                    iconColor: AppColors.secondaryColor,
+                    label: const Text(
+                      'Password',
+                      style: TextStyle(
+                          fontSize: 15, fontFamily: AppFonts.primaryFont),
+                    ),
+                    prefixIcon: const Icon(Icons.fingerprint),
+                    suffix: GestureDetector(
+                      child: Icon(
+                        controller.isPasswordHidden.value
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Colors.grey,
+                        size: 20,
+                      ),
+                      onTap: () {
+                        controller.isPasswordHidden.value =
+                            !controller.isPasswordHidden.value;
+                      },
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide:
+                          BorderSide(color: AppColors.accentColor, width: 2.5),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.circular(15), // Sudut radius 15
+                    )),
+              ),
             ),
             const SizedBox(height: 10),
             TextFormField(

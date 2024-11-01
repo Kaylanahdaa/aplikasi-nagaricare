@@ -46,9 +46,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     });
   }
 
+  final ProfileController profileController = Get.put(ProfileController());
   @override
   void initState() {
     super.initState();
+    profileController.fetchUserProfile();
     _focusNode.addListener(() {
       setState(() {});
     });
@@ -102,17 +104,26 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     _image != null
                         ? CircleAvatar(
                             radius: 50,
-                            backgroundImage: MemoryImage(_image!),
+                            backgroundImage: MemoryImage(
+                                _image!), // Display new image as bytes
                           )
-                        : const CircleAvatar(
-                            radius: 50,
-                            backgroundColor: Colors.grey,
-                            child: Icon(
-                              Icons.person,
-                              size: 50,
-                              color: Colors.white,
-                            ),
-                          ),
+                        : profileController.profilePicture.value
+                                .isNotEmpty // Check if URL is available
+                            ? CircleAvatar(
+                                radius: 50,
+                                backgroundImage: NetworkImage(profileController
+                                    .profilePicture
+                                    .value), // Display image from URL
+                              )
+                            : const CircleAvatar(
+                                radius: 50,
+                                backgroundColor: Colors.grey,
+                                child: Icon(
+                                  Icons.person,
+                                  size: 50,
+                                  color: Colors.white,
+                                ),
+                              ),
                     Align(
                       alignment: Alignment.bottomRight,
                       child: Container(

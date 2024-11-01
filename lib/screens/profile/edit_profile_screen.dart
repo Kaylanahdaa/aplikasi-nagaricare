@@ -53,8 +53,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void initState() {
     super.initState();
     profileController.fetchUserProfile();
-    _focusNode.addListener(() {
-      setState(() {});
+    setState(() {});
     _emailFocusNode.addListener(() {
       setState(
           () {}); // Rebuilds the widget to update label colors based on focus

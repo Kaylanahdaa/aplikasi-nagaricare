@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aplikasi_nagaricare/controllers/profile_controller.dart';
 
+import 'widgets/picture_bottom_modal.dart';
+
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
 
@@ -15,15 +17,31 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   Uint8List? _image;
 
-  void selectImage(ProfileController profileController) async {
+  void selectImageFromGallery(ProfileController profileController) async {
+    await _selectImage(profileController, ImageSource.gallery);
+  }
+
+  void openCamera(ProfileController profileController) async {
+    await _selectImage(profileController, ImageSource.camera);
+  }
+
+  Future<void> _selectImage(
+      ProfileController profileController, ImageSource source) async {
     final ImagePicker _picker = ImagePicker();
-    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    XFile? image = await _picker.pickImage(source: source);
     if (image != null) {
       Uint8List imgBytes = await image.readAsBytes();
       setState(() {
         _image = imgBytes;
       });
     }
+  }
+
+  // Function to delete the image and reset to default avatar
+  void deleteImage() {
+    setState(() {
+      _image = null; // Set to null to reset to default avatar
+    });
   }
 
   @override
@@ -89,7 +107,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         child: Center(
                           child: GestureDetector(
-                            onTap: () => selectImage(profileController),
+                            onTap: () => {
+                              PictureBottomModal.show(
+                                context: context,
+                                onSelectGallery: () {
+                                  selectImageFromGallery(profileController);
+                                },
+                                onOpenCamera: () {
+                                  openCamera(profileController);
+                                },
+                                onDelete: () {
+                                  deleteImage();
+                                },
+                              )
+                            },
                             child: const Icon(
                               Icons.add_a_photo,
                               color: AppColors.backgroundColor,

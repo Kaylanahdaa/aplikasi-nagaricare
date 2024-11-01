@@ -87,6 +87,12 @@ class ProfileController extends GetxController {
             if (userData != null) {
               name.value = userData['name'] ?? '';
               phone.value = userData['phone'] ?? '';
+              profilePicture.value = userData['profile_picture']
+                      .startsWith('http')
+                  ? userData['profile_picture']
+                  : 'http://192.168.100.110:3000/users/profilepicture/${userData['id_user']}'; // Construct URL based on user ID
+              print(
+                  'Profile Picture URL: ${profilePicture.value}'); // Log the fetched URL
               // Log data yang baru diambil
               print('Fetched updated user data: $userData');
             }
@@ -95,6 +101,22 @@ class ProfileController extends GetxController {
       } catch (e) {
         print("Error fetching user profile: $e");
       }
+    }
+  }
+
+  Future<void> fetchProfilePicture(String userId) async {
+    try {
+      final response = await http.get(Uri.parse(
+          'http://192.168.100.110:3000/users/profilepicture/$userId'));
+
+      if (response.statusCode == 200) {
+        profilePicture.value =
+            'http://192.168.100.110:3000/users/profilepicture/$userId';
+      } else {
+        profilePicture.value = ''; // Set default or empty path if no image
+      }
+    } catch (e) {
+      print("Error fetching profile picture: $e");
     }
   }
 

@@ -123,22 +123,31 @@ class ProfileController extends GetxController {
   // Function to edit user data
   Future<void> editUser() async {
     final user = FirebaseAuth.instance.currentUser;
-    final email = user?.email ?? ''; // Get email from logged-in user
+    final currentEmail = user?.email ?? ''; // Get current email
 
     if (name.isNotEmpty && email.isNotEmpty && phone.isNotEmpty) {
-      print('Fetching user ID for email: $email'); // Debug: log the email
-      final userId = await getUserId(email);
+      print(
+          'Fetching user ID for email: $currentEmail'); // Debug: log current email
+      final userId = await getUserId(currentEmail);
 
       if (userId != null) {
         print(
             'User ID fetched successfully: $userId'); // Debug: log the fetched user ID
         try {
+          // Check if email has changed
+          if (currentEmail != email.value) {
+            // Update email in Firebase Auth with verification
+            await user?.verifyBeforeUpdateEmail(email.value);
+            print("Firebase email verification sent to new email");
+          }
+
+          // Update user data in the database
           final response = await http.put(
             Uri.parse('http://192.168.100.110:3000/users/$userId'),
             headers: {'Content-Type': 'application/json'},
             body: jsonEncode({
               "name": name.value,
-              "email": email,
+              "email": email.value, // New email for the database
               "phone": phone.value.isEmpty ? "" : phone.value,
               "profile_picture": profilePicture.isEmpty ? "" : profilePicture,
             }),
@@ -147,7 +156,7 @@ class ProfileController extends GetxController {
           if (response.statusCode == 200 || response.statusCode == 204) {
             // Success logic here
             FocusScope.of(Get.context!).unfocus();
-            Get.back(); // Close modal after successful update user data
+            Get.back(); // Close modal after successful update
 
             Get.snackbar(
               '',
@@ -184,6 +193,7 @@ class ProfileController extends GetxController {
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               duration: Duration(seconds: 3),
             );
+
             fetchUserProfile(); // Fetch updated user profile
           } else {
             log("Failed to update user profile with status: ${response.statusCode}");
@@ -225,6 +235,7 @@ class ProfileController extends GetxController {
           }
         } catch (e) {
           Get.snackbar('Error', 'An error occurred: $e');
+          print('Error updating user profile: $e');
         }
       } else {
         Get.snackbar('Error', 'User ID is null');

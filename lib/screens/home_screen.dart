@@ -18,6 +18,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomePageController controller = Get.put(HomePageController());
     final deviceWidth = MediaQuery.of(context).size.width;
+    final deviceHeight = MediaQuery.of(context).size.height;
 
     // Fetch posts when the widget is built
     controller.fetchPostsByCurrentUser();
@@ -74,6 +75,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Container(
+                height: deviceHeight / 1.4,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(

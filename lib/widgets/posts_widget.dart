@@ -24,45 +24,42 @@ class _PostsWidgetState extends State<PostsWidget> {
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
+    final deviceHeight = MediaQuery.of(context).size.height;
     return Obx(() {
       if (controller.posts.isEmpty) {
         return Center(
-          child: Container(
-            height: deviceWidth * 0.7,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: 30),
-                Column(
-                  children: [
-                    Icon(
-                      Icons.post_add,
-                      color: Colors.grey,
-                      size: 80,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
-                Text(
-                  'Anda belum memiliki post',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[700],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Column(
+                children: [
+                  Icon(
+                    Icons.post_add,
+                    color: Colors.grey,
+                    size: 80,
                   ),
+                ],
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Anda belum memiliki post',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[700],
                 ),
-                SizedBox(height: 10),
-                Text(
-                  'Mulai untuk post sesuatu',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey[600],
-                  ),
-                  textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Mulai untuk post sesuatu',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey[600],
                 ),
-              ],
-            ),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
         );
       }

@@ -162,18 +162,27 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
+                                backgroundColor: AppColors.backgroundColor,
                                 title: const Text("Konfirmasi Logout"),
                                 content: const Text(
                                     "Apakah anda yakin ingin logout?"),
                                 actions: [
                                   TextButton(
-                                    child: const Text("Tidak"),
+                                    child: const Text(
+                                      "Tidak",
+                                      style: TextStyle(
+                                          color: AppColors.alertColor),
+                                    ),
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
                                   ),
                                   TextButton(
-                                    child: const Text("Iya"),
+                                    child: const Text(
+                                      "Iya",
+                                      style: TextStyle(
+                                          color: AppColors.accentColor),
+                                    ),
                                     onPressed: () {
                                       AuthenticationRepository.instance
                                           .logout()

@@ -95,6 +95,7 @@ class ProfileController extends GetxController {
                   'Profile Picture URL: ${profilePicture.value}'); // Log the fetched URL
               // Log data yang baru diambil
               print('Fetched updated user data: $userData');
+              update();
             }
           }
         }
@@ -102,6 +103,7 @@ class ProfileController extends GetxController {
         print("Error fetching user profile: $e");
       }
     }
+    update();
   }
 
   // Future<void> fetchProfilePicture(String userId) async {
@@ -233,18 +235,18 @@ class ProfileController extends GetxController {
             // Success logic here
             FocusScope.of(Get.context!).unfocus();
             Get.back(); // Close modal after successful update
-
+            update();
             Get.snackbar(
               '',
               '',
               titleText: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.check_circle_outline,
                     color: Colors.green,
                     size: 24,
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
                     'Success',
                     style: TextStyle(
@@ -255,7 +257,7 @@ class ProfileController extends GetxController {
                   ),
                 ],
               ),
-              messageText: Text(
+              messageText: const Text(
                 'Profil berhasil diperbarui!',
                 style: TextStyle(
                   fontSize: 14,
@@ -265,9 +267,9 @@ class ProfileController extends GetxController {
               snackPosition: SnackPosition.TOP,
               backgroundColor: Colors.white,
               borderRadius: 12,
-              margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              duration: Duration(seconds: 3),
+              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              duration: const Duration(seconds: 3),
             );
 
             fetchUserProfile(); // Fetch updated user profile
@@ -278,12 +280,12 @@ class ProfileController extends GetxController {
               '',
               titleText: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.cancel_outlined,
                     color: Colors.red,
                     size: 24,
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
                     'Error',
                     style: TextStyle(
@@ -294,7 +296,7 @@ class ProfileController extends GetxController {
                   ),
                 ],
               ),
-              messageText: Text(
+              messageText: const Text(
                 'Gagal memperbarui profil',
                 style: TextStyle(
                   fontSize: 14,
@@ -304,9 +306,9 @@ class ProfileController extends GetxController {
               snackPosition: SnackPosition.TOP,
               backgroundColor: Colors.white,
               borderRadius: 12,
-              margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              duration: Duration(seconds: 3),
+              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              duration: const Duration(seconds: 3),
             );
           }
         } catch (e) {
@@ -319,6 +321,7 @@ class ProfileController extends GetxController {
     } else {
       Get.snackbar('Error', 'Title and content are required');
     }
+    update();
   }
 }
 

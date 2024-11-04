@@ -88,10 +88,10 @@ class BottomBarWidget extends StatelessWidget {
           buildBottomNavigationMenu(context, bottomBarController),
       body: Obx(() => IndexedStack(
             index: bottomBarController.tabIndex.value,
-            children: [
-              const MyProfileScreen(),
+            children: const [
+              ProfileScreen(),
               HomePage(),
-              const HelpScreen(),
+              HelpScreen(),
               // SettingsPage(),
             ],
           )),

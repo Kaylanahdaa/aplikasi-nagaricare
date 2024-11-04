@@ -75,7 +75,6 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Container(
-                height: deviceHeight / 1.4,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(

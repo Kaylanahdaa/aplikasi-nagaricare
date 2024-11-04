@@ -23,10 +23,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   void selectImageFromGallery(ProfileController profileController) async {
     await _selectImage(profileController, ImageSource.gallery);
+    profileController
+        .changePicture(); // Call changePicture to upload immediately after selecting
   }
 
   void openCamera(ProfileController profileController) async {
     await _selectImage(profileController, ImageSource.camera);
+    profileController
+        .changePicture(); // Call changePicture to upload immediately after capturing
   }
 
   Future<void> _selectImage(
@@ -38,6 +42,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       setState(() {
         _image = imgBytes;
       });
+      profileController.selectedProfImage.value =
+          image; // Update ProfileController's selected image
     }
   }
 
@@ -265,14 +271,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   SizedBox(
                       width: deviceWidth * 0.35,
                       child: ElevatedButton(
-                        onPressed: () {
-                          // Log untuk memastikan data yang dikirim
+                        onPressed: () async {
+                          // Log for verifying sent data
                           print("Updating profile with: ");
                           print("Name: ${nameController.text}");
                           print("Email: ${emailController.text}");
                           print("Phone: ${phoneController.text}");
 
-                          // Update observables dan panggil metode edit
+                          // Update observables and call edit method
                           profileController.name.value =
                               nameController.text.trim();
                           profileController.email.value =
@@ -280,6 +286,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           profileController.phone.value =
                               phoneController.text.trim();
 
+                          // Upload profile picture first if there's a new one
+                          await profileController.changePicture();
+
+                          // Then save other profile changes
                           profileController.editUser();
                         },
                         style: ElevatedButton.styleFrom(

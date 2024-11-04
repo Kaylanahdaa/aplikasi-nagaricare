@@ -23,7 +23,6 @@ class _PostsWidgetState extends State<PostsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     return Obx(() {
       if (controller.posts.isEmpty) {
@@ -59,6 +58,7 @@ class _PostsWidgetState extends State<PostsWidget> {
                 ),
                 textAlign: TextAlign.center,
               ),
+              SizedBox(height: deviceHeight / 5),
             ],
           ),
         );

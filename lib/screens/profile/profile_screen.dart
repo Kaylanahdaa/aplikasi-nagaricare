@@ -45,8 +45,8 @@ class ProfileScreen extends GetView {
                       ctrl.profilePicture.value.isNotEmpty
                           ? CircleAvatar(
                               radius: 50,
-                              backgroundImage:
-                                  NetworkImage(ctrl.profilePicture.value),
+                              backgroundImage: NetworkImage(
+                                  '${ctrl.profilePicture.value}?v=${DateTime.now().millisecondsSinceEpoch}'),
                             )
                           : const CircleAvatar(
                               radius: 50,
@@ -172,7 +172,6 @@ class ProfileScreen extends GetView {
                                           .logout()
                                           .then(
                                         (value) {
-                                          Navigator.of(context).pop();
                                           Get.offAll(
                                               () => const WelcomeScreen());
                                         },

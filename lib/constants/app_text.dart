@@ -7,7 +7,7 @@ const String alreadyHaveAnAccount = 'Sudah memiliki akun? ';
 const String dontHaveAnAccount = 'Belum memiliki akun? ';
 
 // -- Forget Password
-const String forgetPassword = 'Lupakan Sandi';
+const String forgetPassword = 'Forgot Password';
 const String titleForgetPassword = 'Make Selection!';
 const String subtitleForgetPassword =
     'Select one of the options given below to reset your password';

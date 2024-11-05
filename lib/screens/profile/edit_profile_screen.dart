@@ -1,4 +1,8 @@
 import 'dart:typed_data';
+import 'package:aplikasi_nagaricare/screens/home_screen.dart';
+import 'package:aplikasi_nagaricare/screens/profile/profile_screen.dart';
+import 'package:aplikasi_nagaricare/widgets/bottom_bar_widget.dart';
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -256,7 +260,40 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         width: deviceWidth * 0.35,
                         child: ElevatedButton(
                           onPressed: () {
-                            Get.back();
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  backgroundColor: AppColors.backgroundColor,
+                                  title: const Text("Cancel Edit Profile? "),
+                                  content: const Text(
+                                      "You'll lose any unsaved work"),
+                                  actions: [
+                                    TextButton(
+                                      child: const Text(
+                                        "Tidak",
+                                        style: TextStyle(
+                                            color: AppColors.alertColor),
+                                      ),
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: const Text(
+                                        "Iya",
+                                        style: TextStyle(
+                                            color: AppColors.accentColor),
+                                      ),
+                                      onPressed: () {
+                                        Get.back();
+                                        Get.back();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.alertColor,
@@ -285,7 +322,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ctrl.phone.value = phoneController.text.trim();
 
                             // Upload profile picture first if there's a new one
-                            await ctrl.changePicture();
+                            // await ctrl.changePicture();
 
                             // Then save other profile changes
                             ctrl.editUser();

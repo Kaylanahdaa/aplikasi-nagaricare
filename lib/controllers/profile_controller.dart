@@ -234,7 +234,10 @@ class ProfileController extends GetxController {
           if (response.statusCode == 200 || response.statusCode == 204) {
             // Success logic here
             FocusScope.of(Get.context!).unfocus();
-            Get.back(); // Close modal after successful update
+            update();
+            print("Navigating back to previous screen...");
+            Get.back();
+// Close modal after successful update
             update();
             Get.snackbar(
               '',

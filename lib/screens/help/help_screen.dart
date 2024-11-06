@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'widgets/floating_chat_widget.dart';
+
 class HelpScreen extends StatelessWidget {
   const HelpScreen({super.key});
   // Helper function to launch a URL
@@ -81,6 +83,8 @@ class HelpScreen extends StatelessWidget {
             FAQPage(),
             contactPage(),
           ]),
+          floatingActionButton: FloatingChatWidget(),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         ));
   }
 

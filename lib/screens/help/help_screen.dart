@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:aplikasi_nagaricare/controllers/help_screen_controller.dart';
-import 'package:aplikasi_nagaricare/controllers/socket_client.dart';
+import 'package:aplikasi_nagaricare/controllers/chat_controller.dart';
 
 class HelpScreen extends StatefulWidget {
   const HelpScreen({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class HelpScreen extends StatefulWidget {
 }
 
 class _HelpScreenState extends State<HelpScreen> {
-  final SocketClient socketClient = Get.put(SocketClient());
+  final ChatController socketClient = Get.put(ChatController());
   final HelpScreenController _controller = Get.put(HelpScreenController());
   final DraggableScrollableController _sheetController =
       DraggableScrollableController();

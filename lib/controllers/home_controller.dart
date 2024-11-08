@@ -38,7 +38,7 @@ class HomePageController extends GetxController {
                   'email': email,
                 });
               }).toList();
-              log("Fetched posts for user ID $id_user: ${response.body}");
+              // log("Fetched posts for user ID $id_user: ${response.body}");
             } else {
               log("Failed to load posts with status: ${response.statusCode}");
             }
@@ -65,7 +65,7 @@ class HomePageController extends GetxController {
 
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
-        log("Fetched user data: $data");
+        // log("Fetched user data: $data");
 
         final userData = data.firstWhere(
           (user) => user['email'] == email,

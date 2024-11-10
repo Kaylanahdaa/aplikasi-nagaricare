@@ -69,7 +69,7 @@ flutter_native_splash:
   android_12:
     color: "#1A66B2"
     image: assets/images/logo_nagaricare_removebg.png
-    branding: assets/images/logo_banknagari_branding
+    branding: assets/images/logo_banknagari_branding.png
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -95,7 +95,7 @@ flutter:
     - assets/images/author6.jpg
     - assets/images/author7.jpg
     - assets/images/logo_banknagari.png
-    - assets/images/logo_banknagari_branding
+    - assets/images/logo_banknagari_branding.png
     - assets/images/logo_nagaricare.png
     - assets/images/logo_nagaricare_removebg.png
     - assets/images/logo_nagaricare_android.png

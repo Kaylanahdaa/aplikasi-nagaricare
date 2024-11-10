@@ -74,112 +74,116 @@ class _PostsWidgetState extends State<PostsWidget> {
           ? sortedPosts.take(widget.postLimit!).toList()
           : sortedPosts;
 
-      return Column(
-        children: limitedPosts.map((post) {
-          DateTime createdAtDateTime = DateTime.parse(post.createdAt);
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => DetailPostScreen(idPosts: post.idPosts),
-                ),
-              );
-            },
-            child: Container(
-              height: 180,
-              margin: const EdgeInsets.all(15.0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26.withOpacity(0.05),
-                    offset: const Offset(0.0, 6.0),
-                    blurRadius: 10.0,
-                    spreadRadius: 0.10,
+      return Container(
+        child: Column(
+          children: limitedPosts.map((post) {
+            DateTime createdAtDateTime = DateTime.parse(post.createdAt);
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => DetailPostScreen(idPosts: post.idPosts),
                   ),
-                ],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 70,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.65,
-                                      child: Text(
-                                        post.title,
-                                        style: const TextStyle(
-                                          overflow: TextOverflow.ellipsis,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          letterSpacing: .4,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 2.0),
-                                    Row(
-                                      children: <Widget>[
-                                        Text(
-                                          post.email,
-                                          style: TextStyle(
-                                              color:
-                                                  Colors.red.withOpacity(0.6)),
-                                        ),
-                                        const SizedBox(width: 15),
-                                        Text(
-                                          timeago.format(createdAtDateTime,
-                                              locale: 'en-short'),
-                                          style: TextStyle(
-                                              color:
-                                                  Colors.grey.withOpacity(0.6)),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: Center(
-                        child: Text(
-                          post.content.length > 80
-                              ? "${post.content.substring(0, 80)}.."
-                              : post.content,
-                          style: TextStyle(
-                            color: Colors.grey.withOpacity(0.8),
-                            fontSize: 16,
-                            letterSpacing: .3,
-                          ),
-                        ),
-                      ),
+                );
+              },
+              child: Container(
+                height: 180,
+                margin: const EdgeInsets.all(15.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26.withOpacity(0.05),
+                      offset: const Offset(0.0, 6.0),
+                      blurRadius: 10.0,
+                      spreadRadius: 0.10,
                     ),
                   ],
                 ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 70,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.65,
+                                        child: Text(
+                                          post.title,
+                                          style: const TextStyle(
+                                            overflow: TextOverflow.ellipsis,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: .4,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 2.0),
+                                      Row(
+                                        children: <Widget>[
+                                          Text(
+                                            post.email,
+                                            style: TextStyle(
+                                                color: Colors.red
+                                                    .withOpacity(0.6)),
+                                          ),
+                                          const SizedBox(width: 15),
+                                          Text(
+                                            timeago.format(createdAtDateTime,
+                                                locale: 'en-short'),
+                                            style: TextStyle(
+                                                color: Colors.grey
+                                                    .withOpacity(0.6)),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 50,
+                        child: Center(
+                          child: Text(
+                            post.content.length > 80
+                                ? "${post.content.substring(0, 80)}.."
+                                : post.content,
+                            style: TextStyle(
+                              color: Colors.grey.withOpacity(0.8),
+                              fontSize: 16,
+                              letterSpacing: .3,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-          );
-        }).toList(),
+            );
+          }).toList(),
+        ),
       );
     });
   }

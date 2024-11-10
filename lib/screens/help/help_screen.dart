@@ -25,6 +25,8 @@ class _HelpScreenState extends State<HelpScreen> {
   bool isChatting = false;
   late IO.Socket _socket; // Initialize _socket here
   bool isSocketConnected = false; // To track socket connection
+  // Tambahkan list untuk menyimpan profil-profil yang sudah di klik
+  List<Map<String, dynamic>> chatProfiles = [];
 
   @override
   void initState() {
@@ -34,7 +36,7 @@ class _HelpScreenState extends State<HelpScreen> {
 
   // Function to initialize socket connection
   void _initializeSocket() {
-    _socket = IO.io('http://192.168.100.110:8080', <String, dynamic>{
+    _socket = IO.io('http://172.20.10.9:8080', <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': false,
     });
@@ -76,12 +78,6 @@ class _HelpScreenState extends State<HelpScreen> {
       final Uri _fallbackUrl = Uri.parse(fallbackUrl);
       await launchUrl(_fallbackUrl, mode: LaunchMode.externalApplication);
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _initializeSocket();
   }
 
   @override
@@ -258,19 +254,27 @@ class _HelpScreenState extends State<HelpScreen> {
               }
             }),
             Divider(),
-            // List view untuk menampilkan daftar chat aktif
-            ..._activeChats.map((chatUser) => ListTile(
-                  title: Text(chatUser['username']),
-                  subtitle: Text(chatUser['email']),
-                  leading: CircleAvatar(
-                    backgroundImage: NetworkImage(chatUser['profile']),
-                  ),
-                  onTap: () {
-                    setState(() {
-                      isChatting = true;
-                    });
-                  },
-                )),
+            // SizedBox(
+            //   // Specify a height for the ListView.builder
+            //   child: ListView.builder(
+            //     itemCount: chatProfiles.length,
+            //     itemBuilder: (context, index) {
+            //       final profile = chatProfiles[index];
+            //       return ListTile(
+            //         leading: CircleAvatar(
+            //           backgroundImage: NetworkImage(profile['profile']),
+            //         ),
+            //         title: Text(profile['username'] ?? 'Unknown User'),
+            //         subtitle: Text(profile['email']),
+            //         onTap: () {
+            //           setState(() {
+            //             isChatting = true;
+            //           });
+            //         },
+            //       );
+            //     },
+            //   ),
+            // ),
           ],
         ),
       ),

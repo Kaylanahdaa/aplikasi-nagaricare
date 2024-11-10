@@ -33,7 +33,7 @@ class BottomBarWidget extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
               icon: Container(
-                margin: const EdgeInsets.only(bottom: 8, top: 8),
+                margin: const EdgeInsets.only(bottom: 7),
                 child: const Icon(
                   Ionicons.person,
                   size: 20.0,

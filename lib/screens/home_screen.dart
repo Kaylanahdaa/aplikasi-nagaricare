@@ -20,8 +20,7 @@ class HomePage extends StatelessWidget {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
 
-    // Fetch posts when the widget is built
-    controller.fetchPostsByCurrentUser();
+    // Return the FutureBuilder to handle asynchronous post fetching
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () => showPostModal(context),
@@ -39,106 +38,125 @@ class HomePage extends StatelessWidget {
             // Fetch the new posts when the user pulls to refresh
             await controller.fetchPostsByCurrentUser();
           },
-          child: ListView(
-            children: <Widget>[
-              Container(
-                height: 100,
-                decoration: const BoxDecoration(color: AppColors.accentColor),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        children: [
-                          Image(
-                            image: AssetImage(logoApp),
-                            width: deviceWidth *
-                                0.20, // Set logo width as 25% of device width
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            "Forum NagariCare",
-                            style: TextStyle(
-                              fontFamily: AppFonts.primaryFont,
-                              fontSize: deviceWidth *
-                                  0.070, // Set font size as 7.5% of device width
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(35.0),
-                    topRight: Radius.circular(35.0),
-                  ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          child: FutureBuilder<void>(
+            future: controller
+                .fetchPostsByCurrentUser(), // Fetch posts when the page is built
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                // Show loading indicator while waiting for posts
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                // Show an error message if there's an error fetching the posts
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else {
+                return ListView(
                   children: <Widget>[
-                    const Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: Text(
-                        "Latest Bank Nagari Update",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                    Container(
+                      height: 100,
+                      decoration:
+                          const BoxDecoration(color: AppColors.accentColor),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Row(
+                              children: [
+                                Image(
+                                  image: AssetImage(logoApp),
+                                  width: deviceWidth *
+                                      0.20, // Set logo width as 25% of device width
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  "Forum NagariCare",
+                                  style: TextStyle(
+                                    fontFamily: AppFonts.primaryFont,
+                                    fontSize: deviceWidth *
+                                        0.070, // Set font size as 7.5% of device width
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    const CarouselMenu(),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20.0, top: 20.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "Your Posts",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(35.0),
+                          topRight: Radius.circular(35.0),
+                        ),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          const Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child: Text(
+                              "Latest Bank Nagari Update",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => const AllPostScreen(),
+                          const CarouselMenu(),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, top: 20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "Your Posts",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
                                   ),
-                                );
-                              },
-                              child: const Text(
-                                "See All",
-                                style: TextStyle(color: AppColors.accentColor),
-                              ))
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => const AllPostScreen(),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text(
+                                    "See All",
+                                    style:
+                                        TextStyle(color: AppColors.accentColor),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          // Display the first 3 posts without any filtering
+                          GetBuilder<HomePageController>(
+                            builder: (_) {
+                              return PostsWidget(
+                                postLimit: 3,
+                                posts:
+                                    controller.posts, // Use posts directly here
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),
-                    // Display the first 3 posts without any filtering
-                    GetBuilder<HomePageController>(
-                      builder: (_) {
-                        return PostsWidget(
-                          postLimit: 3,
-                          posts: controller.posts, // Use posts directly here
-                        );
-                      },
-                    )
                   ],
-                ),
-              ),
-            ],
+                );
+              }
+            },
           ),
         ),
       ),

@@ -67,7 +67,7 @@ flutter_native_splash:
   branding: assets/images/logo_banknagari.png
 
   android_12:
-    color: "#F1A66B2"
+    color: "#6EACDA"
     image: assets/images/logo_nagaricare_android_splashscreen.png
     branding: assets/images/logo_banknagari_branding.png
 

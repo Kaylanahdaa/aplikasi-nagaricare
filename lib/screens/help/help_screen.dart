@@ -225,11 +225,16 @@ class _HelpScreenState extends State<HelpScreen> {
               final resultMessage = _controller.searchResult.value;
 
               if (user != null) {
+                // Parse the 'id_user' as an integer
+                final int userId = int.tryParse(user['id_user'].toString()) ??
+                    0; // Default to 0 if it fails
+
                 return GestureDetector(
                   onTap: () async {
                     // Check if socket is connected before emitting an event
                     if (_socket.connected) {
-                      _socket.emit('joinRoom', int.parse(user['id_user']));
+                      _socket.emit(
+                          'joinRoom', userId); // Emit the parsed userId
                       setState(() {
                         isChatting = true;
                       });
@@ -253,6 +258,7 @@ class _HelpScreenState extends State<HelpScreen> {
                 return Container();
               }
             }),
+
             Divider(),
             // SizedBox(
             //   // Specify a height for the ListView.builder

@@ -17,26 +17,42 @@ class HelpScreen extends StatefulWidget {
 }
 
 class _HelpScreenState extends State<HelpScreen> {
-  final ChatController socketClient = Get.put(ChatController());
+  final ChatController chatController = Get.put(ChatController());
   final HelpScreenController _controller = Get.put(HelpScreenController());
   final DraggableScrollableController _sheetController =
       DraggableScrollableController();
-  late IO.Socket _socket;
   bool isChatting = false;
+  late IO.Socket _socket; // Initialize _socket here
+  bool isSocketConnected = false; // To track socket connection
 
   @override
   void initState() {
     super.initState();
-    _initializeSocket();
+    _initializeSocket(); // Ensure socket is initialized before use
   }
 
+  // Function to initialize socket connection
   void _initializeSocket() {
-    _socket = IO.io('http://192.168.100.110:3000', <String, dynamic>{
+    _socket = IO.io('http://192.168.100.110:8080', <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': false,
     });
+
     _socket.connect();
-    _socket.on('connect', (_) => print('Connected to Socket.IO server'));
+
+    _socket.on('connect', (_) {
+      print('Connected to Socket.IO server');
+      setState(() {
+        isSocketConnected = true; // Mark socket as connected
+      });
+    });
+
+    _socket.on('disconnect', (_) {
+      print('Disconnected from Socket.IO server');
+      setState(() {
+        isSocketConnected = false; // Mark socket as disconnected
+      });
+    });
   }
 
   @override
@@ -74,7 +90,7 @@ class _HelpScreenState extends State<HelpScreen> {
               builder: (context, scrollController) {
                 return isChatting
                     ? ChatPage(
-                        socket: _socket,
+                        socket: _socket, // Pass the socket to the chat page
                         scrollController: scrollController,
                         onCloseChat: () {
                           setState(() {
@@ -83,6 +99,7 @@ class _HelpScreenState extends State<HelpScreen> {
                         },
                         username:
                             _controller.userData.value?['username'] ?? 'User',
+                        messages: [],
                       )
                     : _buildProfileSearch(scrollController);
               },
@@ -183,21 +200,27 @@ class _HelpScreenState extends State<HelpScreen> {
               final resultMessage = _controller.searchResult.value;
 
               if (user != null) {
-                return ListTile(
-                  onTap: () {
-                    _socket.emit('joinRoom',
-                        user['id_user']); // Emit join event to server
-                    setState(() {
-                      isChatting = true; // Switch to chat mode
-                    });
+                return GestureDetector(
+                  onTap: () async {
+                    // Check if socket is connected before emitting an event
+                    if (_socket.connected) {
+                      _socket.emit('joinRoom', int.parse(user['id_user']));
+                      setState(() {
+                        isChatting = true;
+                      });
+                    } else {
+                      print("Socket is not connected");
+                    }
                   },
-                  leading: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      '${user['profile']}?v=${DateTime.now().millisecondsSinceEpoch}',
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                        '${user['profile']}?v=${DateTime.now().millisecondsSinceEpoch}',
+                      ),
                     ),
+                    title: Text(user['username'] ?? 'Unknown User'),
+                    subtitle: Text(user['email'] ?? 'No Email'),
                   ),
-                  title: Text(user['username'] ?? 'Unknown User'),
-                  subtitle: Text(user['email'] ?? 'No Email'),
                 );
               } else if (resultMessage.isNotEmpty) {
                 return Center(child: Text(resultMessage));
@@ -213,7 +236,7 @@ class _HelpScreenState extends State<HelpScreen> {
 
   @override
   void dispose() {
-    _socket.dispose();
+    _socket.dispose(); // Dispose of the socket when the widget is disposed
     super.dispose();
   }
 }

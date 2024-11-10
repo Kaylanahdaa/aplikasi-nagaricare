@@ -2,16 +2,13 @@ import 'package:aplikasi_nagaricare/constants/app_colors.dart';
 import 'package:aplikasi_nagaricare/screens/help/widgets/contact_widget.dart';
 import 'package:aplikasi_nagaricare/screens/help/widgets/faq_widget.dart';
 import 'package:aplikasi_nagaricare/widgets/chat_page.dart';
-import 'package:aplikasi_nagaricare/widgets/faq_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:aplikasi_nagaricare/controllers/help_screen_controller.dart';
 import 'package:aplikasi_nagaricare/controllers/chat_controller.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HelpScreen extends StatefulWidget {
   const HelpScreen({Key? key}) : super(key: key);
@@ -110,7 +107,7 @@ class _HelpScreenState extends State<HelpScreen> {
           children: [
             TabBarView(
               children: [
-                FaqWidget(),
+                FAQPage(),
                 ContactWidget(),
               ],
             ),
@@ -284,150 +281,5 @@ class _HelpScreenState extends State<HelpScreen> {
   void dispose() {
     _socket.dispose(); // Dispose of the socket when the widget is disposed
     super.dispose();
-  }
-
-  // Container FAQPage() {
-  //   return Container(
-  //     margin: EdgeInsets.all(16),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         _textField(),
-  //         SizedBox(height: 10),
-  //         ExpansionTile(
-  //           title: Text('How do I reset my password?'),
-  //           children: [
-  //             Padding(
-  //               padding: const EdgeInsets.all(8.0),
-  //               child: Text(
-  //                 'To reset your password, go to the login screen, click "Forgot Password", and follow the instructions sent to your email.',
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  TextField _textField() {
-    return TextField(
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: Colors.white,
-        contentPadding: EdgeInsets.all(15),
-        hintText: 'Search for Help',
-        hintStyle: TextStyle(
-          color: Color(0xffDDDADA),
-          fontSize: 14,
-        ),
-        prefixIcon: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Icon(Icons.search),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide.none,
-        ),
-      ),
-    );
-  }
-
-  Container contactPage() {
-    return Container(
-      margin: EdgeInsets.all(40),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            margin: EdgeInsets.only(bottom: 10), // Space between tiles
-            decoration: BoxDecoration(
-              color: Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(10), // Rounded corners
-            ),
-            child: ListTile(
-              onTap: () => {
-                _launchUrl('tel:+123456789'),
-              },
-              leading: Icon(Icons.call),
-              title: Text('Customer Services'),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(bottom: 10), // Space between tiles
-            decoration: BoxDecoration(
-              color: Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(10), // Rounded corners
-            ),
-            child: ListTile(
-              onTap: () => {
-                _launchApp(
-                    'whatsapp://send?phone=123456789', // WhatsApp direct app link
-                    'https://play.google.com/store/apps/details?id=com.whatsapp')
-              },
-              leading: Icon(Ionicons.logo_whatsapp),
-              title: Text('WhatsApp'),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(bottom: 10), // Space between tiles
-            decoration: BoxDecoration(
-              color: Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(10), // Rounded corners
-            ),
-            child: ListTile(
-              onTap: () => {_launchUrl('https://www.banknagari.co.id/')},
-              leading: Icon(Icons.web),
-              title: Text('Website'),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(bottom: 10), // Space between tiles
-            decoration: BoxDecoration(
-              color: Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(10), // Rounded corners
-            ),
-            child: ListTile(
-              onTap: () => {
-                'fb://profile/your_facebook_id',
-                'https://www.facebook.com/your_page_name'
-              },
-              leading: Icon(Ionicons.logo_facebook),
-              title: Text('Facebook'),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(bottom: 10), // Space between tiles
-            decoration: BoxDecoration(
-              color: Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(10), // Rounded corners
-            ),
-            child: ListTile(
-              onTap: () => {
-                _launchApp('twitter://user?screen_name=example_user',
-                    'https://twitter.com/example_user')
-              },
-              leading: Icon(Ionicons.logo_twitter),
-              title: Text('Twitter'),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(bottom: 10), // Space between tiles
-            decoration: BoxDecoration(
-              color: Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(10), // Rounded corners
-            ),
-            child: ListTile(
-              onTap: () => {
-                _launchApp('instagram://user?username=bank_nagari',
-                    'https://www.instagram.com/bank_nagari')
-              },
-              leading: Icon(Ionicons.logo_instagram),
-              title: Text('Instagram'),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }

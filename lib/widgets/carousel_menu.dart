@@ -27,7 +27,7 @@ class CarouselMenu extends StatelessWidget {
               autoPlay: true,
               enlargeCenterPage: true,
               enableInfiniteScroll: true,
-              aspectRatio: 16 / 8,
+              aspectRatio: 16 / 7,
               viewportFraction: .95,
               onPageChanged: (index, reason) {
                 controller.changePage(index);
@@ -46,14 +46,14 @@ class CarouselMenu extends StatelessWidget {
                 },
                 child: CachedNetworkImage(
                   imageUrl: imagePath,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
                       color: Theme.of(context).dialogBackgroundColor,
                       borderRadius: BorderRadius.circular(24),
                       image: DecorationImage(
                         image: imageProvider,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ),

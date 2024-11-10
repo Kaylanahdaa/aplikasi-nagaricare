@@ -1,76 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:aplikasi_nagaricare/constants/app_colors.dart';
+import '../../../models/faq_model.dart';
+import '../../../data/faq_data.dart';
 
-class FaqWidget extends StatelessWidget {
+class FAQPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _textField(),
-          SizedBox(height: 10),
-          // Example Question 1
-          ExpansionTile(
-            title: Text('How do I reset my password?'),
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'To reset your password, go to the login screen, click "Forgot Password", and follow the instructions sent to your email.',
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: ListView.builder(
+        itemCount: faqListData.length,
+        itemBuilder: (context, index) {
+          final FAQ faq = faqListData[index];
+          return Card(
+            color: AppColors.accentColor,
+            elevation: 0,
+            margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 8.0),
+            child: ExpansionTile(
+              tilePadding: EdgeInsets.symmetric(horizontal: 16.0),
+              title: Text(
+                faq.question,
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
                 ),
               ),
-            ],
-          ),
-          // Example Question 2
-          ExpansionTile(
-            title: Text('How do I contact customer support?'),
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'You can contact customer support through the "Contact Us" tab or call us directly at +123456789.',
+              children: [
+                Container(
+                  color: AppColors.accentColor,
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    faq.answer,
+                    style: TextStyle(color: Colors.white70),
+                  ),
                 ),
-              ),
-            ],
-          ),
-          // Example Question 3
-          ExpansionTile(
-            title: Text('How do I update my profile information?'),
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'You can update your profile information in the settings menu after logging into your account.',
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Helper function to create the search text field
-  Widget _textField() {
-    return TextField(
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: Colors.white,
-        contentPadding: EdgeInsets.all(15),
-        hintText: 'Search for Help',
-        hintStyle: TextStyle(
-          color: Color(0xffDDDADA),
-          fontSize: 14,
-        ),
-        prefixIcon: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Icon(Icons.search),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide.none,
-        ),
+              ],
+              backgroundColor: Colors.transparent,
+            ),
+          );
+        },
       ),
     );
   }

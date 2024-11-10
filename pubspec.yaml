@@ -59,12 +59,18 @@ dev_dependencies:
     sdk: flutter
 
 flutter_native_splash:
-  color: "#1A66B2"
+  android: true
+  ios: true
+  web: false
+
   image: assets/images/logo_nagaricare_removebg.png
+  branding: assets/images/logo_banknagari.png
 
   android_12:
-    icon_background_color: "#FFB200"
+    color: "#1A66B2"
     image: assets/images/logo_nagaricare_removebg.png
+    branding: assets/images/logo_banknagari_branding
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
@@ -89,8 +95,10 @@ flutter:
     - assets/images/author6.jpg
     - assets/images/author7.jpg
     - assets/images/logo_banknagari.png
+    - assets/images/logo_banknagari_branding
     - assets/images/logo_nagaricare.png
     - assets/images/logo_nagaricare_removebg.png
+    - assets/images/logo_nagaricare_android.png
     - assets/images/logo_google.png
     - assets/images/logo_otp.png
     - assets/images/logo_default_photo.png

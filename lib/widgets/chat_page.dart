@@ -3,21 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class ChatPage extends StatelessWidget {
+  final IO.Socket socket;
+  final ScrollController scrollController;
+  final VoidCallback onCloseChat;
+  final String username;
+  final List<Map<String, dynamic>> messages;
+
   ChatPage({
     required this.socket,
     required this.scrollController,
     required this.onCloseChat,
-    required this.username, // Add username parameter
+    required this.username,
+    required this.messages,
   });
-
-  final IO.Socket socket;
-  final ScrollController scrollController;
-  final VoidCallback onCloseChat;
-  final String username; // Define the username property
 
   @override
   Widget build(BuildContext context) {
-    final messageController = TextEditingController();
+    final TextEditingController messageController = TextEditingController();
 
     return Container(
       decoration: BoxDecoration(
@@ -29,6 +31,7 @@ class ChatPage extends StatelessWidget {
       ),
       child: Column(
         children: [
+          // Header
           Container(
             height: 60,
             padding: EdgeInsets.all(10),
@@ -42,10 +45,8 @@ class ChatPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  ' $username', // Use the username here
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
+                Text('$username',
+                    style: TextStyle(color: Colors.white, fontSize: 18)),
                 IconButton(
                   icon: Icon(Icons.close, color: Colors.white),
                   onPressed: onCloseChat,
@@ -53,15 +54,21 @@ class ChatPage extends StatelessWidget {
               ],
             ),
           ),
+          // Messages List
           Expanded(
             child: ListView.builder(
               controller: scrollController,
-              itemCount: 1, // Replace with actual message count
-              itemBuilder: (context, index) => ListTile(
-                title: Text('User: pesan disini'),
-              ),
+              itemCount: messages.length,
+              itemBuilder: (context, index) {
+                final message = messages[index];
+                return ListTile(
+                  title: Text(message['sender'] ?? 'User'),
+                  subtitle: Text(message['content'] ?? ''),
+                );
+              },
             ),
           ),
+          // Input Field for new message
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -70,24 +77,25 @@ class ChatPage extends StatelessWidget {
                   child: TextField(
                     controller: messageController,
                     decoration: InputDecoration(
-                      hintText: 'Ketik pesan...',
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      hintText: 'Type a message...',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
                       ),
                     ),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.send, color: AppColors.secondaryColor),
+                  icon: Icon(Icons.send),
                   onPressed: () {
-                    final message = messageController.text;
-                    socket.emit('sendMessage', message);
-                    messageController.clear();
+                    if (messageController.text.isNotEmpty) {
+                      socket.emit('sendMessage', {
+                        'sender': username,
+                        'content': messageController.text,
+                      });
+
+                      // Clear the message input field after sending
+                      messageController.clear();
+                    }
                   },
                 ),
               ],

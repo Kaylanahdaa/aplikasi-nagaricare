@@ -3,7 +3,7 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class ChatController extends GetxController {
   late IO.Socket socket;
-  var messages = <Map<String, dynamic>>[].obs;
+  RxList<Map<String, dynamic>> messages = <Map<String, dynamic>>[].obs;
 
   @override
   void onInit() {
@@ -12,24 +12,25 @@ class ChatController extends GetxController {
   }
 
   void _initializeSocket() {
-    socket = IO.io('http://192.168.100.110:3000', <String, dynamic>{
+    socket = IO.io('http://192.168.100.110:8080', <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': true,
     });
-
+    socket.connect();
     socket.on('connect', (_) => print('Connected to Socket.IO server'));
 
-    // Listening for messages from the server
-    socket.on('receive_message', (data) {
-      messages.add(data);
+    // Listen for incoming messages
+    socket.on('receiveMessage', (data) {
+      messages.add(data); // Add message to the list
     });
+
+    // Add other event listeners as needed
   }
 
-  void sendMessage(String message, String roomId) {
-    socket.emit('send_message', {
-      'message': message,
-      'roomId': roomId,
-    });
+  void sendMessage(String message, String username) {
+    if (message.isNotEmpty) {
+      socket.emit('sendMessage', {'sender': username, 'content': message});
+    }
   }
 
   void joinRoom(String roomId) {

@@ -36,7 +36,7 @@ class _HelpScreenState extends State<HelpScreen> {
 
   // Function to initialize socket connection
   void _initializeSocket() {
-    _socket = IO.io('http://172.20.10.9:8080', <String, dynamic>{
+    _socket = IO.io('http://192.168.43.58:8080', <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': false,
     });

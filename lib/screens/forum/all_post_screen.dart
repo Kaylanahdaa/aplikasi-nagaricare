@@ -14,70 +14,79 @@ class AllPostScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.accentColor,
-      body: ListView(children: <Widget>[
-        Container(
-          color: AppColors.accentColor,
-          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 5.0),
-          child: Column(
-            children: [
-              Row(
-                children: <Widget>[
-                  IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: const Icon(
-                      Ionicons.arrow_back,
-                      size: 25,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(width: 5.0),
-                  const Text(
-                    "Semua Postingan",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 28,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20.0),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: Row(
+      body: ListView(
+        children: <Widget>[
+          Container(
+            color: AppColors.accentColor,
+            padding:
+                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 5.0),
+            child: Column(
+              children: [
+                Row(
                   children: <Widget>[
-                    // Search Bar
-                    Expanded(
-                      child: TextField(
-                        onChanged: (value) {
-                          controller.search(value); // Call search function
-                        },
-                        style: const TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          hintText: "Find topics you like to read",
-                          hintStyle:
-                              TextStyle(color: Colors.white.withOpacity(0.6)),
-                          filled: true,
-                          fillColor: Colors.white.withOpacity(0.1),
-                          prefixIcon:
-                              const Icon(Ionicons.search, color: Colors.white),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
+                    IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(
+                        Ionicons.arrow_back,
+                        size: 25,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(width: 5.0),
+                    const Text(
+                      "All Posts",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],
                 ),
-              ),
-            ],
+                const SizedBox(height: 20.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Row(
+                    children: <Widget>[
+                      // Search Bar
+                      Expanded(
+                        child: TextField(
+                          onChanged: (value) {
+                            controller.search(value); // Call search function
+                          },
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            hintText: "Find topics you like to read",
+                            hintStyle:
+                                TextStyle(color: Colors.white.withOpacity(0.6)),
+                            filled: true,
+                            fillColor: Colors.white.withOpacity(0.1),
+                            prefixIcon: const Icon(Ionicons.search,
+                                color: Colors.white),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        PostsWidget()
-        // Obx(() => PostsWidget(
-        //     posts: controller.filteredPosts)), // Display filteredPosts
-      ]),
+          // Use GetBuilder to rebuild when filteredPosts changes
+          GetBuilder<HomePageController>(
+            builder: (_) {
+              return PostsWidget(
+                posts: controller
+                    .filteredPosts, // Pass filtered posts to the widget
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }

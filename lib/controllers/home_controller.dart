@@ -7,12 +7,20 @@ import 'dart:convert';
 
 class HomePageController extends GetxController {
   var posts = <Post>[].obs;
-  var filteredPosts = <Post>[].obs;
+  var filteredPosts = <Post>[].obs; // The list of filtered posts
 
-  @override
-  void onInit() {
-    super.onInit();
-    fetchPostsByCurrentUser();
+  // Search function to filter posts based on the query
+  void search(String query) {
+    if (query.isEmpty) {
+      filteredPosts
+          .assignAll(posts); // Reset the filtered posts when query is empty
+    } else {
+      filteredPosts.value = posts
+          .where(
+              (post) => post.title.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    }
+    update(); // Notify GetBuilder to rebuild
   }
 
   // Fetch posts for the currently logged-in user
@@ -27,74 +35,57 @@ class HomePageController extends GetxController {
         if (id_user != null) {
           try {
             final response = await http.get(
-              Uri.parse("http://172.20.10.9:3000/posts/user/$id_user"),
+              Uri.parse("http://192.168.43.58:3000/posts/user/$id_user"),
             );
 
             if (response.statusCode == 200) {
               final List<dynamic> data = json.decode(response.body);
-              posts.value = data.map((post) {
+              posts.assignAll(data.map((post) {
                 return Post.fromJson({
                   ...post,
                   'email': email,
                 });
-              }).toList();
-              // log("Fetched posts for user ID $id_user: ${response.body}");
+              }).toList());
+              filteredPosts
+                  .assignAll(posts); // Initially set filteredPosts as all posts
             } else {
               log("Failed to load posts with status: ${response.statusCode}");
             }
           } catch (e) {
             log("Error fetching posts: $e");
           }
-        } else {
-          log("User ID not found for the current user.");
         }
-      } else {
-        log("User email is null or empty.");
       }
-    } else {
-      log("No user is currently logged in.");
     }
   }
+}
 
-  // Method to fetch user ID based on email
-  Future<int?> fetchUserIdByEmail(String email) async {
-    try {
-      final response = await http.get(
-        Uri.parse("http://172.20.10.9:3000/users"),
+// Method to fetch user ID based on email
+Future<int?> fetchUserIdByEmail(String email) async {
+  try {
+    final response = await http.get(
+      Uri.parse("http://192.168.43.58:3000/users"),
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic> data = json.decode(response.body);
+      // log("Fetched user data: $data");
+
+      final userData = data.firstWhere(
+        (user) => user['email'] == email,
+        orElse: () => null,
       );
 
-      if (response.statusCode == 200) {
-        final List<dynamic> data = json.decode(response.body);
-        // log("Fetched user data: $data");
-
-        final userData = data.firstWhere(
-          (user) => user['email'] == email,
-          orElse: () => null,
-        );
-
-        if (userData != null) {
-          return userData['id_user'];
-        } else {
-          log("No user data found for email: $email");
-        }
+      if (userData != null) {
+        return userData['id_user'];
       } else {
-        log("Failed to fetch user ID with status: ${response.statusCode}");
+        log("No user data found for email: $email");
       }
-    } catch (e) {
-      log("Error fetching user ID: $e");
-    }
-    return null;
-  }
-
-  // Search function to filter posts by title
-  void search(String query) {
-    if (query.isEmpty) {
-      filteredPosts.assignAll(posts); // Reset filteredPosts when query is empty
     } else {
-      filteredPosts.value = posts
-          .where(
-              (post) => post.title.toLowerCase().contains(query.toLowerCase()))
-          .toList();
+      log("Failed to fetch user ID with status: ${response.statusCode}");
     }
+  } catch (e) {
+    log("Error fetching user ID: $e");
   }
+  return null;
 }

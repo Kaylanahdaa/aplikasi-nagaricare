@@ -88,7 +88,7 @@ class HomePage extends StatelessWidget {
                     const Padding(
                       padding: EdgeInsets.all(20.0),
                       child: Text(
-                        "Update Terbaru Bank Nagari",
+                        "Latest Bank Nagari Update",
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -103,7 +103,7 @@ class HomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
-                            "Postingan Anda",
+                            "Your Posts",
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -120,13 +120,21 @@ class HomePage extends StatelessWidget {
                                 );
                               },
                               child: const Text(
-                                "Lihat Semua",
+                                "See All",
                                 style: TextStyle(color: AppColors.accentColor),
                               ))
                         ],
                       ),
                     ),
-                    PostsWidget(postLimit: 3),
+                    // Display the first 3 posts without any filtering
+                    GetBuilder<HomePageController>(
+                      builder: (_) {
+                        return PostsWidget(
+                          postLimit: 3,
+                          posts: controller.posts, // Use posts directly here
+                        );
+                      },
+                    )
                   ],
                 ),
               ),

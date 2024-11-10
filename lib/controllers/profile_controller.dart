@@ -25,7 +25,7 @@ class ProfileController extends GetxController {
   Future<int?> getUserId(String email) async {
     try {
       final response = await http.get(
-        Uri.parse("http://172.20.10.9:3000/users"),
+        Uri.parse("http://192.168.43.58:3000/users"),
       );
 
       print('Response status: ${response.statusCode}');
@@ -72,7 +72,7 @@ class ProfileController extends GetxController {
 
       try {
         final response = await http.get(
-          Uri.parse("http://172.20.10.9:3000/users"),
+          Uri.parse("http://192.168.43.58:3000/users"),
         );
 
         if (response.statusCode == 200) {
@@ -90,7 +90,7 @@ class ProfileController extends GetxController {
               profilePicture.value = userData['profile_picture']
                       .startsWith('http')
                   ? userData['profile_picture']
-                  : 'http://172.20.10.9:3000/users/profilepicture/${userData['id_user']}'; // Construct URL based on user ID
+                  : 'http://192.168.43.58:3000/users/profilepicture/${userData['id_user']}'; // Construct URL based on user ID
               print(
                   'Profile Picture URL: ${profilePicture.value}'); // Log the fetched URL
               // Log data yang baru diambil
@@ -109,11 +109,11 @@ class ProfileController extends GetxController {
   // Future<void> fetchProfilePicture(String userId) async {
   //   try {
   //     final response = await http.get(Uri.parse(
-  //         'http://172.20.10.9:3000/users/profilepicture/$userId'));
+  //         'http://192.168.43.58:3000/users/profilepicture/$userId'));
 
   //     if (response.statusCode == 200) {
   //       profilePicture.value =
-  //           'http://172.20.10.9:3000/users/profilepicture/$userId';
+  //           'http://192.168.43.58:3000/users/profilepicture/$userId';
   //     } else {
   //       profilePicture.value = ''; // Set default or empty path if no image
   //     }
@@ -168,7 +168,8 @@ class ProfileController extends GetxController {
     try {
       var request = http.MultipartRequest(
         'PUT',
-        Uri.parse('http://172.20.10.9:3000/users/uploadprofilepicture/$userId'),
+        Uri.parse(
+            'http://192.168.43.58:3000/users/uploadprofilepicture/$userId'),
       );
 
       // Attach the selected image file
@@ -220,7 +221,7 @@ class ProfileController extends GetxController {
           }
 
           final response = await http.put(
-            Uri.parse('http://172.20.10.9:3000/users/$userId'),
+            Uri.parse('http://192.168.43.58:3000/users/$userId'),
             headers: {'Content-Type': 'application/json'},
             body: jsonEncode({
               "name": name.value,

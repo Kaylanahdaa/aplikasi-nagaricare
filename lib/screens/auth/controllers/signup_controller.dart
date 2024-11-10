@@ -41,7 +41,7 @@ class SignupController extends GetxController {
       var currentUser = AuthenticationRepository.instance.firebaseUser.value;
       if (currentUser != null) {
         var response = await http.post(
-          Uri.parse("http://172.20.10.9:3000/users"),
+          Uri.parse("http://192.168.43.58:3000/users"),
           body: {
             'email': email,
             'name': fullname,

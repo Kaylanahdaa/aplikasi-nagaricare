@@ -17,7 +17,7 @@ class PostForumController extends GetxController {
   Future<int?> getUserId(String email) async {
     try {
       final response = await http.get(
-        Uri.parse("http://172.20.10.9:3000/users"),
+        Uri.parse("http://192.168.43.58:3000/users"),
       );
 
       print('Response status: ${response.statusCode}');
@@ -71,7 +71,7 @@ class PostForumController extends GetxController {
             'User ID fetched successfully: $userId'); // Debug: log the fetched user ID
         try {
           final response = await http.post(
-            Uri.parse('http://172.20.10.9:3000/posts'),
+            Uri.parse('http://192.168.43.58:3000/posts'),
             headers: {'Content-Type': 'application/json'},
             body: jsonEncode({
               "title": title.value,

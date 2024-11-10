@@ -55,7 +55,7 @@ class CustomImageViewer {
                     ),
                     const SizedBox(height: 10),
                     const Text(
-                      'Berita Bank Nagari',
+                      'Latest Bank Nagari Update',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,

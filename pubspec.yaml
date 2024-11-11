@@ -64,7 +64,7 @@ flutter_native_splash:
   ios: true
   web: false
   background_image: assets/images/background.png
-  image: assets/images/logo_nagaricare_removebg.png
+  image: assets/images/logo_nagaricare_ios.png
   branding: assets/images/logo_banknagari.png
 
   android_12:
@@ -100,6 +100,7 @@ flutter:
     - assets/images/logo_banknagari.png
     - assets/images/logo_banknagari_branding.png
     - assets/images/logo_nagaricare.png
+    - assets/images/logo_nagaricare_ios.png
     - assets/images/logo_nagaricare_removebg.png
     - assets/images/logo_nagaricare_android_fixed.png
     - assets/images/logo_google.png

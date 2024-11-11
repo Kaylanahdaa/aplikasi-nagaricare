@@ -98,7 +98,7 @@ class _HelpScreenState extends State<HelpScreen> {
             ),
             DraggableScrollableSheet(
               controller: _sheetController,
-              initialChildSize: 0.8,
+              initialChildSize: 0.08,
               minChildSize: 0.08,
               maxChildSize: 1.0,
               builder: (context, scrollController) {
@@ -248,7 +248,7 @@ class _HelpScreenState extends State<HelpScreen> {
               }
             }),
 
-            const Divider(),
+            Divider(),
             // SizedBox(
             //   // Specify a height for the ListView.builder
             //   child: ListView.builder(

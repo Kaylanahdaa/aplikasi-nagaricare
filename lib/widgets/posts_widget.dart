@@ -21,18 +21,15 @@ class PostsWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Column(
-              children: [
-                Icon(
-                  Icons.post_add,
-                  color: Colors.grey,
-                  size: 80,
-                ),
-              ],
+            SizedBox(height: 80),
+            Icon(
+              Icons.post_add,
+              color: Colors.grey,
+              size: 100,
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Text(
-              'Anda belum memiliki post',
+              "You haven't made any posts yet",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,

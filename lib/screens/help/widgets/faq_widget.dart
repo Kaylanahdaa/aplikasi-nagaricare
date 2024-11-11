@@ -17,6 +17,8 @@ class FAQPage extends StatelessWidget {
             elevation: 0,
             margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 8.0),
             child: ExpansionTile(
+              iconColor: Colors.white,
+              collapsedIconColor: Colors.white,
               tilePadding: EdgeInsets.symmetric(horizontal: 16.0),
               title: Text(
                 faq.question,
@@ -31,7 +33,7 @@ class FAQPage extends StatelessWidget {
                   padding: EdgeInsets.all(16.0),
                   child: Text(
                     faq.answer,
-                    style: TextStyle(color: Colors.white70),
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ],

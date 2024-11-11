@@ -4,11 +4,11 @@ import 'package:aplikasi_nagaricare/screens/help/widgets/faq_widget.dart';
 import 'package:aplikasi_nagaricare/widgets/chat_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:aplikasi_nagaricare/controllers/help_screen_controller.dart';
 import 'package:aplikasi_nagaricare/controllers/chat_controller.dart';
+
+import 'widgets/custom_tab_indicator.dart';
 
 class HelpScreen extends StatefulWidget {
   const HelpScreen({Key? key}) : super(key: key);
@@ -55,31 +55,6 @@ class _HelpScreenState extends State<HelpScreen> {
     }
   }
 
-  // Helper function to launch a URL
-  Future<void> _launchUrl(String url) async {
-    final Uri _url = Uri.parse(url); // Use Uri.parse for better URL handling
-    if (!await launchUrl(_url)) {
-      throw 'Could not launch $url';
-    }
-  }
-
-  // Helper function to open an app if installed or fallback to Play Store/App Store
-  Future<void> _launchApp(String urlScheme, String fallbackUrl) async {
-    try {
-      final Uri _urlScheme = Uri.parse(urlScheme);
-      final Uri _fallbackUrl = Uri.parse(fallbackUrl);
-
-      // Try launching the app, if it fails, open the fallback URL (Play Store, web, etc.)
-      if (!await launchUrl(_urlScheme, mode: LaunchMode.externalApplication)) {
-        await launchUrl(_fallbackUrl, mode: LaunchMode.externalApplication);
-      }
-    } catch (e) {
-      // Fallback to the app store or web if the app is not installed
-      final Uri _fallbackUrl = Uri.parse(fallbackUrl);
-      await launchUrl(_fallbackUrl, mode: LaunchMode.externalApplication);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -87,15 +62,29 @@ class _HelpScreenState extends State<HelpScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text('Help Center'),
+          title: const Center(
+            child: const Text(
+              'Help Center',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
           backgroundColor: Colors.white,
           bottom: TabBar(
-            tabs: [
-              Tab(text: 'FAQ'),
+            tabs: const [
+              Tab(
+                text: 'FAQ',
+              ),
               Tab(text: 'Contact Us'),
             ],
+            labelColor: AppColors.accentColor,
             indicatorColor: AppColors.secondaryColor,
             indicatorWeight: 5,
+            indicator: CustomTabIndicator(
+              color: AppColors.secondaryColor,
+              indicatorWidth: 210.0, // indicator width is half of the tab
+            ),
+            overlayColor: WidgetStateProperty.all(
+                Colors.transparent), // removes tap shadow
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
@@ -133,7 +122,7 @@ class _HelpScreenState extends State<HelpScreen> {
         ),
         floatingActionButton: isChatting
             ? FloatingActionButton(
-                shape: CircleBorder(),
+                shape: const CircleBorder(),
                 child: CircleAvatar(
                   radius: 30,
                   backgroundImage:
@@ -155,12 +144,12 @@ class _HelpScreenState extends State<HelpScreen> {
       onTap: () {
         _sheetController.animateTo(
           1.0,
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
         );
       },
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(15),
@@ -171,7 +160,7 @@ class _HelpScreenState extends State<HelpScreen> {
           controller: scrollController,
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: AppColors.secondaryColor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15),
@@ -179,8 +168,8 @@ class _HelpScreenState extends State<HelpScreen> {
                 ),
               ),
               height: 60,
-              padding: EdgeInsets.all(5),
-              child: Row(
+              padding: const EdgeInsets.all(5),
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.chat_bubble_outline, color: Colors.white),
@@ -192,9 +181,9 @@ class _HelpScreenState extends State<HelpScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: _controller.searchController,
                 onSubmitted: (value) {
@@ -203,23 +192,23 @@ class _HelpScreenState extends State<HelpScreen> {
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
-                  contentPadding: EdgeInsets.all(15),
+                  contentPadding: const EdgeInsets.all(15),
                   hintText: 'Search email here',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.all(12),
+                  hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+                  prefixIcon: const Padding(
+                    padding: EdgeInsets.all(12),
                     child: Icon(Icons.search),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(
-                      color: const Color.fromARGB(255, 205, 205, 205),
+                    borderSide: const BorderSide(
+                      color: Color.fromARGB(255, 205, 205, 205),
                     ),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             Obx(() {
               final user = _controller.userData.value;
               final resultMessage = _controller.searchResult.value;
@@ -259,7 +248,7 @@ class _HelpScreenState extends State<HelpScreen> {
               }
             }),
 
-            Divider(),
+            const Divider(),
             // SizedBox(
             //   // Specify a height for the ListView.builder
             //   child: ListView.builder(

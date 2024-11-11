@@ -248,7 +248,7 @@ class _HelpScreenState extends State<HelpScreen> {
               }
             }),
 
-            Divider(),
+            // Divider(),
             // SizedBox(
             //   // Specify a height for the ListView.builder
             //   child: ListView.builder(

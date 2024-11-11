@@ -35,7 +35,7 @@ class HomePageController extends GetxController {
         if (id_user != null) {
           try {
             final response = await http.get(
-              Uri.parse("http://192.168.43.58:3000/posts/user/$id_user"),
+              Uri.parse("http://192.168.100.110:3000/posts/user/$id_user"),
             );
 
             if (response.statusCode == 200) {
@@ -64,7 +64,7 @@ class HomePageController extends GetxController {
 Future<int?> fetchUserIdByEmail(String email) async {
   try {
     final response = await http.get(
-      Uri.parse("http://192.168.43.58:3000/users"),
+      Uri.parse("http://192.168.100.110:3000/users"),
     );
 
     if (response.statusCode == 200) {

@@ -8,7 +8,7 @@ class ForumController extends GetxController {
   var posts = <Post>[].obs;
   var isLoading = true.obs;
   // Backend API URL (Adjust this URL to match your backend route)
-  final String apiUrl = 'http://192.168.43.58:3000/posts';
+  final String apiUrl = 'http://192.168.100.110:3000/posts';
 
   // Fetch all posts from the backend
   Future<void> fetchPosts() async {

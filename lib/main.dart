@@ -2,6 +2,7 @@ import 'package:aplikasi_nagaricare/firebase_options.dart';
 import 'package:aplikasi_nagaricare/repository/authentication_repository/authentication_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -11,6 +12,7 @@ import 'localization/messages.dart';
 
 void main() async {
   WidgetsFlutterBinding();
+  await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) => Get.put(AuthenticationRepository()));
   Get.put(HomePageController(), permanent: false);

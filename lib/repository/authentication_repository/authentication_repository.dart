@@ -99,7 +99,7 @@ class AuthenticationRepository extends GetxController {
       // Send a POST request to your backend to save user data
       if (email != null && name != null) {
         final response = await http.post(
-          Uri.parse('http://192.168.43.58:3000/users/signin'),
+          Uri.parse('http://192.168.100.110:3000/users/signin'),
           headers: {
             'Content-Type': 'application/json',
           },

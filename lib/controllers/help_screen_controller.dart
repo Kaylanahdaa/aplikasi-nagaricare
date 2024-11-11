@@ -12,7 +12,7 @@ class HelpScreenController extends GetxController {
   Future<int?> getUserId(String email) async {
     try {
       final response = await http.get(
-        Uri.parse("http://192.168.43.58:3000/users"),
+        Uri.parse("http://192.168.100.110:3000/users"),
       );
 
       if (response.statusCode == 200) {
@@ -47,7 +47,7 @@ class HelpScreenController extends GetxController {
     final userId = await getUserId(email);
 
     if (userId != null) {
-      final url = Uri.parse("http://192.168.43.58:3000/users/$userId");
+      final url = Uri.parse("http://192.168.100.110:3000/users/$userId");
 
       try {
         final response = await http.get(url);
@@ -62,7 +62,7 @@ class HelpScreenController extends GetxController {
               'profile': (data['profile_picture'] != null &&
                       data['profile_picture'].startsWith('http'))
                   ? data['profile_picture']
-                  : 'http://192.168.43.58:3000/users/profilepicture/${data['id_user']}', // Provide default value if profile_picture is not a full URL
+                  : 'http://192.168.100.110:3000/users/profilepicture/${data['id_user']}', // Provide default value if profile_picture is not a full URL
               'id_user': data['id_user'] ?? 0, // Provide default value
             };
             searchResult.value = '';

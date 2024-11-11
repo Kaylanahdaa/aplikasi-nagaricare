@@ -12,7 +12,7 @@ class ChatController extends GetxController {
   }
 
   void _initializeSocket() {
-    socket = IO.io('http://192.168.43.58:8080', <String, dynamic>{
+    socket = IO.io('http://192.168.100.110:8080', <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': true,
     });

@@ -31,9 +31,8 @@ class ContactWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(40),
+      padding: EdgeInsets.all(35),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _buildContactTile(
             icon: Icons.call,
@@ -88,7 +87,7 @@ class ContactWidget extends StatelessWidget {
       required String title,
       required VoidCallback onTap}) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
         color: Colors.grey.shade200,
         borderRadius: BorderRadius.circular(10),
